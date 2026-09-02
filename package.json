@@ -1,0 +1,26 @@
+{
+  "name": "notebook",
+  "version": "0.0.0",
+  "description": "A Collection of My Notes",
+  "scripts": {
+    "dev": "vitepress dev docs",
+    "build": "vitepress build docs",
+    "preview": "vitepress preview docs"
+  },
+  "author": "Mehdi smart",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "markdown-it-attrs": "^4.1.6",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-mathjax3": "^4.3.2",
+    "mermaid": "^11.4.0",
+    "vitepress": "^1.6.3",
+    "vitepress-plugin-mermaid": "^2.0.16",
+    "vitepress-plugin-tabs": "^0.9.1",
+    "vue": "^3.4.27"
+  },
+  "allowScripts": {
+    "esbuild@0.21.5": true
+  }
+}

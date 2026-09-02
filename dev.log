@@ -1,0 +1,9 @@
+npm notice run notebook@0.0.0 dev
+npm notice run vitepress dev docs --debug
+Port 5173 is in use, trying another one...
+
+  vitepress v1.6.4
+
+  ➜  Local:   http://localhost:5174/mehdi-hexing/
+  ➜  Network: use --host to expose
+  ➜  press h to show help

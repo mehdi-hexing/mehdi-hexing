@@ -1,0 +1,55 @@
+import { createContentLoader } from 'vitepress'
+
+const base = '/mehdi-hexing/'
+const EXCERPT_MAX_LENGTH = 120
+const MAX_TOTAL_POSTS = 10
+
+function stripHtmlAndTruncate(html, maxLength) {
+  if (!html) return ''
+  let text = html
+    .replace(/<\/?[^>]+(>|$)/g, '')
+    .replace(/\u200B|\u00A0/gi, ' ')
+    .replace(/\s\s+/g, ' ')
+    .trim()
+  return text.length > maxLength ? text.substring(0, maxLength) + '...' : text
+}
+
+function formatDate(raw) {
+  const date = raw ? new Date(raw) : new Date()
+  if (isNaN(date.getTime())) return { time: 0, string: 'N/A' }
+  return {
+    time: +date,
+    string: date.toLocaleDateString('fa-IR', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }),
+  }
+}
+
+export default createContentLoader(
+  ['topics/**/*.md'],
+  {
+    excerpt: true,
+    transform(raw) {
+      return raw
+        .filter(({ frontmatter, url }) => frontmatter.title && !url.includes('index.md'))
+        .map((page) => {
+          return {
+            title: page.frontmatter.title,
+            url: `${base}${page.url.replace(/^\//, '')}`.replace(/\.md$/, '.html'),
+            excerpt: stripHtmlAndTruncate(
+              page.frontmatter.description || page.excerpt,
+              EXCERPT_MAX_LENGTH
+            ),
+            date: formatDate(page.frontmatter.date || page.frontmatter.lastUpdated),
+            category: page.frontmatter.category || 'آموزش',
+            categoryIcon: page.frontmatter.icon || '🧭',
+            author: page.frontmatter.author || 'Mehdi',
+          }
+        })
+        .sort((a, b) => b.date.time - a.date.time)
+        .slice(0, MAX_TOTAL_POSTS)
+    },
+  }
+)
