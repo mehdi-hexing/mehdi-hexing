@@ -5,7 +5,7 @@ description: مستندات کامل رپوی CF-ProxyIPChecker — معماری
 
 # CF-ProxyIPChecker
 
-![تصویر اصلی ابزار - حالت تاریک](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic.png)
+![تصویر اصلی ابزار - حالت تاریک](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic.jpg)
 
 ## ProxyIP چیست؟
 
@@ -49,9 +49,9 @@ description: مستندات کامل رپوی CF-ProxyIPChecker — معماری
 - **دسترس‌پذیری بالا:** امکان تعریف چند نشانی سرویس پشتیبان برای افزونگی، جدا از پشتیبان‌های Scamalytics و موقعیت‌یابی جغرافیایی
 - **کاملاً بدون سرور:** کل زیرساخت روی پلتفرم‌های سرورلس (Serverless) اجرا می‌شود؛ نیازی به نگه‌داری سرور اختصاصی نیست.
 
-![نتیجه‌ی بررسی تک آی‌پی همراه با برچسب امتیاز ریسک](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic1.png)
+![نتیجه‌ی بررسی تک آی‌پی همراه با برچسب امتیاز ریسک](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic1.jpg)
 
-![بررسی چندتایی/بازه‌ی آی‌پی همراه با فهرست موارد ناموفق](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic2.png)
+![بررسی چندتایی/بازه‌ی آی‌پی همراه با فهرست موارد ناموفق](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic2.jpg)
 
 ## پیش‌نیازها
 
@@ -153,7 +153,7 @@ const apiUrls = [
 - از روی فایل: `/file/https://raw.githubusercontent.com/user/repo/main/ips.txt`
 - دامنه: `/domain/google.com` (هم رکورد A هم AAAA)
 
-![نتیجه‌ی بررسی دامنه همراه با فهرست آی‌پی‌های پشت آن](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic3.png)
+![نتیجه‌ی بررسی دامنه همراه با فهرست آی‌پی‌های پشت آن](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic3.jpg)
 
 ## اسکن قابل‌ازسرگیری و کش
 
@@ -176,7 +176,7 @@ const apiUrls = [
 - **خطای ۵۰۰ روی Worker:** معمولاً به‌دلیل جاافتادن یک متغیر محیطی است؛ پس از تنظیم صحیح متغیرها، دوباره استقرار دهید.
 - **سرویس روی Render کند بالا می‌آید:** در پلن رایگان طبیعی است (Cold Start)؛ برای رفع آن یا از پلن پولی استفاده کنید یا سرویس را با یک پینگ دوره‌ای بیدار نگه دارید.
 
-![نمای موبایل و حالت تاریک ابزار](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic4.png)
+![نمای موبایل و حالت تاریک ابزار](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic4.jpg)
 
 ## لینک‌های مرتبط
 
