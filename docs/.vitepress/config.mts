@@ -107,7 +107,7 @@ export default withMermaid(defineConfig({
                 { text: 'Termux Guide', link: '/en/topics/termux' },
                 { text: 'AI Tools', link: '/en/topics/ai' },
                 { text: 'Serverless runtime', link: '/en/topics/zizifn' },
-                { text: 'ProxyIPChecker's Documentation, Setup, and Additional Content', link: '/en/topics/CF-ProxyIPChecker' },
+                { text: 'ProxyIPChecker Documentation, Setup, and Additional Content', link: '/en/topics/CF-ProxyIPChecker' },
               ],
             },
           ],
