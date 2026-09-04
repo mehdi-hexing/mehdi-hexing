@@ -82,7 +82,7 @@ Render هم مثل Vercel یک پلتفرم بدون‌سرور با استقر�
 ۳. تنظیمات سرویس را وارد کنید:
 - **Runtime:** Python 3
 - **Build Command:** `pip install -r requirements.txt`
-- **Start Command:** `python main.py --port $PORT`
+- **Start Command:** `uvicorn checker:app --host 0.0.0.0 --port $PORT`
 - **Plan:** برای شروع، پلن رایگان کافی است
 ۴. توجه داشته باشید که Render شماره پورت را از طریق متغیر محیطی `PORT` به برنامه می‌دهد، نه یک مقدار ثابت مثل ۸۰۸۰؛ به همین دلیل دستور اجرا باید از `$PORT` استفاده کند، نه یک عدد هاردکد
 ۵. روی **Create Web Service** بزنید؛ بعد از پایان بیلد، Render یک نشانی HTTPS دائمی (مانند `https://proxy-api.onrender.com`) در اختیارتان می‌گذارد — همین را در مرحله‌ی ۳ استفاده کنید
