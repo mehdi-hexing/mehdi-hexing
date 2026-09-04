@@ -82,7 +82,7 @@ Render, like Vercel, is a serverless platform with direct deployment from GitHub
 3. Enter the service settings:
 - **Runtime:** Python 3
 - **Build Command:** `pip install -r requirements.txt`
-- **Start Command:** `python main.py --port $PORT`
+- **Start Command:** `uvicorn checker:app --host 0.0.0.0 --port $PORT`
 - **Plan:** the free plan is enough to start with
 4. Note that Render passes the port number to the app through the `PORT` environment variable, not a fixed value like 8080; for this reason the start command must use `$PORT`, not a hardcoded number
 5. Click **Create Web Service**; once the build finishes, Render gives you a permanent HTTPS address (like `https://proxy-api.onrender.com`) — use this in Step 3
