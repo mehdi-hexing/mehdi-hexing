@@ -75,6 +75,7 @@ export default withMermaid(defineConfig({
                 { text: 'مستندات، راهنما و حل مشکل ریجن در سرویس های گوگل', link: '/topics/WorkerPlacementGemini' },
                 { text: 'مستندات، نحوه راه اندازی و دپلوی و نکات ECH-Workers', link: '/topics/ECH-Workers' },
                 { text: 'مستندات ، راه‌اندازی و مطالب تکمیلی ProxyIPChecker', link: '/topics/CF-ProxyIPChecker' },
+                { text: 'مستندات، نحوه راه اندازی و دپلوی و نکات ProxyIP-Tel-Bot', link: '/topics/ProxyIP-Tel-Bot' }
                 { text: 'مستندات، نحوه راه اندازی و دپلوی و نکات Cloudflare-Scamalytics', link: '/topics/Cloudflare-Scamalytics' },
                 { text: 'مستندات، نحوه راه اندازی و دپلوی و نکات Domain-Resolve', link: '/topics/Domain-Resolve' },
                 { text: 'مستندات، نحوه راه اندازی و دپلوی و نکات Check-Host-API', link: '/topics/Check-Host-API' },
@@ -116,6 +117,7 @@ export default withMermaid(defineConfig({
                 { text: 'Documentation, help and problem solving region in Google services', link: '/en/topics/WorkerPlacementGemini' },
                 { text: 'ECH-Workers documentation, setup and deployment tips and tricks', link: '/en/topics/ECH-Workers' },
                 { text: 'ProxyIPChecker Documentation, Setup, and Additional Content', link: '/en/topics/CF-ProxyIPChecker' },
+                { text: 'Documentation, setup, deployment, and notes for ProxyIP-Tel-Bot', link: '/en/topics/ProxyIP-Tel-Bot' },
                 { text: 'Cloudflare-Scamalytics documentation, setup and deployment tips and tricks', link: '/en/topics/Cloudflare-Scamalytics' },
                 { text: 'Domain-Resolve documentation, setup and deployment tips and tricks', link: '/en/topics/Domain-Resolve' },
                 { text: 'Check-Host-API documentation, setup and deployment tips and tricks', link: '/en/topics/Check-Host-API' },
