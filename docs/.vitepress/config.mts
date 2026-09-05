@@ -75,7 +75,7 @@ export default withMermaid(defineConfig({
                 { text: 'مستندات، راهنما و حل مشکل ریجن در سرویس های گوگل', link: '/topics/WorkerPlacementGemini' },
                 { text: 'مستندات، نحوه راه اندازی و دپلوی و نکات ECH-Workers', link: '/topics/ECH-Workers' },
                 { text: 'مستندات ، راه‌اندازی و مطالب تکمیلی ProxyIPChecker', link: '/topics/CF-ProxyIPChecker' },
-                { text: 'مستندات، نحوه راه اندازی و دپلوی و نکات ProxyIP-Tel-Bot', link: '/topics/ProxyIP-Tel-Bot' }
+                { text: 'مستندات، نحوه راه اندازی و دپلوی و نکات ProxyIP-Tel-Bot', link: '/topics/ProxyIP-Tel-Bot' },
                 { text: 'مستندات، نحوه راه اندازی و دپلوی و نکات Cloudflare-Scamalytics', link: '/topics/Cloudflare-Scamalytics' },
                 { text: 'مستندات، نحوه راه اندازی و دپلوی و نکات Domain-Resolve', link: '/topics/Domain-Resolve' },
                 { text: 'مستندات، نحوه راه اندازی و دپلوی و نکات Check-Host-API', link: '/topics/Check-Host-API' },
