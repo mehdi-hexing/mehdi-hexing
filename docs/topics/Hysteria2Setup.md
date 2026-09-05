@@ -55,7 +55,7 @@ description: راهنمای گام‌به‌گام ساخت سرور و کانف
 
 تصویر ۱ از ۵:
 
-![مرحله ساخت و ورود به پنل - تصویر ۱](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic2-fa.jpg)
+![مرحله ساخت و ورود به پنل - تصویر ۱](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic2.jpg)
 
 تصویر ۲ از ۵:
 
@@ -63,7 +63,7 @@ description: راهنمای گام‌به‌گام ساخت سرور و کانف
 
 تصویر ۳ از ۵:
 
-![مرحله ساخت و ورود به پنل - تصویر ۳](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic4.jpg)
+![مرحله ساخت و ورود به پنل - تصویر ۳](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic4-fa.jpg)
 
 تصویر ۴ از ۵:
 
