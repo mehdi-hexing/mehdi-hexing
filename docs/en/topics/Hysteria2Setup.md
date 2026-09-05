@@ -55,7 +55,7 @@ In this step, the server is created and you log into its management panel.
 
 Image 1 of 5:
 
-![Server creation and panel login step - Image 1](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic2-en.jpg)
+![Server creation and panel login step - Image 1](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic2.jpg)
 
 Image 2 of 5:
 
@@ -63,7 +63,7 @@ Image 2 of 5:
 
 Image 3 of 5:
 
-![Server creation and panel login step - Image 3](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic4.jpg)
+![Server creation and panel login step - Image 3](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic4-en.jpg)
 
 Image 4 of 5:
 
