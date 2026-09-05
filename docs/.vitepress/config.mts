@@ -70,6 +70,7 @@ export default withMermaid(defineConfig({
               collapsed: false,
               items: [
                 { text: 'مستندات، آموزش گام به گام و راهنمای استفاده از سرویس hysteria در بستر katabump', link: '/topics/Hysteria2Setup' },
+                { text: 'مستندات، آموزش گام به گام و راهنمای استفاده از سرویس MTProto در بستر katabump', link: '/topics/KataBumpMTProtoSetup' },
                 { text: 'مستندات، نحوه راه اندازی و دپلوی و نکات HTTP-PROXY', link: '/topics/HTTP-PROXY' },
                 { text: 'راه‌اندازی وورکر zizifn', link: '/topics/zizifn' },
                 { text: 'مستندات، راهنما و حل مشکل ریجن در سرویس های گوگل', link: '/topics/WorkerPlacementGemini' },
@@ -112,6 +113,7 @@ export default withMermaid(defineConfig({
               collapsed: false,
               items: [
                 { text: 'Documentation, step-by-step training and instructions for using the hysteria service on the katabump platform', link: '/en/topics/Hysteria2Setup' },
+                { text: 'Documentation, step-by-step training and instructions for using the MTProto service on the katabump platform', link: '/en/topics/KataBumpMTProtoSetup' },
                 { text: 'HTTP-PROXY documentation, setup and deployment tips and tricks', link: '/en/topics/HTTP-PROXY' },
                 { text: 'Serverless runtime', link: '/en/topics/zizifn' },
                 { text: 'Documentation, help and problem solving region in Google services', link: '/en/topics/WorkerPlacementGemini' },
