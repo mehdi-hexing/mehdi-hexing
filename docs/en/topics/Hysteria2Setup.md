@@ -41,11 +41,11 @@ To get started, you need to create an account on Katabump:
 
 Image 1 of 2:
 
-![Registration step - Image 1](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic.jpg)
+![Registration step - Image 1](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic.jpg)
 
 Image 2 of 2:
 
-![Registration step - Image 2](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic1-en.jpg)
+![Registration step - Image 2](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic1-en.jpg)
 
 ## Step 2: Creating and logging into the server management panel
 
@@ -55,23 +55,23 @@ In this step, the server is created and you log into its management panel.
 
 Image 1 of 5:
 
-![Server creation and panel login step - Image 1](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic2-en.jpg)
+![Server creation and panel login step - Image 1](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic2-en.jpg)
 
 Image 2 of 5:
 
-![Server creation and panel login step - Image 2](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic3-en.jpg)
+![Server creation and panel login step - Image 2](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic3-en.jpg)
 
 Image 3 of 5:
 
-![Server creation and panel login step - Image 3](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic4.jpg)
+![Server creation and panel login step - Image 3](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic4.jpg)
 
 Image 4 of 5:
 
-![Server creation and panel login step - Image 4](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic5.jpg)
+![Server creation and panel login step - Image 4](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic5.jpg)
 
 Image 5 of 5:
 
-![Server creation and panel login step - Image 5](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic6.jpg)
+![Server creation and panel login step - Image 5](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic6.jpg)
 
 ## Step 3: Uploading files
 
@@ -81,15 +81,15 @@ Extract the zip file provided in the Prerequisites section; its contents are use
 
 Image 1 of 3:
 
-![File upload step - Image 1](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic7.jpg)
+![File upload step - Image 1](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic7.jpg)
 
 Image 2 of 3:
 
-![File upload step - Image 2](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic8.jpg)
+![File upload step - Image 2](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic8.jpg)
 
 Image 3 of 3:
 
-![File upload step - Image 3](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic9.jpg)
+![File upload step - Image 3](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic9.jpg)
 
 ## Step 4: Final step — getting the panel address and subscription
 
@@ -99,12 +99,12 @@ At this stage, as shown in the images below, the panel address and subscription 
 
 Image 1 of 3:
 
-![Final step - Image 1](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic10.jpg)
+![Final step - Image 1](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic10.jpg)
 
 Image 2 of 3:
 
-![Final step - Image 2](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic11.jpg)
+![Final step - Image 2](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic11.jpg)
 
 Image 3 of 3:
 
-![Final step - Image 3](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic12.jpg)
+![Final step - Image 3](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic12.jpg)
