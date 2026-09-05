@@ -1,6 +1,16 @@
 ---
-title: HTTP-PROXY — آرشیو خودکار پروکسی‌های رایگان (HTTP/HTTPS/SOCKS4/SOCKS5)
-description: مستندات ریپوی HTTP-PROXY — یک GitHub Actions که هر ۶ ساعت پروکسی‌های رایگان عمومی رو جمع، تست و بر اساس کشور/فراد-اسکور دسته‌بندی می‌کنه، به‌همراه کانفیگ‌های ساب آماده
+layout: doc
+outline: deep
+lang: "fa-IR"
+dir: "rtl"
+title: "آرشیو پروکسی‌های رایگان"
+description: "مستندات ریپوی HTTP-PROXY — یک GitHub Actions که هر ۶ ساعت پروکسی‌های رایگان عمومی رو جمع، تست و بر اساس کشور/ریسک آی‌پی دسته‌بندی می‌کنه، به‌همراه لینک‌های ساب آماده"
+date: 2026-9-27
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: HTTP, SOCKS5, HTTP Proxies, Action github, Workflow, Cron job, Python, Free Proxy, Free for iran
 ---
 
 # HTTP-PROXY
@@ -15,7 +25,7 @@ description: مستندات ریپوی HTTP-PROXY — یک GitHub Actions که �
 1. نتایج را به تفکیک پروتکل و کشور، هم به‌صورت txt هم CSV، ذخیره و در همان ریپو کامیت می‌کند.
 1. چند فرمت کانفیگ اشتراک آماده (برای MahsaNG، V2rayNG، Exclave) هم با QR کد تولید می‌کند.
 
-## اسکن کن و همین الان استفاده کن 📱
+## 📱 اسکن کن و همین الان استفاده کن
 
 هر کدوم از این QR کدها همیشه با آخرین اسکن (هر ۶ ساعت) هم‌گام‌اند — مستقیم از خودِ ریپو لود می‌شن، پس همیشه به‌روزن:
 
@@ -48,13 +58,19 @@ description: مستندات ریپوی HTTP-PROXY — یک GitHub Actions که �
 
 1. پروکسی‌های زنده بر اساس (کشور، فراد-اسکور) مرتب و در قالب‌های زیر ذخیره می‌شوند:
 
+<Ltr>
+
 - `proxies/protocol/<protocol>/all.txt` و `all.csv` (لیست جهانی)
 - `proxies/countries/<protocol>/<CC>.txt` و `<CC>.csv` (به تفکیک کد کشور؛ کشورهای نامشخص در `UNKNOWN`)
+
+</Ltr>
 
 1. فایل‌های اشتراک (`proxies/subscriptions/`) و QR کدهایشان ساخته می‌شوند و جدول داخل `README.md` بین دو کامنت `SUBSCRIPTION_TABLE_START/END` خودکار به‌روزرسانی می‌شود.
 1. تغییرات با کاربر `github-actions[bot]` کامیت و پوش می‌شوند.
 
 ## ستون‌های فایل CSV
+
+<Ltr>
 
 | ستون | توضیح |
 | --- | --- |
@@ -65,6 +81,10 @@ description: مستندات ریپوی HTTP-PROXY — یک GitHub Actions که �
 | VPN | آیا این IP به‌عنوان VPN شناخته شده |
 | ISP | ارائه‌دهنده‌ی سرویس اینترنت |
 | Latency (ms) | زمان پاسخ در لحظه‌ی تست |
+
+</Ltr>
+
+<br/>
 
 ## سازگاری با Psiphon
 
@@ -79,31 +99,45 @@ description: مستندات ریپوی HTTP-PROXY — یک GitHub Actions که �
 
 ### لیست جهانی (هر پروتکل)
 
+<Ltr>
+
+
 ```
 proxies/protocol/{http,https,socks4,socks5}/all.txt
 proxies/protocol/{http,https,socks4,socks5}/all.csv
-```
+```  
+
+</Ltr>
 
 ### لیست به تفکیک کشور
+
+<Ltr>  
+
 
 ```
 proxies/countries/{http,https,socks4,socks5}/{CC}.txt
 proxies/countries/{http,https,socks4,socks5}/{CC}.csv
-```
+```  
+
+</Ltr>
 
 ### لینک‌های اشتراک (برای import مستقیم در کلاینت)
 
 QR کدهای این لینک‌ها بالای همین صفحه هستن؛ این‌جا فقط خودِ لینک‌های خام برای کپی دستی:
 
-| کلاینت | پروتکل | لینک خام (کپی‌کردنی) |
-| --- | --- | --- |
-| **MahsaNG** | HTTP | `https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/mahsang_http.txt` |
-| **V2rayNG** | HTTP | `https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/v2rayng_http.txt` |
-| **Exclave** | HTTP | `https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_http.txt` |
-| **Exclave** | HTTPS | `https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_https.txt` |
-| **Exclave** | SOCKS4 | `https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks4.txt` |
-| **V2rayNG** | SOCKS5 | `https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/v2rayng_socks5.txt` |
-| **Exclave** | SOCKS5 | `https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks5.txt` |
+<Ltr>
+
+| کلاینت | پروتکل | کپی لینک |
+| :--- | :--- | :--- |
+| **MahsaNG** | HTTP | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/mahsang_http.txt"/> |
+| **V2rayNG** | HTTP | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/v2rayng_http.txt"/> |
+| **Exclave** | HTTP | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_http.txt"/> |
+| **Exclave** | HTTPS | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_https.txt"/> |
+| **Exclave** | SOCKS4 | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks4.txt"/> |
+| **V2rayNG** | SOCKS5 | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/v2rayng_socks5.txt"/> |
+| **Exclave** | SOCKS5 | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks5.txt"/> |
+
+</Ltr>
 
 ## اجرای محلی (اختیاری)
 
@@ -129,5 +163,8 @@ python Scanner.py
 
 ## لینک‌های مرتبط
 
-- ریپوی این پروژه: `https://github.com/mehdi-hexing/HTTP-PROXY`
-- منبع فراد-اسکور: `https://github.com/mehdi-hexing/Cloudflare-Scamalytics`
+- ریپوی این پروژه:  
+https://github.com/mehdi-hexing/HTTP-PROXY
+
+- منبع فراد-اسکور:  
+https://github.com/mehdi-hexing/Cloudflare-Scamalytics

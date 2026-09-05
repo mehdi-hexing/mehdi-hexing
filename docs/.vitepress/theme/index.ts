@@ -3,6 +3,7 @@ import { h } from 'vue'
 import type { Theme } from 'vitepress'
 import DocFooter from './components/DocFooter.vue'
 import Ltr from './components/Ltr.vue'
+import CopyLink from './components/CopyLink.vue'
 import './custom.css'
 
 export default {
@@ -14,5 +15,6 @@ export default {
   },
   enhanceApp({ app }) {
     app.component('Ltr', Ltr)
+    app.component('CopyLink', CopyLink)
   },
 } satisfies Theme
