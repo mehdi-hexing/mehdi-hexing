@@ -41,11 +41,11 @@ description: راهنمای گام‌به‌گام ساخت سرور و کانف
 
 تصویر ۱ از ۲:
 
-![مرحله ثبت‌نام - تصویر ۱](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic.jpg)
+![مرحله ثبت‌نام - تصویر ۱](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic.jpg)
 
 تصویر ۲ از ۲:
 
-![مرحله ثبت‌نام - تصویر ۲](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic1-fa.jpg)
+![مرحله ثبت‌نام - تصویر ۲](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic1-fa.jpg)
 
 ## مرحله ۲: ساخت و ورود به پنل مدیریت سرور
 
@@ -55,23 +55,23 @@ description: راهنمای گام‌به‌گام ساخت سرور و کانف
 
 تصویر ۱ از ۵:
 
-![مرحله ساخت و ورود به پنل - تصویر ۱](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic2-fa.jpg)
+![مرحله ساخت و ورود به پنل - تصویر ۱](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic2-fa.jpg)
 
 تصویر ۲ از ۵:
 
-![مرحله ساخت و ورود به پنل - تصویر ۲](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic3-fa.jpg)
+![مرحله ساخت و ورود به پنل - تصویر ۲](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic3-fa.jpg)
 
 تصویر ۳ از ۵:
 
-![مرحله ساخت و ورود به پنل - تصویر ۳](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic4.jpg)
+![مرحله ساخت و ورود به پنل - تصویر ۳](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic4.jpg)
 
 تصویر ۴ از ۵:
 
-![مرحله ساخت و ورود به پنل - تصویر ۴](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic5.jpg)
+![مرحله ساخت و ورود به پنل - تصویر ۴](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic5.jpg)
 
 تصویر ۵ از ۵:
 
-![مرحله ساخت و ورود به پنل - تصویر ۵](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic6.jpg)
+![مرحله ساخت و ورود به پنل - تصویر ۵](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic6.jpg)
 
 ## مرحله ۳: آپلود فایل‌ها
 
@@ -81,15 +81,15 @@ description: راهنمای گام‌به‌گام ساخت سرور و کانف
 
 تصویر ۱ از ۳:
 
-![مرحله آپلود فایل‌ها - تصویر ۱](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic7.jpg)
+![مرحله آپلود فایل‌ها - تصویر ۱](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic7.jpg)
 
 تصویر ۲ از ۳:
 
-![مرحله آپلود فایل‌ها - تصویر ۲](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic8.jpg)
+![مرحله آپلود فایل‌ها - تصویر ۲](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic8.jpg)
 
 تصویر ۳ از ۳:
 
-![مرحله آپلود فایل‌ها - تصویر ۳](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic9.jpg)
+![مرحله آپلود فایل‌ها - تصویر ۳](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic9.jpg)
 
 ## مرحله ۴: مرحله آخر — دریافت آدرس پنل و ساب
 
@@ -99,12 +99,12 @@ description: راهنمای گام‌به‌گام ساخت سرور و کانف
 
 تصویر ۱ از ۳:
 
-![مرحله آخر - تصویر ۱](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic10.jpg)
+![مرحله آخر - تصویر ۱](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic10.jpg)
 
 تصویر ۲ از ۳:
 
-![مرحله آخر - تصویر ۲](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic11.jpg)
+![مرحله آخر - تصویر ۲](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic11.jpg)
 
 تصویر ۳ از ۳:
 
-![مرحله آخر - تصویر ۳](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic12.jpg)
+![مرحله آخر - تصویر ۳](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic12.jpg)
