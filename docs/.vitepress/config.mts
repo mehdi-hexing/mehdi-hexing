@@ -47,9 +47,16 @@ export default withMermaid(defineConfig({
       text: 'Last updated',
       formatOptions: { dateStyle: 'medium', timeStyle: 'short' },
     },
-    returnToTopLabel: 'Back to top',
-    sidebarMenuLabel: 'Menu',
-    darkModeSwitchLabel: 'Theme',
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/mehdi-hexing/' },
+      {
+        icon: {
+          svg: '<svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m20.665 3.717-17.73 6.837c-1.21.486-1.203 1.161-.222 1.462l4.552 1.42 10.532-6.645c.498-.303.953-.14.579.192l-8.533 7.701h-.002l-.002.001-.314 4.692c.46 0 .663-.211.921-.46l2.211-2.15 4.599 3.397c.848.467 1.457.227 1.668-.785l3.019-14.228c.309-1.239-.473-1.8-1.282-1.434z"/></svg>'
+        },
+        link: 'https://t.me/mehdiasmart',
+        ariaLabel: 'Telegram'
+      }
+    ],
   },
 
   locales: {
@@ -58,10 +65,19 @@ export default withMermaid(defineConfig({
       lang: 'fa-IR',
       dir: 'rtl',
       themeConfig: {
+        returnToTopLabel: 'بازگشت به بالا',
+        sidebarMenuLabel: 'منوی جانبی',
+        darkModeSwitchLabel: 'تغییر تم',
+        langMenuLabel: 'تغییر زبان',
+        outline: { level: [2, 3], label: 'در این صفحه' },
+        docFooter: { prev: 'صفحه قبلی', next: 'صفحه بعدی' },
+        editLink: {
+          pattern: 'https://github.com/mehdi-hexing/mehdi-hexing/edit/main/docs/:path',
+          text: 'این صفحه را ویرایش کنید',
+        },
         nav: [
           { text: '🏠 خانه', link: '/' },
           { text: '📖 موضوعات', link: '/topics/' },
-          { text: '🔗 گیت‌هاب', link: 'https://github.com/mehdi-hexing/mehdi-hexing' },
         ],
         sidebar: {
           '/topics/': [
@@ -81,18 +97,12 @@ export default withMermaid(defineConfig({
                 { text: 'مطالب Cloudflare-Scamalytics', link: '/topics/Cloudflare-Scamalytics' },
                 { text: 'مطالب مربوط به Check-Host-API', link: '/topics/Check-Host-API' },
                 { text: 'حل مشکل ریجن در سرویس های گوگل', link: '/topics/WorkerPlacementGemini' },
-                { text: 'راهنمای استفاده از سرویس MTProto در بستر katabump', link: '/topics/KataBumpMTProtoSetup.md' },
+                { text: 'راهنمای استفاده از سرویس MTProto در بستر katabump', link: '/topics/KataBumpMTProtoSetup' },
                 { text: 'راهنمای استفاده از سرویس Hysteria2 در بستر katabump', link: '/topics/Hysteria2Setup' },
               ],
             },
           ],
         },
-        docFooter: { prev: 'صفحه قبلی', next: 'صفحه بعدی' },
-        editLink: {
-          pattern: 'https://github.com/mehdi-hexing/mehdi-hexing/edit/main/docs/:path',
-          text: 'این صفحه را ویرایش کنید',
-        },
-        outline: { level: [2, 3], label: 'On this page' },
       },
     },
 
@@ -101,10 +111,19 @@ export default withMermaid(defineConfig({
       lang: 'en-US',
       dir: 'ltr',
       themeConfig: {
+        returnToTopLabel: 'Return to top',
+        sidebarMenuLabel: 'Menu',
+        darkModeSwitchLabel: 'Appearance',
+        langMenuLabel: 'Change language',
+        outline: { level: [2, 3], label: 'On this page' },
+        docFooter: { prev: 'Previous', next: 'Next' },
+        editLink: {
+          pattern: 'https://github.com/mehdi-hexing/mehdi-hexing/edit/main/docs/:path',
+          text: 'Edit this page on GitHub',
+        },
         nav: [
           { text: '🏠 Home', link: '/en/' },
           { text: '📖 Topics', link: '/en/topics/' },
-          { text: '🔗 GitHub', link: 'https://github.com/mehdi-hexing/mehdi-hexing' },
         ],
         sidebar: {
           '/en/topics/': [
@@ -130,8 +149,6 @@ export default withMermaid(defineConfig({
             },
           ],
         },
-        docFooter: { prev: 'Previous', next: 'Next' },
-        outline: { level: [2, 3], label: 'On this page' },
       },
     },
   },
