@@ -40,11 +40,11 @@ The Worker's main page (when opened with no parameters) has a UI with two tabs:
 
 - **Scamalytics IP Check** — an input box that accepts IPv4, IPv6, or a domain, with guidance on using URL parameters (`?ip=` or `?domain=`)
 
-![Full check result for a domain with the risk score of every IP behind it](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cloudflare-camalytics/pic.jpg)
+![Full check result for a domain with the risk score of every IP behind it](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cloudflare-scamalytics/pic.jpg)
 
 - **Check-Host Network Test** — choosing a check type (Ping/HTTP/TCP/UDP/DNS) and one or more countries, with a results table tailored to the check type (e.g. HTTP code + response time for HTTP, open/closed + response time for TCP/UDP, record count for DNS)
 
-![Check-Host results table for several countries](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cloudflare-camalytics/pic1.jpg)
+![Check-Host results table for several countries](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cloudflare-scamalytics/pic1.jpg)
 
 ## Endpoints (Routes)
 
