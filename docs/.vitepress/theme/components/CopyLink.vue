@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { useData } from 'vitepress'
 
 const props = defineProps({
   url: {
@@ -7,6 +8,14 @@ const props = defineProps({
     required: true
   }
 })
+
+const { lang } = useData()
+const messages = {
+  'fa-IR': { copy: 'کپی لینک', copied: 'کپی شد ✓' },
+  'en-US': { copy: 'Copy link', copied: 'Copied ✓' }
+}
+
+const t = computed(() => messages[lang.value] ?? messages['en-US'])
 
 const copied = ref(false)
 
@@ -25,10 +34,9 @@ const copyToClipboard = async () => {
 
 <template>
   <button class="copy-btn" :class="{ copied: copied }" @click="copyToClipboard">
-    {{ copied ? 'کپی شد ✓' : 'کپی لینک' }}
+    {{ copied ? t.copied : t.copy }}
   </button>
 </template>
-
 
 <style scoped>
 .copy-btn {
