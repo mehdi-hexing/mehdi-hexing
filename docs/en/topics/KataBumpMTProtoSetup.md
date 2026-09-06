@@ -59,7 +59,7 @@ To get started, you need to create an account on Katabump. You can sign up with 
 **📷 Image 2 of 15:**
 
 <p align="center">
-  <img src="/katabump-mtproto-setup/pic1-fa.jpg" alt="Sign Up - Completing information and logging in">
+  <img src="/katabump-mtproto-setup/pic1-en.jpg" alt="Sign Up - Completing information and logging in">
 </p><br/>
 
 ## Step 2: Accessing the Dashboard and Creating a New Server
@@ -77,13 +77,13 @@ After logging into the Katabump dashboard, click the Create Server option.
 **📷 Image 4 of 15:**
 
 <p align="center">
-  <img src="/katabump-mtproto-setup/pic3-fa.jpg" alt="Selecting the free server plan">
+  <img src="/katabump-mtproto-setup/pic3-en.jpg" alt="Selecting the free server plan">
 </p><br/>
 
 **📷 Image 5 of 15:**
 
 <p align="center">
-  <img src="/katabump-mtproto-setup/pic4-fa.jpg" alt="Entering the management panel of the created server">
+  <img src="/katabump-mtproto-setup/pic4-en.jpg" alt="Entering the management panel of the created server">
 </p><br/>
 
 ## Step 3:** Selecting the Python Environment
