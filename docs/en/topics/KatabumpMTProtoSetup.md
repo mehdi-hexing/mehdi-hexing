@@ -6,7 +6,7 @@ description: "A step-by-step guide to creating a server and running a Telegram M
 date: 2026-10-6
 editLink: true
 head:
-  meta:
+  - - meta
     - name: keywords
       content: MTProto, SOCKS5, HTTP Proxies, Action github, Python, Free Proxy, Telegram Proxies, MT-Proto protocol
 ---
