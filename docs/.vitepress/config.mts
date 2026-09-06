@@ -81,7 +81,7 @@ export default withMermaid(defineConfig({
                 { text: 'مطالب Cloudflare-Scamalytics', link: '/topics/Cloudflare-Scamalytics' },
                 { text: 'مطالب مربوط به Check-Host-API', link: '/topics/Check-Host-API' },
                 { text: 'حل مشکل ریجن در سرویس های گوگل', link: '/topics/WorkerPlacementGemini' },
-                { text: 'راهنمای استفاده از سرویس MTProto در بستر katabump', link: '/topics/KatabumpMTProtoSetup.md' },
+                { text: 'راهنمای استفاده از سرویس MTProto در بستر katabump', link: '/topics/KataBumpMTProtoSetup.md' },
                 { text: 'راهنمای استفاده از سرویس Hysteria2 در بستر katabump', link: '/topics/Hysteria2Setup' },
               ],
             },
