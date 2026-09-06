@@ -101,10 +101,10 @@ head:
 هر سرور در Katabump یک **پورت عمومی اختصاصی** دارد که در بخش **Settings** سرور نمایش داده می‌شود. این پورت معمولاً یک عدد **پنج‌رقمی** است (مثلاً چیزی شبیه `25565` یا `31842`).
 
 
-**📷 تصویر ۷ از ۱۵:** <Badge type="danger" text="نمونه‌ی پورت عمومی پنج‌رقمی در پنل" />  
+**📷 تصویر ۷ از ۱۵:**
 
 <p align="center">
-  <img src="/katabump-mtproto-setup/pic6.jpg" alt="نمونه پورت عمومی پنج‌رقمی سرور" >
+  <img src="/katabump-mtproto-setup/pic6.jpg" alt="لاگین کردن در سرور" >
 </p><br><br/>
 
 ## مرحله ۵: تنظیم پورت در config.py
@@ -123,10 +123,10 @@ PORT = 25565  # replace with your own public port
 
 <br/>
 
-**📷 تصویر ۸ از ۱۵:**
+**📷 تصویر ۸ از ۱۵:** <Badge type="danger" text="نمونه‌ی پورت عمومی پنج‌رقمی در پنل" />
 
 <p align="center">
-  <img src="/katabump-mtproto-setup/pic7.jpg" alt="ویرایش PORT در config.py" >
+  <img src="/katabump-mtproto-setup/pic7.jpg" alt="نمونه از پورت عمومی سرور" >
 </p><br><br/>
 
 ## مرحله ۶: آپلود فایل‌ها
