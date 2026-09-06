@@ -27,11 +27,13 @@ According to Cloudflare's official documentation, there are three modes:
 
 | **Mode** | **Best For** |
 | ---|---|
-| **Default (off)** | The Worker runs in the nearest data center to the **end user**; lowest latency for the user's own connection |
-| **Smart** | Cloudflare automatically detects which fixed backend the Worker connects to most based on traffic, and runs it near that backend |
-| **Region** | You explicitly specify a region from AWS, GCP, or Azure (e.g., `gcp:us-east4`); Cloudflare runs the Worker in its nearest data center to that region |
+| <Badge type="tip" text="Default (off)" /> | The Worker runs in the nearest data center to the **end user**; lowest latency for the user's own connection |
+| <Badge type="tip" text="Smart" /> | Cloudflare automatically detects which fixed backend the Worker connects to most based on traffic, and runs it near that backend |
+| <Badge type="tip" text="Region" /> | You explicitly specify a region from AWS, GCP, or Azure (e.g., `gcp:us-east4`); Cloudflare runs the Worker in its nearest data center to that region |
 
-Smart and Region are designed for when the Worker connects to a fixed backend/database/API (single-homed) and you want to shorten the round-trip between the Worker and that backend.
+::: info **NOTE**  
+Smart and Region are designed for when the Worker connects to a fixed backend/database/API (single-homed) and you want to shorten the round-trip between the Worker and that backend.  
+:::
 
 ## Why the Main Worker (VLESS/Tunnel with Variable Destinations) Should NOT Enable This
 
@@ -47,17 +49,17 @@ So the main Worker should stay on Default.
 
 ## Recommended Worker Code
 
-<Badge type="info" text="FOR THIS USE CASE" /> , the following code and repository is recommended as the Worker:
+<Badge type="info" text="FOR THIS USE CASE" /> the following code and repository is recommended as the Worker:
 
-- **Repository link:**  
-   [github.com/NiREvil/zizifn][1]
+- <Badge type="info" text="Repository Link" />  
+   [github.com/NiREvil/zizifn][1]  
 
-- **Project documentation link:**  
-   [github.io/Diana-Cl/topics/zizifn][2]
+- <Badge type="info" text="Project Documentation Link" />  
+   [github.io/Diana-Cl/topics/zizifn][2]  
 
 ## The Solution: A Second, Separate Worker — Only for US/GCP Destinations
 
-Instead of changing the main Worker's settings, create a completely separate Worker whose Placement is set to Region on GCP, and use it only for destinations you know are US-based or only respond to the US (like Google AI Studio). Give it a name like `only-GS` <Badge type="danger" text="Only Google Studio" /> so it doesn't get confused with the main Worker — because for other destinations (besides these specific ones), this second Worker is useless.
+Instead of changing the main Worker's settings, create a completely separate Worker whose Placement is set to Region on GCP, and use it only for destinations you know are US-based or only respond to the US (like Google AI Studio). Give it a name like <Badge type="tip" text="only-GS" /> <Badge type="danger" text="Only Google Studio" /> so it doesn't get confused with the main Worker — because for other destinations (besides these specific ones), this second Worker is useless.
 
 ## Step-by-Step Instructions (Based on the Cloudflare Dashboard)
 
@@ -67,7 +69,7 @@ Instead of changing the main Worker's settings, create a completely separate Wor
 
 2. Click on the `Placement` field and change it from Default to Region.
 
-3. The Provider field will appear — make sure to set it to `Google Cloud Platform` (GCP) (this field is mandatory, not optional).
+3. The Provider field will appear — make sure to set it to `Google Cloud Platform` <Badge type="tip" text="GCP" /> (this field is mandatory, not optional).
 
 4. The `Location/Region` field comes next — this one is optional; you can select one or more regions (e.g., Central, US East) or leave it empty to let Cloudflare pick the best option.
 
@@ -101,7 +103,7 @@ Cloudflare officially advertises this feature for "reducing latency to a specifi
 
 - Main Worker (tunnel/browsing with variable destinations): keep Placement on Default
 - Second, separate Worker (only for US/GCP destinations like Gemini): set Placement to Region → Google Cloud Platform, location optional, name it something like `only-GS` to make it clear it's only for this purpose
-- For the code of this second Worker, use the recommended repository [^1]([NiREvil/zizifn][1])
+- For the code of this second Worker, use the recommended repository [^1].
 - Keep this second Worker as a separate, additional config — not a replacement for your daily config.
 
 ## Support and Help
@@ -109,10 +111,9 @@ Cloudflare officially advertises this feature for "reducing latency to a specifi
 ::: info **Further Assistance**
 If you encounter any questions or issues during setup or while using this project, you can reach out through the following channels:
 
-- <Badge type="tip" text="DIRECT CONTACT:" />  [My personal Telegram account][6]
+<Badge type="tip" text="DIRECT CONTACT:" />  [My personal Telegram account][6]
 
-- <Badge type="tip" text="GENERAL Q&A" />  [Telegram support group][7]
-
+<Badge type="tip" text="GENERAL Q&A" />  [Telegram support group][7]  
 :::
 
 [^1]: [NiREvil/zizifn][1]
