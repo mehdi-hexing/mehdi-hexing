@@ -27,7 +27,7 @@ According to Cloudflare's official documentation, there are three modes:
 
 | **Mode** | **Best For** |
 | ---|---|
-| **Default** <Badge type="danger" text="Off" /> | The Worker runs in the nearest data center to the **end user**; lowest latency for the user's own connection |
+| **Default (Off)** | The Worker runs in the nearest data center to the **end user**; lowest latency for the user's own connection |
 | **Smart** | Cloudflare automatically detects which fixed backend the Worker connects to most based on traffic, and runs it near that backend |
 | **Region** | You explicitly specify a region from AWS, GCP, or Azure (e.g., `gcp:us-east4`); Cloudflare runs the Worker in its nearest data center to that region |
 
@@ -51,11 +51,11 @@ So the main Worker should stay on Default.
 
 <Badge type="info" text="FOR THIS USE CASE" /> the following code and repository is recommended as the Worker:
 
-**Repository Link**  
-- [github.com/NiREvil/zizifn][1]  
+- **Repository Link:**  
+  - [github.com/NiREvil/zizifn][1]  
 
-**Project Documentation Link**  
-- [github.io/Diana-Cl/topics/zizifn][2]  
+- **Project Documentation Link:**  
+  - [github.io/Diana-Cl/topics/zizifn][2]  
 
 ## The Solution: A Second, Separate Worker — Only for US/GCP Destinations
 
