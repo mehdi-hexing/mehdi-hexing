@@ -27,11 +27,11 @@ According to Cloudflare's official documentation, there are three modes:
 
 | **Mode** | **Best For** |
 | ---|---|
-| <Badge type="tip" text="Default (off)" /> | The Worker runs in the nearest data center to the **end user**; lowest latency for the user's own connection |
-| <Badge type="tip" text="Smart" /> | Cloudflare automatically detects which fixed backend the Worker connects to most based on traffic, and runs it near that backend |
-| <Badge type="tip" text="Region" /> | You explicitly specify a region from AWS, GCP, or Azure (e.g., `gcp:us-east4`); Cloudflare runs the Worker in its nearest data center to that region |
+| **Default** <Badge type="danger" text="Off" /> | The Worker runs in the nearest data center to the **end user**; lowest latency for the user's own connection |
+| **Smart** | Cloudflare automatically detects which fixed backend the Worker connects to most based on traffic, and runs it near that backend |
+| **Region** | You explicitly specify a region from AWS, GCP, or Azure (e.g., `gcp:us-east4`); Cloudflare runs the Worker in its nearest data center to that region |
 
-::: info **NOTE**  
+::: tip `NOTE`  
 Smart and Region are designed for when the Worker connects to a fixed backend/database/API (single-homed) and you want to shorten the round-trip between the Worker and that backend.  
 :::
 
@@ -51,11 +51,11 @@ So the main Worker should stay on Default.
 
 <Badge type="info" text="FOR THIS USE CASE" /> the following code and repository is recommended as the Worker:
 
-- <Badge type="info" text="Repository Link" />  
-   [github.com/NiREvil/zizifn][1]  
+**Repository Link**  
+- [github.com/NiREvil/zizifn][1]  
 
-- <Badge type="info" text="Project Documentation Link" />  
-   [github.io/Diana-Cl/topics/zizifn][2]  
+**Project Documentation Link**  
+- [github.io/Diana-Cl/topics/zizifn][2]  
 
 ## The Solution: A Second, Separate Worker — Only for US/GCP Destinations
 
@@ -85,7 +85,7 @@ Instead of changing the main Worker's settings, create a completely separate Wor
 
 8. Now try [Google AI Studio] / [Gemini] — it should normally load.
 
-::: tip **Recommendation**
+::: tip `Recommendation`
 To avoid v2rayNG client bugs and also benefit from the pattern parameters `Final mask` and `Cypher suites`, I recommend using the v2ray-Enhanced subscription link from the zizifn panel inside the [PattNG][5] client. The frequent disconnections and low upload speed issues will be completely resolved.
 
 [More details][4]  
@@ -95,7 +95,7 @@ To avoid v2rayNG client bugs and also benefit from the pattern parameters `Final
 
 According to Cloudflare's official documentation, in Region mode, the Worker code execution itself takes place in the Cloudflare data center with the lowest latency to the selected cloud region (here, GCP) — meaning this data center is genuinely geographically closer to that region (e.g., the US). When this Worker makes an outbound request to Gemini/Google AI Studio, the outbound IP comes from that same US Cloudflare data center, not the European/near-Iran data center that would be chosen in Default mode. Since these services typically decide whether to respond based on the geographic location of the incoming IP, this change is exactly what's needed.
 
-::: danger **Important Note**
+::: danger `Important Note`
 Cloudflare officially advertises this feature for "reducing latency to a specific backend," not for "changing the geographic location of a request"; meaning this is a side-effect of a performance feature, not an official or guaranteed capability for bypassing geo-restrictions. Cloudflare may change the internal behavior of this feature in the future.
 :::
 
@@ -108,12 +108,12 @@ Cloudflare officially advertises this feature for "reducing latency to a specifi
 
 ## Support and Help
 
-::: info **Further Assistance**
+::: info `Further Assistance`
 If you encounter any questions or issues during setup or while using this project, you can reach out through the following channels:
 
-<Badge type="tip" text="DIRECT CONTACT:" />  [My personal Telegram account][6]
+- **Direct Contact:** [My personal Telegram account][6]
 
-<Badge type="tip" text="GENERAL Q&A" />  [Telegram support group][7]  
+- **General Q&A:** [Telegram support group][7]  
 :::
 
 [^1]: [NiREvil/zizifn][1]
