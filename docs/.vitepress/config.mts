@@ -70,7 +70,7 @@ export default withMermaid(defineConfig({
               collapsed: false,
               items: [
                 { text: 'مستندات، آموزش گام به گام و راهنمای استفاده از سرویس hysteria در بستر katabump', link: '/topics/Hysteria2Setup' },
-                { text: 'مستندات، آموزش گام به گام و راهنمای استفاده از سرویس MTProto در بستر katabump', link: '/topics/KataBumpMTProtoSetup' },
+                { text: 'مستندات، آموزش گام به گام و راهنمای استفاده از سرویس MTProto در بستر katabump', link: '/topics/KatabumpMTProtoSetup.md' },
                 { text: 'مستندات، نحوه راه اندازی و دپلوی و نکات HTTP-PROXY', link: '/topics/HTTP-PROXY' },
                 { text: 'راه‌اندازی وورکر zizifn', link: '/topics/zizifn' },
                 { text: 'مستندات، راهنما و حل مشکل ریجن در سرویس های گوگل', link: '/topics/WorkerPlacementGemini' },
