@@ -6,7 +6,7 @@ description: "Documentation for the HTTP-PROXY repo — a GitHub Actions workflo
 date: 2026-9-27
 editLink: true
 head:
-  meta:
+  - - meta
     - name: keywords
       content: HTTP, SOCKS5, HTTP Proxies, Action github, Workflow, Cron job, Python, Free Proxy, Free for iran
 ---
