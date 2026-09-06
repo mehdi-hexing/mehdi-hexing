@@ -100,10 +100,9 @@ In the Startup tab of the server panel, set the environment type to Python (not 
 
 Each server on Katabump has a dedicated public port, which is displayed in the server's Settings section. This port is typically a five-digit number (e.g., something like `25565` or `31842`).
 
-**📷 Image 7 of 15:** <Badge type="danger" text="Example of a five-digit public port in the panel" />
-
+**📷 Image 7 of 15:**
 <p align="center">
-  <img src="/katabump-mtproto-setup/pic6.jpg" alt="Example of a five-digit public server port">
+  <img src="/katabump-mtproto-setup/pic6.jpg" alt="login in server">
 </p><br/>
 
 ## Step 5: Setting the Port in config.py
@@ -122,10 +121,10 @@ This is the only value that needs to be set manually; everything else (secret an
 
 <br/>
 
-**📷 Image 8 of 15:**
+**📷 Image 8 of 15:** <Badge type="danger" text="Example of a five-digit public port in the panel" />
 
 <p align="center">
-  <img src="/katabump-mtproto-setup/pic7.jpg" alt="Editing PORT in config.py">
+  <img src="/katabump-mtproto-setup/pic7.jpg" alt="Example of a five-digit public">
 </p><br/>
 
 ## Step 6: Uploading the Files
