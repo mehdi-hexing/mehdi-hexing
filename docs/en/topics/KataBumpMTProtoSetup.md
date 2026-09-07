@@ -86,7 +86,7 @@ After logging into the Katabump dashboard, click the Create Server option.
   <img src="/katabump-mtproto-setup/pic4-en.jpg" alt="Entering the management panel of the created server">
 </p><br/>
 
-## Step 3:Selecting the Python Environment
+## Step 3: Selecting the Python Environment
 
 In the Startup tab of the server panel, set the environment type to Python (not Node.js), since the proxy runs on Python.
 
