@@ -29,7 +29,7 @@ This project depends on two other side services (each its own separate repo, bot
 
 | Service | Role in this project |
 | --- | --- |
-| **[Domain-Resolve](https://github.com/mehdi-hexing/Domain-Resolve)** | When the user enters a domain, instead of resolving directly (which could fill up Cloudflare's Subrequest cap), the Worker calls this service and gets back the grouped list of IPs |
+| **[Domain-Resolve][1]** | When the user enters a domain, instead of resolving directly (which could fill up Cloudflare's Subrequest cap), the Worker calls this service and gets back the grouped list of IPs |
 | **Check-Host** (a separate repo, defaults to `check-host.onrender.com`) | Runs Ping/HTTP/TCP/UDP/DNS tests from different countries; the Worker just proxies and caches its response |
 
 Workflow in short:
@@ -175,3 +175,5 @@ serves both the web UI and all the endpoints above.
 - This project's repo: `https://github.com/mehdi-hexing/Cloudflare-Scamalytics`
 - Domain resolve service: `https://github.com/mehdi-hexing/Domain-Resolve`
 - Check-Host service: `https://github.com/mehdi-hexing/Check-Host-API`
+
+[1]: https://github.com/mehdi-hexing/Domain-Resolve

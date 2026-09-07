@@ -83,7 +83,7 @@ There are three ways to run this service; pick whichever one is more convenient 
 
 **Option A) Deploy on Vercel (easiest method):** <Badge type="tip" text="Vercel" />
 
-1. Go to the [ProxyIP-Checker-Vercel-API](https://github.com/mehdi-hexing/ProxyIP-Checker-Vercel-API) repository
+1. Go to the [ProxyIP-Checker-Vercel-API][1] repository
 2. Click the "Deploy" button in that same repo's README so Vercel automatically deploys a copy of the project for you
 3. Save the final address (like `https://my-proxy-api.vercel.app`) — you'll need it in Step 3.
 
@@ -91,8 +91,8 @@ There are three ways to run this service; pick whichever one is more convenient 
 
 Render, like Vercel, is a serverless platform with direct deployment from GitHub, with the difference that it's better suited to a long-running Python service (not just short functions):
 
-1. Log into the [Render](https://render.com) dashboard and click **New +** then **Web Service**
-2. Connect the [ProxyIP-Checker-API](https://github.com/mehdi-hexing/ProxyIP-Checker-API) repo from GitHub (or Fork it first so it's connected to your own account)
+1. Log into the [Render][2] dashboard and click **New +** then **Web Service**
+2. Connect the [ProxyIP-Checker-API][3] repo from GitHub (or Fork it first so it's connected to your own account)
 3. Enter the service settings:
 - **Runtime:** Python 3
 - **Build Command:** `pip install -r requirements.txt`
@@ -184,7 +184,7 @@ For large ranges or long lists that take a while:
 
 ## IPv6 Support
 
-IPv6 addresses are supported throughout the infrastructure: in the single/multi-IP box, the IP range (bracketed form only), the file-based list, and domain resolution (both A and AAAA records). Geolocation and risk scoring (whether the main service or the fallback mirror) also work correctly with IPv6. The [ProxyIP-Checker-API](https://github.com/mehdi-hexing/ProxyIP-Checker-API) backend service correctly interprets all of these formats as well.
+IPv6 addresses are supported throughout the infrastructure: in the single/multi-IP box, the IP range (bracketed form only), the file-based list, and domain resolution (both A and AAAA records). Geolocation and risk scoring (whether the main service or the fallback mirror) also work correctly with IPv6. The [ProxyIP-Checker-API][3] backend service correctly interprets all of these formats as well.
 
 ## Troubleshooting
 
@@ -203,3 +203,7 @@ IPv6 addresses are supported throughout the infrastructure: in the single/multi-
 - Main repository: `https://github.com/mehdi-hexing/CF-ProxyIPChecker`
 - Backend service (Vercel): `https://github.com/mehdi-hexing/ProxyIP-Checker-vercel-API`
 - Backend service (Python — deployable on Render or a VPS): `https://github.com/mehdi-hexing/ProxyIP-Checker-API`
+
+[1]: https://github.com/mehdi-hexing/ProxyIP-Checker-Vercel-API
+[2]: https://render.com
+[3]: https://github.com/mehdi-hexing/ProxyIP-Checker-API

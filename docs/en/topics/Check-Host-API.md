@@ -15,9 +15,9 @@ head:
 
 ## What is this project?
 
-A **FastAPI** (Python) service that uses the global nodes of [check-host.net](https://check-host.net) to test the accessibility of a host from any country you want — with five test types: **ping, http, tcp, udp, dns**.
+A **FastAPI** (Python) service that uses the global nodes of [check-host][1] to test the accessibility of a host from any country you want — with five test types: **ping, http, tcp, udp, dns**.
 
-This service is the exact backend that the **"Check-Host Network Test"** tab in the [Cloudflare-Scamalytics](https://mehdi-hexing.github.io/mehdi-hexing/topics/Cloudflare-Scamalytics) project connects to.
+This service is the exact backend that the **"Check-Host Network Test"** tab in the [Cloudflare-Scamalytics][2] project connects to.
 
 ## Compatibility with the Cloudflare-Scamalytics project's Worker
 
@@ -147,9 +147,9 @@ Interactive API documentation is available at `http://localhost:8000/docs`.
 
 ### On Render <Badge type="info" text="Render" />
 
-<div style="text-align:right">
+<div style="text-align:left">
 
-1. Fork this repo or copy its link to connect it to Render in the Web Service section.
+Fork this repo or copy its link to connect it to Render in the Web Service section.
 
 </div>
 
@@ -161,7 +161,7 @@ Settings:
 
 </div>
 
-4. For the server plan, choose the Free plan.
+For the server plan, choose the Free plan.
 
 <p align="center">
 <img src="/public/check-host-api/pic.jpg" alt="New Web Service page on Render with Build/Start Command filled in">
@@ -194,3 +194,6 @@ If you need HTTPS and a custom domain, put it behind Nginx or Caddy.
 
 - This service's repo: `https://github.com/mehdi-hexing/Check-Host-API`
 - The project that uses this service: `https://github.com/mehdi-hexing/Cloudflare-Scamalytics`
+
+[1]: https://check-host.net
+[2]: https://mehdi-hexing.github.io/mehdi-hexing/topics/Cloudflare-Scamalytics

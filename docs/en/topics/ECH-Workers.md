@@ -82,7 +82,7 @@ These are public, free services with no uptime guarantee; if you need to change 
 - **Workers KV Storage: Edit**
 - **Account: Read**
 
-Steps: go to [dash.cloudflare.com/profile/api-tokens](https://dash.cloudflare.com/profile/api-tokens), then click **Create Token** and choose the **"Edit Cloudflare Workers"** template (this template automatically adds KV Storage:Edit and Workers Scripts:Edit; it also adds Zone→Workers Routes:Edit, which isn't needed for this project and you can remove it)
+Steps: go to [dash.cloudflare.com/profile/api-tokens][1], then click **Create Token** and choose the **"Edit Cloudflare Workers"** template (this template automatically adds KV Storage:Edit and Workers Scripts:Edit; it also adds Zone→Workers Routes:Edit, which isn't needed for this project and you can remove it)
 Add one more permission manually:
 **Account → Account Settings → Read** →
 under "Account Resources", select just your specific account, not "All accounts"
@@ -132,3 +132,5 @@ As soon as the API Token, Account ID, and each KV namespace ID are known, the wo
 ## Related links
 
 - This project's repo: `https://github.com/mehdi-hexing/ECH-Workers`
+
+[1]: https://dash.cloudflare.com/profile/api-tokens
