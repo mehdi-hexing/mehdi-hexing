@@ -47,20 +47,24 @@ This bot's Worker first tries to get a risk score from the **official Scamalytic
 <p align="center">
 <img src="/public/proxyip-tel-bot/pic3.jpg" alt="Country menu for /freeproxyip">
 </p><br/>
+
 - **Interactive live testing:** the result message updates live, with **Pause / Resume / Cancel** buttons
 
 <p align="center">
 <img src="/public/proxyip-tel-bot/pic1.jpg" alt="Result of /proxyip for a single IP, with Pause/Cancel buttons">
 </p><br/>
+
 - **5 selectable output formats** at the end of each test: Detailed Info, Rich Table (Collapsible), Copyable IPs, Files (TXT/CSV), or All Formats
 
 <p align="center">
 <img src="/public/proxyip-tel-bot/pic2.jpg" alt="Output format selection menu">
 </p><br/>
+
 - **Posting to a channel/group:**
   - `/addchat` — multi-step registration of a destination channel/group
   - `/deletechat` — an interactive menu for removing a registered chat
   - `/post` — runs any test type in the background and automatically posts the cleaned-up result to the registered destination
+
 - **Conversational logic:** in a private chat you can either pass arguments directly (`/proxyip 1.1.1.1`) or go through the conversational flow; in groups only the conversational/reply mode is active (for better stability)
 - **User experience:** emoji numbering for multi-domain tests, automatic cleanup of temporary messages, and error guidance for invalid commands.
 
