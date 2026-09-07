@@ -17,7 +17,7 @@ head:
 
 ## این پروژه برای چه مشکلی ساخته شد؟
 
-Cloudflare Workers برای هر اجرا یک سقف مشخص روی تعداد **Subrequest** (درخواست‌های خروجی) داره. وقتی پروژه‌ی [Cloudflare-Scamalytics](https://mehdi-hexing.github.io/mehdi-hexing/topics/Cloudflare-Scamalytics) می‌خواست ریسک‌اسکور یک دامنه رو بررسی کنه، اگه اون دامنه پشتش بیشتر از ۵۰ آی‌پی داشت، تلاش برای گرفتن ریسک تک‌تک آن‌ها به Scamalytics باعث پر شدن سقف SubRequest ورکر می‌شد و کل عملیات با لیمیت مواجه می‌شد.
+Cloudflare Workers برای هر اجرا یک سقف مشخص روی تعداد **Subrequest** (درخواست‌های خروجی) داره. وقتی پروژه‌ی [Cloudflare-Scamalytics][1] می‌خواست ریسک‌اسکور یک دامنه رو بررسی کنه، اگه اون دامنه پشتش بیشتر از ۵۰ آی‌پی داشت، تلاش برای گرفتن ریسک تک‌تک آن‌ها به Scamalytics باعث پر شدن سقف SubRequest ورکر می‌شد و کل عملیات با لیمیت مواجه می‌شد.
 
 **Domain-Resolve**برای حل همین مشکل ساخته شده: به‌جای اینکه خودِ Worker مستقیم DNS دامنه رو resolve کنه و همه‌ی آی‌پی‌ها رو یک‌جا به Scamalytics بفرسته، این سرویس واسط این کارها رو انجام می‌ده:
 
@@ -31,7 +31,7 @@ Cloudflare Workers برای هر اجرا یک سقف مشخص روی تعداد
 
 <div style="text-align:right">
 
-::: tip `نکته`
+::: tip `Note`
 از اونجایی که به خاطر محدودیت SubRequest در طرح رایگان کلادفلر مجبوریم از این روش استفاده کنیم، تعداد Request های ورکرمون میره بالا.
 :::
 
@@ -116,7 +116,7 @@ GET /health
 
 ### دیپلوی روی Render (رایگان، دائمی) <Badge type="info" text="Render" />
 
-۱. وارد داشبورد [Render](https://render.com) شو و روی **New کلیک کن**
+۱. وارد داشبورد [Render][2] شو و روی **New کلیک کن**
 و سپس روی **Web Service** بزن.
 ۲. ریپوی `domain-resolve` را از گیت‌هاب متصل کن (یا اول Fork کن)
 ۳. تنظیمات را وارد کن:
@@ -130,7 +130,7 @@ GET /health
 
 ۴. روی **Create Web Service** بزن؛ بعد از پایان بیلد، یک نشانی HTTPS دائمی (مثل `https://domain-resolve.onrender.com`) دریافت می‌کنی
 
-::: tip `نکته‌ی پلن رایگان`
+::: tip `Free Plan Note`
 بعد از مدتی بی‌فعالیتی، سرویس می‌خوابد و اولین درخواست بعدی چند ثانیه Cold Start می‌خورد. برای بیدار نگه‌داشتنش می‌توانی همان اندپوینت `/health` را با یک Cron/Ping دوره‌ای (مثلاً هر ۱۰ دقیقه) صدا بزنی.
 :::
 
@@ -148,8 +148,8 @@ curl "https://<your-deployed-url>/health"
 ```js
 const res = await fetch(`https://domain-resolve.onrender.com/resolve?domain=${encodeURIComponent(domain)}`);
 const data = await res.json();
-// data.groups یک آرایه از آرایه‌های حداکثر ۴۰ آی‌پی است؛
-// هر گروه را جداگانه برای ریسک‌سنجی به Scamalytics بفرست
+// data.groups is an array of arrays of at most 40 IPs each;
+// send each group separately to Scamalytics for risk scoring
 ```
 
 ## عیب‌یابی
@@ -163,3 +163,6 @@ const data = await res.json();
 
 - ریپوی این سرویس: `https://github.com/mehdi-hexing/Domain-Resolve`
 - پروژه‌ی اصلی که از این سرویس استفاده می‌کند: `https://github.com/mehdi-hexing/Cloudflare-scamalytics`
+
+[1]: https://mehdi-hexing.github.io/mehdi-hexing/topics/Cloudflare-Scamalytics
+[2]: https://render.com
