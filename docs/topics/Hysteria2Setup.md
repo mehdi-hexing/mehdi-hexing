@@ -31,7 +31,7 @@ head:
 
 📦 **فایل پیوست (zip):**
 
-[فایل zip کانفیگ](/public/hysteria2-setup/KataBumpJSCode[NeedToExtract].zip)
+[فایل zip کانفیگ][1]
 
 فایل بالا را extract کنید؛ محتوای آن در مرحله‌ی آپلود فایل‌ها استفاده می‌شود — یا فایل‌ها را مستقیماً آپلود می‌کنید یا محتوای هرکدام را کپی و در محل مربوطه وارد می‌کنید.
 
@@ -144,3 +144,5 @@ head:
 <p align="center">
 <img src="/public/hysteria2-setup/pic12.jpg" alt="مرحله آخر - تصویر ۳">
 </p><br/>
+
+[1]: https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/KataBumpJSCode[NeedToExtract].zip
