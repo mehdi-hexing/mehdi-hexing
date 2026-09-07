@@ -1,6 +1,16 @@
 ---
-title: راه‌اندازی سرور و کانفیگ Hysteria با Katabump
-description: راهنمای گام‌به‌گام ساخت سرور و کانفیگ Hysteria با استفاده از Katabump — از ثبت‌نام تا آپلود فایل‌ها و دریافت لینک ساب
+layout: doc
+outline: deep
+lang: "fa-IR"
+dir: "rtl"
+title: "راه‌اندازی سرور و کانفیگ Hysteria با Katabump"
+description: "راهنمای گام‌به‌گام ساخت سرور و کانفیگ Hysteria با استفاده از Katabump — از ثبت‌نام تا آپلود فایل‌ها و دریافت لینک ساب"
+date: 2026-9-10
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: Hysteria2, Katabump, VPS, Server Setup, Config, Subscription Link
 ---
 
 # راه‌اندازی سرور و کانفیگ Hysteria با Katabump
@@ -21,13 +31,13 @@ description: راهنمای گام‌به‌گام ساخت سرور و کانف
 
 📦 **فایل پیوست (zip):**
 
-[فایل zip کانفیگ](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/KataBumpJSCode[NeedToExtract].zip)
+[فایل zip کانفیگ](/public/hysteria2-setup/KataBumpJSCode[NeedToExtract].zip)
 
 فایل بالا را extract کنید؛ محتوای آن در مرحله‌ی آپلود فایل‌ها استفاده می‌شود — یا فایل‌ها را مستقیماً آپلود می‌کنید یا محتوای هرکدام را کپی و در محل مربوطه وارد می‌کنید.
 
-## نکته مهم درباره‌ی کیفیت و تمدید سرور
-
+::: danger `نکته مهم درباره‌ی کیفیت و تمدید سرور`
 این کانفیگ Hysteria روی ایرانسل خروجی خوبی می‌دهد و اتصال پایداری دارد. نکته‌ی مهم این است که هر **۴ روز یک‌بار** باید سرور را **renew** کنید.
+:::
 
 ## مرحله ۱: ثبت‌نام
 
@@ -41,11 +51,15 @@ description: راهنمای گام‌به‌گام ساخت سرور و کانف
 
 تصویر ۱ از ۲:
 
-![مرحله ثبت‌نام - تصویر ۱](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic.jpg" alt="مرحله ثبت‌نام - تصویر ۱">
+</p><br/>
 
 تصویر ۲ از ۲:
 
-![مرحله ثبت‌نام - تصویر ۲](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic1-fa.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic1-fa.jpg" alt="مرحله ثبت‌نام - تصویر ۲">
+</p><br/>
 
 ## مرحله ۲: ساخت و ورود به پنل مدیریت سرور
 
@@ -55,23 +69,33 @@ description: راهنمای گام‌به‌گام ساخت سرور و کانف
 
 تصویر ۱ از ۵:
 
-![مرحله ساخت و ورود به پنل - تصویر ۱](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic2.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic2.jpg" alt="مرحله ساخت و ورود به پنل - تصویر ۱">
+</p><br/>
 
 تصویر ۲ از ۵:
 
-![مرحله ساخت و ورود به پنل - تصویر ۲](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic3-fa.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic3-fa.jpg" alt="مرحله ساخت و ورود به پنل - تصویر ۲">
+</p><br/>
 
 تصویر ۳ از ۵:
 
-![مرحله ساخت و ورود به پنل - تصویر ۳](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic4-fa.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic4-fa.jpg" alt="مرحله ساخت و ورود به پنل - تصویر ۳">
+</p><br/>
 
 تصویر ۴ از ۵:
 
-![مرحله ساخت و ورود به پنل - تصویر ۴](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic5.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic5.jpg" alt="مرحله ساخت و ورود به پنل - تصویر ۴">
+</p><br/>
 
 تصویر ۵ از ۵:
 
-![مرحله ساخت و ورود به پنل - تصویر ۵](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic6.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic6.jpg" alt="مرحله ساخت و ورود به پنل - تصویر ۵">
+</p><br/>
 
 ## مرحله ۳: آپلود فایل‌ها
 
@@ -81,15 +105,21 @@ description: راهنمای گام‌به‌گام ساخت سرور و کانف
 
 تصویر ۱ از ۳:
 
-![مرحله آپلود فایل‌ها - تصویر ۱](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic7.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic7.jpg" alt="مرحله آپلود فایل‌ها - تصویر ۱">
+</p><br/>
 
 تصویر ۲ از ۳:
 
-![مرحله آپلود فایل‌ها - تصویر ۲](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic8.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic8.jpg" alt="مرحله آپلود فایل‌ها - تصویر ۲">
+</p><br/>
 
 تصویر ۳ از ۳:
 
-![مرحله آپلود فایل‌ها - تصویر ۳](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic9.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic9.jpg" alt="مرحله آپلود فایل‌ها - تصویر ۳">
+</p><br/>
 
 ## مرحله ۴: مرحله آخر — دریافت آدرس پنل و ساب
 
@@ -99,12 +129,18 @@ description: راهنمای گام‌به‌گام ساخت سرور و کانف
 
 تصویر ۱ از ۳:
 
-![مرحله آخر - تصویر ۱](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic10.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic10.jpg" alt="مرحله آخر - تصویر ۱">
+</p><br/>
 
 تصویر ۲ از ۳:
 
-![مرحله آخر - تصویر ۲](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic11.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic11.jpg" alt="مرحله آخر - تصویر ۲">
+</p><br/>
 
 تصویر ۳ از ۳:
 
-![مرحله آخر - تصویر ۳](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic12.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic12.jpg" alt="مرحله آخر - تصویر ۳">
+</p><br/>

@@ -1,6 +1,16 @@
 ---
-title: ECH-Workers — DoH Worker با انتخاب خودکار سریع‌ترین مسیر
-description: مستندات ریپوی ECH-Workers — یه Cloudflare Worker که رکوردهای DNS-over-HTTPS (برای مواردی مثل ECH) رو از میان چند Resolver و چند پراکسی واسط، با بنچمارک خودکار و کش KV برمی‌گردونه
+layout: doc
+outline: deep
+lang: "fa-IR"
+dir: "rtl"
+title: "ECH-Workers — DoH Worker با انتخاب خودکار سریع‌ترین مسیر"
+description: "مستندات ریپوی ECH-Workers — یه Cloudflare Worker که رکوردهای DNS-over-HTTPS (برای مواردی مثل ECH) رو از میان چند Resolver و چند پراکسی واسط، با بنچمارک خودکار و کش KV برمی‌گردونه"
+date: 2026-9-25
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: DoH, DNS over HTTPS, ECH, Cloudflare Worker, Resolver, KV Cache
 ---
 
 # ECH-Workers
@@ -57,7 +67,9 @@ cloudflare, google, quad9, nextdns, opendns
 direct (بدون واسط), allorigins, corsproxy
 ```
 
+::: tip `نکته`
 این لیست‌ها سرویس‌های عمومی و رایگان‌اند، بدون تضمین آپ‌تایم؛ در صورت نیاز باید مستقیم در فایل `src/index.js` (ثابت‌های `DEFAULT_RESOLVERS` و `DEFAULT_PROXIES`) ویرایش و دوباره دیپلوی شوند.
+:::
 
 ## پیش‌نیازها
 

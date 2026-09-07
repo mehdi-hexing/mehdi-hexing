@@ -1,6 +1,16 @@
 ---
-title: Domain-Resolve — ابزار Resolve و گروه‌بندی آی‌پی برای بررسی ریسک ساب‌دامنه های حاوی آیپی های انبوه
-description: مستندات ریپوی Domain-Resolve — سرویس کمکی که Cloudflare-Scamalytics برای دور زدن محدودیت SubRequest ورکر روی ساب‌دامنه‌های با بیش از ۵۰ آی‌پی ازش استفاده می‌کنه
+layout: doc
+outline: deep
+lang: "fa-IR"
+dir: "rtl"
+title: "Domain-Resolve — ابزار Resolve و گروه‌بندی آی‌پی برای بررسی ریسک ساب‌دامنه های حاوی آیپی های انبوه"
+description: "مستندات ریپوی Domain-Resolve — سرویس کمکی که Cloudflare-Scamalytics برای دور زدن محدودیت SubRequest ورکر روی ساب‌دامنه‌های با بیش از ۵۰ آی‌پی ازش استفاده می‌کنه"
+date: 2026-9-22
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: Domain Resolve, DNS, Subrequest, Cloudflare Worker, Scamalytics, IP Grouping
 ---
 
 # Domain-Resolve
@@ -21,7 +31,9 @@ Cloudflare Workers برای هر اجرا یک سقف مشخص روی تعداد
 
 <div style="text-align:right">
 
-> یه نکته خواستم بگم بهتون اونم اینه که، از اونجایی که به خاطر محدودیت SubRequest در طرح رایگان کلادفلر مجبوریم از این روش استفاده کنیم، تعداد Request های ورکرمون میره بالا.
+::: tip `نکته`
+از اونجایی که به خاطر محدودیت SubRequest در طرح رایگان کلادفلر مجبوریم از این روش استفاده کنیم، تعداد Request های ورکرمون میره بالا.
+:::
 
 </div>
 
@@ -102,7 +114,7 @@ GET /health
 
 چون این سرویس فقط یک اپ ساده‌ی Express است، روی هر پلتفرم Node.js قابل اجراست. در حال حاضر (۲۰۲۶)، **Render** گزینه‌ای واقعاً رایگان و بدون نیاز به تمدید دستیه. (برای اطلاع: Railway دیگه پلن رایگان دائمی نداره و Glitch از ژوئیه‌ی ۲۰۲۵ میزبانی اپ رو کاملاً متوقف کرده و Vercel هم یه مقدار حساس ئه و بن میکنه اکانت رو.)
 
-### دیپلوی روی Render (رایگان، دائمی)
+### دیپلوی روی Render (رایگان، دائمی) <Badge type="info" text="Render" />
 
 ۱. وارد داشبورد [Render](https://render.com) شو و روی **New کلیک کن**
 و سپس روی **Web Service** بزن.
@@ -112,11 +124,15 @@ GET /health
 - **Start Command:** `node server.js`
 - **Plan:** Free
 
-![صفحه‌ی New Web Service روی Render با Build/Start Command پر شده](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/domain-resolve/pic.jpg)
+<p align="center">
+<img src="/public/domain-resolve/pic.jpg" alt="صفحه‌ی New Web Service روی Render با Build/Start Command پر شده">
+</p><br/>
 
 ۴. روی **Create Web Service** بزن؛ بعد از پایان بیلد، یک نشانی HTTPS دائمی (مثل `https://domain-resolve.onrender.com`) دریافت می‌کنی
 
-> **نکته‌ی پلن رایگان:** بعد از مدتی بی‌فعالیتی، سرویس می‌خوابد و اولین درخواست بعدی چند ثانیه Cold Start می‌خورد. برای بیدار نگه‌داشتنش می‌توانی همان اندپوینت `/health` را با یک Cron/Ping دوره‌ای (مثلاً هر ۱۰ دقیقه) صدا بزنی.
+::: tip `نکته‌ی پلن رایگان`
+بعد از مدتی بی‌فعالیتی، سرویس می‌خوابد و اولین درخواست بعدی چند ثانیه Cold Start می‌خورد. برای بیدار نگه‌داشتنش می‌توانی همان اندپوینت `/health` را با یک Cron/Ping دوره‌ای (مثلاً هر ۱۰ دقیقه) صدا بزنی.
+:::
 
 ### تست بعد از دپلوی
 

@@ -1,6 +1,16 @@
 ---
-title: Check-Host-API — سرویس تست شبکه از چندکشور (Ping/HTTP/TCP/UDP/DNS)
-description: مستندات ریپوی Check-Host-API — سرویس FastAPI که با استفاده از نودهای جهانی check-host.net، دسترس‌پذیری یک هاست را از چند کشور مختلف تست می‌کند؛ بک‌اند تب Check-Host در پروژه‌ی Cloudflare-Scamalytics
+layout: doc
+outline: deep
+lang: "fa-IR"
+dir: "rtl"
+title: "Check-Host-API — سرویس تست شبکه از چندکشور (Ping/HTTP/TCP/UDP/DNS)"
+description: "مستندات ریپوی Check-Host-API — سرویس FastAPI که با استفاده از نودهای جهانی check-host.net، دسترس‌پذیری یک هاست را از چند کشور مختلف تست می‌کند؛ بک‌اند تب Check-Host در پروژه‌ی Cloudflare-Scamalytics"
+date: 2026-9-18
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: Check-Host, check-host.net, FastAPI, Ping, HTTP, TCP, UDP, DNS, Network Test, Python
 ---
 
 # Check-Host-API
@@ -137,7 +147,7 @@ uvicorn api.index:app --reload --port 8000
 
 ## راهنمای دیپلوی
 
-### روی Render
+### روی Render <Badge type="info" text="Render" />
 
 <div style="text-align:right">
 
@@ -155,9 +165,11 @@ uvicorn api.index:app --reload --port 8000
 
 ۴. برای پلن سرور، پلن رایگان (Free) رو انتخاب کن.
 
-![صفحه‌ی New Web Service روی Render با Build/Start Command پر شده](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/check-host-api/pic.jpg)
+<p align="center">
+<img src="/public/check-host-api/pic.jpg" alt="صفحه‌ی New Web Service روی Render با Build/Start Command پر شده">
+</p><br/>
 
-### روی Vercel
+### روی Vercel <Badge type="tip" text="Vercel" />
 
 این ریپو یک `vercel.json` هم دارد (که همه‌ی مسیرها را به `api/index` هدایت می‌کند)، پس مستقیماً با اتصال ریپو به Vercel هم قابل دیپلوی است، بدون تنظیم اضافه‌ای.
 
@@ -170,9 +182,9 @@ uvicorn api.index:app --host 0.0.0.0 --port 8000 --workers 2
 
 اگر HTTPS و دامنه‌ی اختصاصی لازم داری، پشت Nginx یا Caddy قرارش بده.
 
-## یک نکته
-
-- `country` هیچ‌جا مقدار پیش‌فرض ندارد؛ هر درخواست باید صریحاً یک کد کشور بدهد (یا `all`)
+::: tip `یک نکته`
+`country` هیچ‌جا مقدار پیش‌فرض ندارد؛ هر درخواست باید صریحاً یک کد کشور بدهد (یا `all`)
+:::
 
 ## عیب‌یابی
 

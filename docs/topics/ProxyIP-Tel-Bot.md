@@ -1,6 +1,16 @@
 ---
-title: ProxyIP-Tel-Bot — ربات تلگرام چک ProxyIP با پشتیبانی گروه/کانال
-description: مستندات ریپوی ProxyIP-Tel-Bot — ربات پایتونی تلگرام برای تست پروکسی‌آی‌پی، رنج، دامنه و فایل، با تست زنده‌ی قابل Pause/Resume، ارسال خودکار به کانال/گروه، و ریسک‌اسکور با API رسمی Scamalytics + بازگشت خودکار به میرور عمومی
+layout: doc
+outline: deep
+lang: "fa-IR"
+dir: "rtl"
+title: "ProxyIP-Tel-Bot — ربات تلگرام چک ProxyIP با پشتیبانی گروه/کانال"
+description: "مستندات ریپوی ProxyIP-Tel-Bot — ربات پایتونی تلگرام برای تست پروکسی‌آی‌پی، رنج، دامنه و فایل، با تست زنده‌ی قابل Pause/Resume، ارسال خودکار به کانال/گروه، و ریسک‌اسکور با API رسمی Scamalytics + بازگشت خودکار به میرور عمومی"
+date: 2026-9-29
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: Telegram Bot, ProxyIP, Python, Scamalytics, Channel, Group
 ---
 
 # ProxyIP-Tel-Bot
@@ -9,7 +19,9 @@ description: مستندات ریپوی ProxyIP-Tel-Bot — ربات پایتون
 
 یک **ربات تلگرام** (پایتون) برای تست پروکسی‌آی‌پی — یک IP‏ تکی، یک رنج، همه‌ی آی‌پی‌های پشت یک دامنه، یا لیستی از یک فایل — که نتیجه رو با جزئیات کامل (تأخیر، کشور، ریسک‌اسکور) برمی‌گردونه.
 
-![خروجی /start](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/proxyip-tel-bot/pic.jpg)
+<p align="center">
+<img src="/public/proxyip-tel-bot/pic.jpg" alt="خروجی /start">
+</p><br/>
 
 ## معماری
 
@@ -25,20 +37,28 @@ description: مستندات ریپوی ProxyIP-Tel-Bot — ربات پایتون
 User → Telegram Bot → Cloudflare Worker → ( Backend API (Render/Server) + Cloudflare-Scamalytics API )
 ```
 
-نکته‌ی مهم: Worker‏ِ این بات اول سعی می‌کنه از **API رسمی Scamalytics** (با یوزرنیم و کلید واقعی، اگه تنظیم شده باشن) ریسک‌اسکور بگیره. اگه این متغیرها اصلاً تنظیم نشده باشن، یا API رسمی خطا بده، quota تموم شده باشه یا پاسخ غیرمعتبر برگردونه، Worker خودکار به همون **میرور عمومی خودِ پروژه‌ی [Cloudflare-Scamalytics](https://mehdi-hexing.github.io/mehdi-hexing/topics/Cloudflare-Scamalytics)** سوییچ می‌کنه (همون `cloudflare-scamalytics.pages.dev`‏ که مستند کردیم). حتی اطلاعات جغرافیایی/ISP‏ هم همین فال‌بک رو دارن: اول `ip-api.com`‏، بعد همون میرور. یعنی **ثبت‌نام Scamalytics اختیاریه** — بات بدون هیچ اکانت Scamalytics‏ هم کار می‌کنه، فقط دقت ریسک‌اسکور (چون از میرور عمومی میاد نه اکانت اختصاصی خودتون) یه‌کم پایین‌تره.
+::: tip `نکته‌ی مهم`
+Worker‏ِ این بات اول سعی می‌کنه از **API رسمی Scamalytics** (با یوزرنیم و کلید واقعی، اگه تنظیم شده باشن) ریسک‌اسکور بگیره. اگه این متغیرها اصلاً تنظیم نشده باشن، یا API رسمی خطا بده، quota تموم شده باشه یا پاسخ غیرمعتبر برگردونه، Worker خودکار به همون **میرور عمومی خودِ پروژه‌ی [Cloudflare-Scamalytics](https://mehdi-hexing.github.io/mehdi-hexing/topics/Cloudflare-Scamalytics)** سوییچ می‌کنه (همون `cloudflare-scamalytics.pages.dev`‏ که مستند کردیم). حتی اطلاعات جغرافیایی/ISP‏ هم همین فال‌بک رو دارن: اول `ip-api.com`‏، بعد همون میرور. یعنی **ثبت‌نام Scamalytics اختیاریه** — بات بدون هیچ اکانت Scamalytics‏ هم کار می‌کنه، فقط دقت ریسک‌اسکور (چون از میرور عمومی میاد نه اکانت اختصاصی خودتون) یه‌کم پایین‌تره.
+:::
 
 ## قابلیت‌ها
 
 - **چند حالت تست:** `/proxyip`‏ (تک/چند IP)، `/iprange`‏، `/domain`‏، `/file`‏ (از روی یک URL‏ فایل)
 - **پروکسی‌های رایگان:** `/freeproxyip`‏ با یک منوی کشوری ۳ستونه و مرتب‌شده (منبع: یک ریپوی عمومی جدا)
 
-  ![منوی کشوری /freeproxyip](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/proxyip-tel-bot/pic3.jpg)
+  <p align="center">
+<img src="/public/proxyip-tel-bot/pic3.jpg" alt="منوی کشوری /freeproxyip">
+</p><br/>
 - **تست زنده‌ی تعاملی:** پیام نتیجه به‌صورت زنده آپدیت می‌شه، با دکمه‌های **Pause / Resume / Cancel**
 
-  ![نتیجه‌ی /proxyip برای یک IP، همراه با دکمه‌های Pause/Cancel](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/proxyip-tel-bot/pic1.jpg)
+  <p align="center">
+<img src="/public/proxyip-tel-bot/pic1.jpg" alt="نتیجه‌ی /proxyip برای یک IP، همراه با دکمه‌های Pause/Cancel">
+</p><br/>
 - **۵ فرمت خروجی قابل انتخاب** بعد از پایان هر تست: Detailed Info، Rich Table (Collapsible)، Copyable IPs، Files (TXT/CSV)، یا All Formats
 
-  ![منوی انتخاب فرمت خروجی](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/proxyip-tel-bot/pic2.jpg)
+  <p align="center">
+<img src="/public/proxyip-tel-bot/pic2.jpg" alt="منوی انتخاب فرمت خروجی">
+</p><br/>
 - **ارسال به کانال/گروه:**
   - `/addchat`‏ — ثبت چندمرحله‌ای یک کانال/گروه مقصد
   - `/deletechat`‏ — منوی تعاملی برای حذف یک چت ثبت‌شده
@@ -46,7 +66,9 @@ User → Telegram Bot → Cloudflare Worker → ( Backend API (Render/Server) + 
 - **منطق محاوره‌ای:** در چت خصوصی هم می‌تونی مستقیم آرگومان بدی (`/proxyip 1.1.1.1`‏) و هم محاوره‌ای پیش بری؛ در گروه‌ها فقط حالت مکالمه‌ای/ریپلای فعاله (برای پایداری بیشتر)
 - **تجربه‌ی کاربری:** شماره‌گذاری با ایموجی برای تست چند-دامنه، حذف خودکار پیام‌های موقت، راهنمای خطا برای دستورات نادرست.
 
-![محیط بات حین اجرای /post — نوار پیشرفت زنده، قبل از اینکه نتیجه‌ی نهایی پست بشه تو کانال/گروه](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/proxyip-tel-bot/pic4.jpg)
+<p align="center">
+<img src="/public/proxyip-tel-bot/pic4.jpg" alt="محیط بات حین اجرای /post — نوار پیشرفت زنده، قبل از اینکه نتیجه‌ی نهایی پست بشه تو کانال/گروه">
+</p><br/>
 
 ## دستورات بات
 
@@ -78,12 +100,12 @@ User → Telegram Bot → Cloudflare Worker → ( Backend API (Render/Server) + 
 
 فقط **یکی** از این گزینه‌ها رو انتخاب کن (می‌تونی چندتا هم دیپلوی کنی و همه رو تو `apiUrls`‏ بذاری تا Worker به‌صورت موازی امتحانشون کنه — رجوع کن به توضیح بخش «معماری»):
 
-**گزینه‌ی الف) Vercel (پیشنهادی، ساده‌تر):**
+**گزینه‌ی الف) Vercel (پیشنهادی، ساده‌تر):** <Badge type="tip" text="Vercel" />
 ۱. به ریپوی [ProxyIP-Checker-Vercel-API](https://github.com/mehdi-hexing/ProxyIP-Checker-Vercel-API) برو
 ۲. روی دکمه‌ی «Deploy» تو README همون ریپو بزن
 ۳. آدرس نهایی (مثل `https://my-proxy-checker.vercel.app`‏) رو ذخیره کن — برای بخش ۳ لازمش داری
 
-**گزینه‌ی ب) سلف‌هاست روی سرور شخصی:**
+**گزینه‌ی ب) سلف‌هاست روی سرور شخصی:** <Badge type="danger" text="VPS" />
 ```bash
 git clone https://github.com/mehdi-hexing/ProxyIP-Checker-API.git
 cd ProxyIP-Checker-API
@@ -95,7 +117,7 @@ python main.py --port 8080
 ```
 آدرس نهایی: `http://Your_Server_IP:8080`‏ (مطمئن شو پورت تو فایروال بازه)
 
-**گزینه‌ی ج) Render:**
+**گزینه‌ی ج) Render:** <Badge type="info" text="Render" />
 همین ریپو (`ProxyIP-Checker-API`‏) روی Render هم قابل دیپلویه — دقیقاً همون سرویسیه که برای پروژه‌ی CF-ProxyIPChecker مستند کردیم. مراحل کامل (Build/Start Command، env varها، نکته‌ی Cold Start) رو همون‌جا نوشتیم، پس اینجا تکرارش نمی‌کنم: [راهنمای دیپلوی Render](https://mehdi-hexing.github.io/mehdi-hexing/topics/CF-ProxyIPChecker)
 
 ### بخش ۲ — راه‌اندازی Scamalytics (اختیاری، ولی توصیه‌شده)
@@ -158,10 +180,10 @@ python proxy-ip-bot.py
 
 برای برگشتن به نشست: `screen -r proxybot`‏ — برای توقف بات: دوباره وصل شو و `Ctrl+C`‏ بزن.
 
-## نکات مهم
-
+::: danger `نکات مهم`
 - منبع داده‌ی `/freeproxyip`‏ یک ریپوی **شخص‌ثالث** (`NiREvil/vless`‏) روی گیت‌هابه، نه دیتای تولیدشده توسط خودم
 - اگه اکانت اختصاصی Scamalytics تنظیم نکنی (یا اون از کار بیفته)، هم ریسک‌اسکور هم اطلاعات جغرافیایی از همون میرور عمومی پروژه‌ی Cloudflare-Scamalytics گرفته می‌شه — یعنی این بات عملاً به در دسترس بودن اون سرویس هم وابسته‌ست.
+:::
 
 ## عیب‌یابی
 

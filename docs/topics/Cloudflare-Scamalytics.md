@@ -1,6 +1,16 @@
 ---
-title: Cloudflare-Scamalytics — Scamalytics IP Checker (بررسی ریسک/فراد IP و دامنه)
-description: مستندات ریپوی Cloudflare-Scamalytics — Cloudflare Worker برای بررسی ریسک IP و دامنه از طریق اسکرپ scamalytics.com، به همراه تست شبکه‌ی Check-Host
+layout: doc
+outline: deep
+lang: "fa-IR"
+dir: "rtl"
+title: "Cloudflare-Scamalytics — Scamalytics IP Checker (بررسی ریسک/فراد IP و دامنه)"
+description: "مستندات ریپوی Cloudflare-Scamalytics — Cloudflare Worker برای بررسی ریسک IP و دامنه از طریق اسکرپ scamalytics.com، به همراه تست شبکه‌ی Check-Host"
+date: 2026-9-20
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: Cloudflare Worker, Scamalytics, IP Risk, Fraud Score, Domain Risk, Check-Host
 ---
 
 # Cloudflare-Scamalytics
@@ -40,11 +50,15 @@ User → Cloudflare-Scamalytics Worker
 
 - **Scamalytics IP Check** — یک باکس ورودی که IPv4، IPv6 یا دامنه می‌پذیرد، با راهنمای استفاده از پارامترهای URL (`?ip=` یا `?domain=`)
 
-![نتیجه‌ی بررسی کامل یک دامنه با ریسک‌اسکور همه‌ی IPهای پشتش](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cloudflare-scamalytics/pic.jpg)
+<p align="center">
+<img src="/public/cloudflare-scamalytics/pic.jpg" alt="نتیجه‌ی بررسی کامل یک دامنه با ریسک‌اسکور همه‌ی IPهای پشتش">
+</p><br/>
 
 - **Check-Host Network Test** — انتخاب نوع تست (Ping/HTTP/TCP/UDP/DNS) و یک یا چند کشور، با جدول نتایج متناسب با نوع تست (مثلاً کد HTTP + زمان پاسخ برای HTTP، باز/بسته + زمان پاسخ برای TCP/UDP، تعداد رکورد برای DNS)
 
-![جدول نتایج Check-Host برای چند کشور](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cloudflare-scamalytics/pic1.jpg)
+<p align="center">
+<img src="/public/cloudflare-scamalytics/pic1.jpg" alt="جدول نتایج Check-Host برای چند کشور">
+</p><br/>
 
 ## اندپوینت‌ها (Routes)
 
@@ -123,10 +137,10 @@ IPv4 و IPv6 در همه‌جا به‌صورت یکسان پشتیبانی می
 
 برای بررسی گروهی/دامنه، IPها در **دسته‌های ۳تایی** اسکور می‌شوند: داخل هر دسته، درخواست‌ها با فاصله‌ی ۲۵۰ میلی‌ثانیه‌ای پخش می‌شوند (تا هم‌زمان به scamalytics.com نخورند)، بین هر دسته و دسته‌ی بعدی هم ۴۰۰ میلی‌ثانیه مکث وجود دارد، و روی هر IP در صورت خطا یک بار تلاش مجدد انجام می‌شود. به همین دلیل، بررسی دامنه‌های با تعداد IP بالا زمان بیشتری می‌برد.
 
-## نکات مهم
-
+::: danger `نکات مهم`
 - چون اسکورینگ از اسکرپ صفحه‌ی عمومی scamalytics.com استفاده می‌کند، ممکن است گاهی ریت‌لیمیت یا بلاک شود؛ در این حالت آن IP خاص با `"error": true` برمی‌گردد، نه کل درخواست.
 - اگر سرویس Check-Host (روی Render) کند یا خاموش باشد، فقط کارت همان کشور با پیام خطا نمایش داده می‌شود، بقیه‌ی کشورهای همان درخواست تحت‌تأثیر قرار نمی‌گیرند.
+:::
 
 ## پیش‌نیازها
 

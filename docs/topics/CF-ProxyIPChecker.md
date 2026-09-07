@@ -1,11 +1,23 @@
 ---
-title: CF-ProxyIPChecker — ابزار بررسی و ریسک‌سنجی ProxyIP
-description: مستندات کامل رپوی CF-ProxyIPChecker — معماری، قابلیت‌ها، راهنمای دِپلوی (Vercel / VPS / Render)، Scamalytics، IPv6
+layout: doc
+outline: deep
+lang: "fa-IR"
+dir: "rtl"
+title: "CF-ProxyIPChecker — ابزار بررسی و ریسک‌سنجی ProxyIP"
+description: "مستندات کامل رپوی CF-ProxyIPChecker — معماری، قابلیت‌ها، راهنمای دِپلوی (Vercel / VPS / Render)، Scamalytics، IPv6"
+date: 2026-9-15
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: CF-ProxyIPChecker, ProxyIP, Cloudflare Worker, Vercel, Render, VPS, Scamalytics, IPv6, IPv4, Risk Score
 ---
 
 # CF-ProxyIPChecker
 
-![تصویر اصلی ابزار - حالت تاریک](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic.jpg)
+<p align="center">
+<img src="/public/cf-proxyipchecker/pic.jpg" alt="تصویر اصلی ابزار - حالت تاریک">
+</p><br/>
 
 ## ProxyIP چیست؟
 
@@ -49,9 +61,13 @@ description: مستندات کامل رپوی CF-ProxyIPChecker — معماری
 - **دسترس‌پذیری بالا:** امکان تعریف چند نشانی سرویس پشتیبان برای افزونگی، جدا از پشتیبان‌های Scamalytics و موقعیت‌یابی جغرافیایی
 - **کاملاً بدون سرور:** کل زیرساخت روی پلتفرم‌های سرورلس (Serverless) اجرا می‌شود؛ نیازی به نگه‌داری سرور اختصاصی نیست.
 
-![نتیجه‌ی بررسی تک آی‌پی همراه با برچسب امتیاز ریسک](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic1.jpg)
+<p align="center">
+<img src="/public/cf-proxyipchecker/pic1.jpg" alt="نتیجه‌ی بررسی تک آی‌پی همراه با برچسب امتیاز ریسک">
+</p><br/>
 
-![بررسی چندتایی/بازه‌ی آی‌پی همراه با فهرست موارد ناموفق](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic2.jpg)
+<p align="center">
+<img src="/public/cf-proxyipchecker/pic2.jpg" alt="بررسی چندتایی/بازه‌ی آی‌پی همراه با فهرست موارد ناموفق">
+</p><br/>
 
 ## پیش‌نیازها
 
@@ -67,13 +83,13 @@ description: مستندات کامل رپوی CF-ProxyIPChecker — معماری
 
 سه روش برای اجرای این سرویس وجود دارد؛ هر کدام را که راحت‌تر هستید انتخاب کنید.
 
-**گزینه‌ی الف) استقرار روی Vercel (ساده‌ترین روش):**
+**گزینه‌ی الف) استقرار روی Vercel (ساده‌ترین روش):** <Badge type="tip" text="Vercel" />
 
 ۱. به ریپوی [ProxyIP-Checker-Vercel-API](https://github.com/mehdi-hexing/ProxyIP-Checker-Vercel-API) بروید
 ۲. روی دکمه‌ی «Deploy» در README همان ریپو کلیک کنید تا Vercel یک نسخه از پروژه را خودکار برایتان مستقر کند
 ۳. نشانی نهایی (مانند `https://my-proxy-api.vercel.app`) را ذخیره کنید — در مرحله‌ی ۳ لازمش دارید.
 
-**گزینه‌ی ب) استقرار روی Render:**
+**گزینه‌ی ب) استقرار روی Render:** <Badge type="info" text="Render" />
 
 Render هم مثل Vercel یک پلتفرم بدون‌سرور با استقرار مستقیم از گیت‌هاب است، با این تفاوت که برای یک سرویس پایتونِ طولانی‌مدت (نه فقط تابع‌های کوتاه) مناسب‌تر است:
 
@@ -87,9 +103,11 @@ Render هم مثل Vercel یک پلتفرم بدون‌سرور با استقر�
 ۴. توجه داشته باشید که Render شماره پورت را از طریق متغیر محیطی `PORT` به برنامه می‌دهد، نه یک مقدار ثابت مثل ۸۰۸۰؛ به همین دلیل دستور اجرا باید از `$PORT` استفاده کند، نه یک عدد هاردکد
 ۵. روی **Create Web Service** بزنید؛ بعد از پایان بیلد، Render یک نشانی HTTPS دائمی (مانند `https://proxy-api.onrender.com`) در اختیارتان می‌گذارد — همین را در مرحله‌ی ۳ استفاده کنید
 
-> **نکته‌ی پلن رایگان:** در پلن رایگان Render، اگر سرویس مدتی درخواست دریافت نکند به خواب می‌رود و اولین درخواست بعدی چند ثانیه تأخیر می‌خورد (Cold Start). اگر می‌خواهید سرویس همیشه بیدار بماند، یا از پلن پولی استفاده کنید یا یک Cron/Ping دوره‌ای برای بیدار نگه‌داشتنش تنظیم کنید.
+::: tip `نکته‌ی پلن رایگان`
+در پلن رایگان Render، اگر سرویس مدتی درخواست دریافت نکند به خواب می‌رود و اولین درخواست بعدی چند ثانیه تأخیر می‌خورد (Cold Start). اگر می‌خواهید سرویس همیشه بیدار بماند، یا از پلن پولی استفاده کنید یا یک Cron/Ping دوره‌ای برای بیدار نگه‌داشتنش تنظیم کنید.
+:::
 
-**گزینه‌ی ج) استقرار شخصی روی VPS (کنترل کامل):**
+**گزینه‌ی ج) استقرار شخصی روی VPS (کنترل کامل):** <Badge type="danger" text="VPS" />
 
 ```bash
 git clone https://github.com/mehdi-hexing/ProxyIP-Checker-API.git
@@ -153,7 +171,9 @@ const apiUrls = [
 - از روی فایل: `/file/https://raw.githubusercontent.com/user/repo/main/ips.txt`
 - دامنه: `/domain/google.com` (هم رکورد A هم AAAA)
 
-![نتیجه‌ی بررسی دامنه همراه با فهرست آی‌پی‌های پشت آن](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic3.jpg)
+<p align="center">
+<img src="/public/cf-proxyipchecker/pic3.jpg" alt="نتیجه‌ی بررسی دامنه همراه با فهرست آی‌پی‌های پشت آن">
+</p><br/>
 
 ## اسکن قابل‌ازسرگیری و کش
 
@@ -176,7 +196,9 @@ const apiUrls = [
 - **خطای ۵۰۰ روی Worker:** معمولاً به‌دلیل جاافتادن یک متغیر محیطی است؛ پس از تنظیم صحیح متغیرها، دوباره استقرار دهید.
 - **سرویس روی Render کند بالا می‌آید:** در پلن رایگان طبیعی است (Cold Start)؛ برای رفع آن یا از پلن پولی استفاده کنید یا سرویس را با یک پینگ دوره‌ای بیدار نگه دارید.
 
-![نمای موبایل و حالت تاریک ابزار](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic4.jpg)
+<p align="center">
+<img src="/public/cf-proxyipchecker/pic4.jpg" alt="نمای موبایل و حالت تاریک ابزار">
+</p><br/>
 
 ## لینک‌های مرتبط
 
