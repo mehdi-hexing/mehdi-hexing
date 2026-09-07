@@ -84,7 +84,7 @@ direct (بدون واسط), allorigins, corsproxy
 - **Workers KV Storage: Edit**
 - **Account: Read**
 
-مراحل: به [dash.cloudflare.com/profile/api-tokens](https://dash.cloudflare.com/profile/api-tokens) برو و سپس بر روی **Create Token** کلیک کن و قالب **«Edit Cloudflare Workers»** را انتخاب کن (این قالب خودکار KV Storage:Edit و Workers Scripts:Edit را اضافه می‌کند؛ Zone→Workers Routes:Edit را هم می‌گذارد که برای این پروژه لازم نیست و می‌تونی حذفش کنی)
+مراحل: به [dash.cloudflare.com/profile/api-tokens][1] برو و سپس بر روی **Create Token** کلیک کن و قالب **«Edit Cloudflare Workers»** را انتخاب کن (این قالب خودکار KV Storage:Edit و Workers Scripts:Edit را اضافه می‌کند؛ Zone→Workers Routes:Edit را هم می‌گذارد که برای این پروژه لازم نیست و می‌تونی حذفش کنی)
 یک دسترسی دیگر هم دستی اضافه کن:
 **Account → Account Settings → Read** →
 زیر «Account Resources» فقط همون اکانت مشخص خودت را انتخاب کن نه «All accounts»
@@ -134,3 +134,5 @@ direct (بدون واسط), allorigins, corsproxy
 ## لینک‌های مرتبط
 
 - ریپوی این پروژه: `https://github.com/mehdi-hexing/ECH-Workers`
+
+[1]: https://dash.cloudflare.com/profile/api-tokens

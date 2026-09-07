@@ -17,9 +17,9 @@ head:
 
 ## این پروژه چیه؟
 
-یک سرویس **FastAPI** (پایتون) که با استفاده از نودهای جهانی [check-host.net](https://check-host.net)، دسترس‌پذیری یک هاست را از هر کشوری که بخواهید تست می‌کند — با پنج نوع تست: **ping، http، tcp، udp، dns**.
+یک سرویس **FastAPI** (پایتون) که با استفاده از نودهای جهانی [check-host][1]، دسترس‌پذیری یک هاست را از هر کشوری که بخواهید تست می‌کند — با پنج نوع تست: **ping، http، tcp، udp، dns**.
 
-این سرویس همون بک‌اندیه که تب **«Check-Host Network Test»** در پروژه‌ی [Cloudflare-Scamalytics](https://mehdi-hexing.github.io/mehdi-hexing/topics/Cloudflare-Scamalytics) بهش وصل می‌شه.
+این سرویس همون بک‌اندیه که تب **«Check-Host Network Test»** در پروژه‌ی [Cloudflare-Scamalytics][2] بهش وصل می‌شه.
 
 ## سازگاری با Worker پروژه‌ی Cloudflare-Scamalytics
 
@@ -151,19 +151,19 @@ uvicorn api.index:app --reload --port 8000
 
 <div style="text-align:right">
 
-۱. این ریپو رو Fork کن یا لینکش رو کپی کن برای وصل کردن به Render در بخش Web Service.
+این ریپو رو Fork کن یا لینکش رو کپی کن برای وصل کردن به Render در بخش Web Service.
 
 </div>
 
 <div style="text-align:left">
 
-:تنظیمات .۳
+Settings:
 **Build Command:** `pip install -r requirements.txt`
 **Start Command:** `uvicorn api.index:app --host 0.0.0.0 --port $PORT`
 
 </div>
 
-۴. برای پلن سرور، پلن رایگان (Free) رو انتخاب کن.
+برای پلن سرور، پلن رایگان (Free) رو انتخاب کن.
 
 <p align="center">
 <img src="/public/check-host-api/pic.jpg" alt="صفحه‌ی New Web Service روی Render با Build/Start Command پر شده">
@@ -182,7 +182,7 @@ uvicorn api.index:app --host 0.0.0.0 --port 8000 --workers 2
 
 اگر HTTPS و دامنه‌ی اختصاصی لازم داری، پشت Nginx یا Caddy قرارش بده.
 
-::: tip `یک نکته`
+::: tip `A Note`
 `country` هیچ‌جا مقدار پیش‌فرض ندارد؛ هر درخواست باید صریحاً یک کد کشور بدهد (یا `all`)
 :::
 
@@ -196,3 +196,6 @@ uvicorn api.index:app --host 0.0.0.0 --port 8000 --workers 2
 
 - ریپوی این سرویس: `https://github.com/mehdi-hexing/Check-Host-API`
 - پروژه‌ای که از این سرویس استفاده می‌کند: `https://github.com/mehdi-hexing/Cloudflare-Scamalytics`
+
+[1]: https://check-host.net
+[2]: https://mehdi-hexing.github.io/mehdi-hexing/topics/Cloudflare-Scamalytics

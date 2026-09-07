@@ -43,7 +43,7 @@ head:
 
 هر کلاینت را که استفاده می‌کنی، QR متناظرش را با اسکنر داخل اپ اسکن کن — لینک اشتراک خودکار اضافه می‌شود. اگه ترجیح می‌دی لینک را دستی کپی کنی، جدول کامل با لینک‌های خام در بخش «لینک‌های اشتراک» پایین‌تر هست.
 
-این پروژه‌ برای فراد-اسکور به پروژه [Cloudflare-Scamalytics](https://github.com/mehdi-hexing/Cloudflare-Scamalytics) متصله اینجویه که:
+این پروژه‌ برای فراد-اسکور به پروژه [Cloudflare-Scamalytics][1] متصله اینجویه که:
 اگه نسخه‌ی Pages جواب نده، به نسخه‌ی Workers سوییچ می‌کند؛ اگه هر دو جواب ندهند، متادیتای پیش‌فرض (`Unknown`/`N/A`) برای آن پروکسی ثبت می‌شود — کل پروکسی از لیست حذف نمی‌شود، فقط ستون‌های کشور/ریسک خالی می‌مانند.
 
 ## نحوه‌ی کارکرد (خودکار، هر ۶ ساعت)
@@ -163,8 +163,15 @@ python Scanner.py
 
 ## لینک‌های مرتبط
 
+::: info **Links**  
+
 - ریپوی این پروژه:  
 https://github.com/mehdi-hexing/HTTP-PROXY
 
 - منبع فراد-اسکور:  
 https://github.com/mehdi-hexing/Cloudflare-Scamalytics
+
+:::
+
+
+[1]: https://github.com/mehdi-hexing/Cloudflare-Scamalytics

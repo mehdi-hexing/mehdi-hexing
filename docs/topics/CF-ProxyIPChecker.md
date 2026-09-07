@@ -85,7 +85,7 @@ head:
 
 **گزینه‌ی الف) استقرار روی Vercel (ساده‌ترین روش):** <Badge type="tip" text="Vercel" />
 
-۱. به ریپوی [ProxyIP-Checker-Vercel-API](https://github.com/mehdi-hexing/ProxyIP-Checker-Vercel-API) بروید
+۱. به ریپوی [ProxyIP-Checker-Vercel-API][1] بروید
 ۲. روی دکمه‌ی «Deploy» در README همان ریپو کلیک کنید تا Vercel یک نسخه از پروژه را خودکار برایتان مستقر کند
 ۳. نشانی نهایی (مانند `https://my-proxy-api.vercel.app`) را ذخیره کنید — در مرحله‌ی ۳ لازمش دارید.
 
@@ -93,8 +93,8 @@ head:
 
 Render هم مثل Vercel یک پلتفرم بدون‌سرور با استقرار مستقیم از گیت‌هاب است، با این تفاوت که برای یک سرویس پایتونِ طولانی‌مدت (نه فقط تابع‌های کوتاه) مناسب‌تر است:
 
-۱. وارد داشبورد [Render](https://render.com) شوید و روی **New +** سپس **Web Service** کلیک کنید
-۲. ریپوی [ProxyIP-Checker-API](https://github.com/mehdi-hexing/ProxyIP-Checker-API) را از گیت‌هاب متصل کنید (یا ابتدا آن را Fork کنید تا به اکانت خودتان متصل شود)
+۱. وارد داشبورد [Render][2] شوید و روی **New +** سپس **Web Service** کلیک کنید
+۲. ریپوی [ProxyIP-Checker-API][3] را از گیت‌هاب متصل کنید (یا ابتدا آن را Fork کنید تا به اکانت خودتان متصل شود)
 ۳. تنظیمات سرویس را وارد کنید:
 - **Runtime:** Python 3
 - **Build Command:** `pip install -r requirements.txt`
@@ -103,7 +103,7 @@ Render هم مثل Vercel یک پلتفرم بدون‌سرور با استقر�
 ۴. توجه داشته باشید که Render شماره پورت را از طریق متغیر محیطی `PORT` به برنامه می‌دهد، نه یک مقدار ثابت مثل ۸۰۸۰؛ به همین دلیل دستور اجرا باید از `$PORT` استفاده کند، نه یک عدد هاردکد
 ۵. روی **Create Web Service** بزنید؛ بعد از پایان بیلد، Render یک نشانی HTTPS دائمی (مانند `https://proxy-api.onrender.com`) در اختیارتان می‌گذارد — همین را در مرحله‌ی ۳ استفاده کنید
 
-::: tip `نکته‌ی پلن رایگان`
+::: tip `Free Plan Note`
 در پلن رایگان Render، اگر سرویس مدتی درخواست دریافت نکند به خواب می‌رود و اولین درخواست بعدی چند ثانیه تأخیر می‌خورد (Cold Start). اگر می‌خواهید سرویس همیشه بیدار بماند، یا از پلن پولی استفاده کنید یا یک Cron/Ping دوره‌ای برای بیدار نگه‌داشتنش تنظیم کنید.
 :::
 
@@ -186,7 +186,7 @@ const apiUrls = [
 
 ## پشتیبانی از IPv6
 
-آدرس‌های IPv6 در کل زیرساخت پشتیبانی می‌شوند: در باکس تک/چند-آی‌پی، بازه‌ی آی‌پی (فقط با فرم کروشه‌دار)، فهرست فایلی و ریزالو دامنه (هر دو رکورد A و AAAA). موقعیت‌یابی جغرافیایی و امتیاز ریسک (چه سرویس اصلی، چه آینه‌ی جایگزین) هم با IPv6 درست کار می‌کنند. سرویس پشتیبان [ProxyIP-Checker-API](https://github.com/mehdi-hexing/ProxyIP-Checker-API) هم همه‌ی این فرمت‌ها را به‌درستی تفسیر می‌کند.
+آدرس‌های IPv6 در کل زیرساخت پشتیبانی می‌شوند: در باکس تک/چند-آی‌پی، بازه‌ی آی‌پی (فقط با فرم کروشه‌دار)، فهرست فایلی و ریزالو دامنه (هر دو رکورد A و AAAA). موقعیت‌یابی جغرافیایی و امتیاز ریسک (چه سرویس اصلی، چه آینه‌ی جایگزین) هم با IPv6 درست کار می‌کنند. سرویس پشتیبان [ProxyIP-Checker-API][3] هم همه‌ی این فرمت‌ها را به‌درستی تفسیر می‌کند.
 
 ## عیب‌یابی
 
@@ -205,3 +205,7 @@ const apiUrls = [
 - ریپوی اصلی: `https://github.com/mehdi-hexing/CF-ProxyIPChecker`
 - سرویس پشتیبان (Vercel): `https://github.com/mehdi-hexing/ProxyIP-Checker-vercel-API`
 - سرویس پشتیبان (Python — قابل استقرار روی Render یا VPS): `https://github.com/mehdi-hexing/ProxyIP-Checker-API`
+
+[1]: https://github.com/mehdi-hexing/ProxyIP-Checker-Vercel-API
+[2]: https://render.com
+[3]: https://github.com/mehdi-hexing/ProxyIP-Checker-API
