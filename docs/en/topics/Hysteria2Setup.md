@@ -1,6 +1,14 @@
 ---
-title: Setting Up a Server and Hysteria Config with Katabump
-description: A step-by-step guide to setting up a server and Hysteria config using Katabump — from registration to uploading files and getting the subscription link
+layout: doc
+outline: deep
+title: "Setting Up a Server and Hysteria Config with Katabump"
+description: "A step-by-step guide to setting up a server and Hysteria config using Katabump — from registration to uploading files and getting the subscription link"
+date: 2026-9-10
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: Hysteria2, Katabump, VPS, Server Setup, Config, Subscription Link
 ---
 
 # Setting Up a Server and Hysteria Config with Katabump
@@ -21,13 +29,13 @@ Obfuscating the code before use is **mandatory**; but don't worry, since it's al
 
 📦 **Attached file (zip):**
 
-[Config zip file](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/KataBumpJSCode[NeedToExtract].zip)
+[Config zip file](/public/hysteria2-setup/KataBumpJSCode[NeedToExtract].zip)
 
 Extract the file above; its contents will be used in the file-upload step — you can either upload the files directly, or copy each file's content and paste it into the corresponding location.
 
-## Important note about quality and server renewal
-
+::: danger `Important Note About Quality and Server Renewal`
 This Hysteria config gives good throughput and a stable connection on Irancell. The important thing to note is that you have to **renew** the server every **4 days**.
+:::
 
 ## Step 1: Registration
 
@@ -41,11 +49,15 @@ To get started, you need to create an account on Katabump:
 
 Image 1 of 2:
 
-![Registration step - Image 1](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic.jpg" alt="Registration step - Image 1">
+</p><br/>
 
 Image 2 of 2:
 
-![Registration step - Image 2](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic1-en.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic1-en.jpg" alt="Registration step - Image 2">
+</p><br/>
 
 ## Step 2: Creating and logging into the server management panel
 
@@ -55,23 +67,33 @@ In this step, the server is created and you log into its management panel.
 
 Image 1 of 5:
 
-![Server creation and panel login step - Image 1](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic2.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic2.jpg" alt="Server creation and panel login step - Image 1">
+</p><br/>
 
 Image 2 of 5:
 
-![Server creation and panel login step - Image 2](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic3-en.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic3-en.jpg" alt="Server creation and panel login step - Image 2">
+</p><br/>
 
 Image 3 of 5:
 
-![Server creation and panel login step - Image 3](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic4-en.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic4-en.jpg" alt="Server creation and panel login step - Image 3">
+</p><br/>
 
 Image 4 of 5:
 
-![Server creation and panel login step - Image 4](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic5.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic5.jpg" alt="Server creation and panel login step - Image 4">
+</p><br/>
 
 Image 5 of 5:
 
-![Server creation and panel login step - Image 5](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic6.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic6.jpg" alt="Server creation and panel login step - Image 5">
+</p><br/>
 
 ## Step 3: Uploading files
 
@@ -81,15 +103,21 @@ Extract the zip file provided in the Prerequisites section; its contents are use
 
 Image 1 of 3:
 
-![File upload step - Image 1](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic7.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic7.jpg" alt="File upload step - Image 1">
+</p><br/>
 
 Image 2 of 3:
 
-![File upload step - Image 2](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic8.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic8.jpg" alt="File upload step - Image 2">
+</p><br/>
 
 Image 3 of 3:
 
-![File upload step - Image 3](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic9.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic9.jpg" alt="File upload step - Image 3">
+</p><br/>
 
 ## Step 4: Final step — getting the panel address and subscription
 
@@ -99,12 +127,18 @@ At this stage, as shown in the images below, the panel address and subscription 
 
 Image 1 of 3:
 
-![Final step - Image 1](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic10.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic10.jpg" alt="Final step - Image 1">
+</p><br/>
 
 Image 2 of 3:
 
-![Final step - Image 2](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic11.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic11.jpg" alt="Final step - Image 2">
+</p><br/>
 
 Image 3 of 3:
 
-![Final step - Image 3](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/pic12.jpg)
+<p align="center">
+<img src="/public/hysteria2-setup/pic12.jpg" alt="Final step - Image 3">
+</p><br/>

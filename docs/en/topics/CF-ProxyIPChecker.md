@@ -1,11 +1,21 @@
 ---
-title: CF-ProxyIPChecker — ProxyIP Checker & Risk Scanner
-description: Full documentation for the CF-ProxyIPChecker repository — architecture, features, deployment guide (Vercel / VPS / Render), Scamalytics, IPv6
+layout: doc
+outline: deep
+title: "CF-ProxyIPChecker — ProxyIP Checker & Risk Scanner"
+description: "Full documentation for the CF-ProxyIPChecker repository — architecture, features, deployment guide (Vercel / VPS / Render), Scamalytics, IPv6"
+date: 2026-9-15
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: CF-ProxyIPChecker, ProxyIP, Cloudflare Worker, Vercel, Render, VPS, Scamalytics, IPv6, IPv4, Risk Score
 ---
 
 # CF-ProxyIPChecker
 
-![Main screenshot of the tool - dark mode](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic.jpg)
+<p align="center">
+<img src="/public/cf-proxyipchecker/pic.jpg" alt="Main screenshot of the tool - dark mode">
+</p><br/>
 
 ## What Is a ProxyIP?
 
@@ -49,9 +59,13 @@ Workflow in short: the user interacts with the frontend UI (on Pages/Workers), t
 - **High availability:** ability to define multiple backend service addresses for redundancy, separate from the Scamalytics and geolocation fallbacks
 - **Fully serverless:** the entire infrastructure runs on serverless platforms; there's no need to maintain a dedicated server.
 
-![Single-IP check result with a risk score badge](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic1.jpg)
+<p align="center">
+<img src="/public/cf-proxyipchecker/pic1.jpg" alt="Single-IP check result with a risk score badge">
+</p><br/>
 
-![Multi-IP/range check with a list of failed entries](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic2.jpg)
+<p align="center">
+<img src="/public/cf-proxyipchecker/pic2.jpg" alt="Multi-IP/range check with a list of failed entries">
+</p><br/>
 
 ## Prerequisites
 
@@ -67,13 +81,13 @@ Workflow in short: the user interacts with the frontend UI (on Pages/Workers), t
 
 There are three ways to run this service; pick whichever one is more convenient for you.
 
-**Option A) Deploy on Vercel (easiest method):**
+**Option A) Deploy on Vercel (easiest method):** <Badge type="tip" text="Vercel" />
 
 1. Go to the [ProxyIP-Checker-Vercel-API](https://github.com/mehdi-hexing/ProxyIP-Checker-Vercel-API) repository
 2. Click the "Deploy" button in that same repo's README so Vercel automatically deploys a copy of the project for you
 3. Save the final address (like `https://my-proxy-api.vercel.app`) — you'll need it in Step 3.
 
-**Option B) Deploy on Render:**
+**Option B) Deploy on Render:** <Badge type="info" text="Render" />
 
 Render, like Vercel, is a serverless platform with direct deployment from GitHub, with the difference that it's better suited to a long-running Python service (not just short functions):
 
@@ -87,9 +101,11 @@ Render, like Vercel, is a serverless platform with direct deployment from GitHub
 4. Note that Render passes the port number to the app through the `PORT` environment variable, not a fixed value like 8080; for this reason the start command must use `$PORT`, not a hardcoded number
 5. Click **Create Web Service**; once the build finishes, Render gives you a permanent HTTPS address (like `https://proxy-api.onrender.com`) — use this in Step 3
 
-> **Free plan note:** on Render's free plan, if the service doesn't receive requests for a while it goes to sleep, and the next request after that has a delay of a few seconds (Cold Start). If you want the service to always stay awake, either use a paid plan or set up a periodic Cron/Ping to keep it awake.
+::: tip `Free Plan Note`
+On Render's free plan, if the service doesn't receive requests for a while it goes to sleep, and the next request after that has a delay of a few seconds (Cold Start). If you want the service to always stay awake, either use a paid plan or set up a periodic Cron/Ping to keep it awake.
+:::
 
-**Option C) Self-hosted deployment on a VPS (full control):**
+**Option C) Self-hosted deployment on a VPS (full control):** <Badge type="danger" text="VPS" />
 
 ```bash
 git clone https://github.com/mehdi-hexing/ProxyIP-Checker-API.git
@@ -153,7 +169,9 @@ and check a known IP such as `1.1.1.1` or a domain such as `di.nscl.ir`. Other d
 - From a file: `/file/https://raw.githubusercontent.com/user/repo/main/ips.txt`
 - Domain: `/domain/google.com` (both A and AAAA records)
 
-![Domain check result with a list of proxy IPs behind it](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic3.jpg)
+<p align="center">
+<img src="/public/cf-proxyipchecker/pic3.jpg" alt="Domain check result with a list of proxy IPs behind it">
+</p><br/>
 
 ## Resumable Scanning and Caching
 
@@ -176,7 +194,9 @@ IPv6 addresses are supported throughout the infrastructure: in the single/multi-
 - **500 error on the Worker:** usually caused by a missing environment variable; redeploy after setting the variables correctly.
 - **The service on Render comes up slowly:** this is normal on the free plan (Cold Start); to fix it, either use a paid plan or keep the service awake with a periodic ping.
 
-![Mobile view and dark mode of the tool](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cf-proxyipchecker/pic4.jpg)
+<p align="center">
+<img src="/public/cf-proxyipchecker/pic4.jpg" alt="Mobile view and dark mode of the tool">
+</p><br/>
 
 ## Related Links
 

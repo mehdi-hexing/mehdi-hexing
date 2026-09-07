@@ -1,6 +1,14 @@
 ---
-title: ECH-Workers — DoH Worker with Automatic Fastest-Route Selection
-description: Documentation for the ECH-Workers repository — a Cloudflare Worker that returns DNS-over-HTTPS records (for things like ECH) across several resolvers and intermediary proxies, with automatic benchmarking and KV caching
+layout: doc
+outline: deep
+title: "ECH-Workers — DoH Worker with Automatic Fastest-Route Selection"
+description: "Documentation for the ECH-Workers repository — a Cloudflare Worker that returns DNS-over-HTTPS records (for things like ECH) across several resolvers and intermediary proxies, with automatic benchmarking and KV caching"
+date: 2026-9-25
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: DoH, DNS over HTTPS, ECH, Cloudflare Worker, Resolver, KV Cache
 ---
 
 # ECH-Workers
@@ -57,7 +65,9 @@ Intermediary proxies:
 direct (no intermediary), allorigins, corsproxy
 ```
 
+::: tip `Note`
 These are public, free services with no uptime guarantee; if you need to change them, you have to edit them directly in `src/index.js` (the `DEFAULT_RESOLVERS` and `DEFAULT_PROXIES` constants) and redeploy.
+:::
 
 ## Prerequisites
 

@@ -1,6 +1,14 @@
 ---
-title: Cloudflare-Scamalytics — Scamalytics IP Checker (IP & Domain Fraud/Risk Check)
-description: Documentation for the Cloudflare-Scamalytics repository — a Cloudflare Worker for checking IP and domain risk via scraping scamalytics.com, along with a Check-Host network test
+layout: doc
+outline: deep
+title: "Cloudflare-Scamalytics — Scamalytics IP Checker (IP & Domain Fraud/Risk Check)"
+description: "Documentation for the Cloudflare-Scamalytics repository — a Cloudflare Worker for checking IP and domain risk via scraping scamalytics.com, along with a Check-Host network test"
+date: 2026-9-20
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: Cloudflare Worker, Scamalytics, IP Risk, Fraud Score, Domain Risk, Check-Host
 ---
 
 # Cloudflare-Scamalytics
@@ -40,11 +48,15 @@ The Worker's main page (when opened with no parameters) has a UI with two tabs:
 
 - **Scamalytics IP Check** — an input box that accepts IPv4, IPv6, or a domain, with guidance on using URL parameters (`?ip=` or `?domain=`)
 
-![Full check result for a domain with the risk score of every IP behind it](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cloudflare-scamalytics/pic.jpg)
+<p align="center">
+<img src="/public/cloudflare-scamalytics/pic.jpg" alt="Full check result for a domain with the risk score of every IP behind it">
+</p><br/>
 
 - **Check-Host Network Test** — choosing a check type (Ping/HTTP/TCP/UDP/DNS) and one or more countries, with a results table tailored to the check type (e.g. HTTP code + response time for HTTP, open/closed + response time for TCP/UDP, record count for DNS)
 
-![Check-Host results table for several countries](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/cloudflare-scamalytics/pic1.jpg)
+<p align="center">
+<img src="/public/cloudflare-scamalytics/pic1.jpg" alt="Check-Host results table for several countries">
+</p><br/>
 
 ## Endpoints (Routes)
 
@@ -123,10 +135,10 @@ IPv4 and IPv6 are supported identically everywhere:
 
 For batch/domain checks, IPs are scored in **batches of 3**: within each batch, requests are spread out with a 250ms gap (so they don't hit scamalytics.com all at once), there's also a 400ms pause between one batch and the next, and one retry is done per IP on error. Because of this, checking domains with a large number of IPs takes longer.
 
-## Important notes
-
+::: danger `Important Notes`
 - Since scoring uses scraping of the public scamalytics.com page, it may occasionally get rate-limited or blocked; in that case that specific IP comes back with `"error": true`, not the whole request.
 - If the Check-Host service (on Render) is slow or down, only that country's card shows an error message, the rest of the countries in the same request aren't affected.
+:::
 
 ## Prerequisites
 

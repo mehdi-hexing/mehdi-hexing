@@ -1,6 +1,14 @@
 ---
-title: Check-Host-API — Multi-country Network Test Service (Ping/HTTP/TCP/UDP/DNS)
-description: Documentation for the Check-Host-API repo — a FastAPI service that uses check-host.net's global nodes to test a host's accessibility from multiple countries; backend of the Check-Host tab in the Cloudflare-Scamalytics project
+layout: doc
+outline: deep
+title: "Check-Host-API — Multi-country Network Test Service (Ping/HTTP/TCP/UDP/DNS)"
+description: "Documentation for the Check-Host-API repo — a FastAPI service that uses check-host.net's global nodes to test a host's accessibility from multiple countries; backend of the Check-Host tab in the Cloudflare-Scamalytics project"
+date: 2026-9-18
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: Check-Host, check-host.net, FastAPI, Ping, HTTP, TCP, UDP, DNS, Network Test, Python
 ---
 
 # Check-Host-API
@@ -137,7 +145,7 @@ Interactive API documentation is available at `http://localhost:8000/docs`.
 
 ## Deployment guide
 
-### On Render
+### On Render <Badge type="info" text="Render" />
 
 <div style="text-align:right">
 
@@ -155,9 +163,11 @@ Settings:
 
 4. For the server plan, choose the Free plan.
 
-![New Web Service page on Render with Build/Start Command filled in](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/check-host-api/pic.jpg)
+<p align="center">
+<img src="/public/check-host-api/pic.jpg" alt="New Web Service page on Render with Build/Start Command filled in">
+</p><br/>
 
-### On Vercel
+### On Vercel <Badge type="tip" text="Vercel" />
 
 This repo also has a `vercel.json` (which routes all paths to `api/index`), so it can also be deployed directly by connecting the repo to Vercel, with no extra configuration.
 
@@ -170,9 +180,9 @@ uvicorn api.index:app --host 0.0.0.0 --port 8000 --workers 2
 
 If you need HTTPS and a custom domain, put it behind Nginx or Caddy.
 
-## A note
-
-- `country` has no default value anywhere; every request must explicitly provide a country code (or `all`)
+::: tip `A Note`
+`country` has no default value anywhere; every request must explicitly provide a country code (or `all`)
+:::
 
 ## Troubleshooting
 

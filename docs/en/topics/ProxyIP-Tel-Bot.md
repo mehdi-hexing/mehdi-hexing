@@ -1,6 +1,14 @@
 ---
-title: ProxyIP-Tel-Bot — Telegram Bot for Checking ProxyIP with Group/Channel Support
-description: Documentation for the ProxyIP-Tel-Bot repo — a Python Telegram bot for testing proxy IPs, ranges, domains, and files, with a pausable/resumable live test, automatic posting to a channel/group, and risk scoring via the official Scamalytics API + automatic fallback to a public mirror.
+layout: doc
+outline: deep
+title: "ProxyIP-Tel-Bot — Telegram Bot for Checking ProxyIP with Group/Channel Support"
+description: "Documentation for the ProxyIP-Tel-Bot repo — a Python Telegram bot for testing proxy IPs, ranges, domains, and files, with a pausable/resumable live test, automatic posting to a channel/group, and risk scoring via the official Scamalytics API + automatic fallback to a public mirror."
+date: 2026-9-29
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: Telegram Bot, ProxyIP, Python, Scamalytics, Channel, Group
 ---
 
 # ProxyIP-Tel-Bot
@@ -9,7 +17,9 @@ description: Documentation for the ProxyIP-Tel-Bot repo — a Python Telegram bo
 
 A **Telegram bot** (Python) for testing proxy IPs — a single IP, a range, all IPs behind a domain, or a list from a file — that returns results with full detail (latency, country, risk score).
 
-![Output of /start](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/proxyip-tel-bot/pic.jpg)
+<p align="center">
+<img src="/public/proxyip-tel-bot/pic.jpg" alt="Output of /start">
+</p><br/>
 
 ## Architecture
 
@@ -25,20 +35,28 @@ Three separate components working together:
 User → Telegram Bot → Cloudflare Worker → ( Backend API (Render/Server) + Cloudflare-Scamalytics API )
 ```
 
-Important note: this bot's Worker first tries to get a risk score from the **official Scamalytics API** (using a real username and key, if configured). If those variables are never set, or the official API errors out, the quota runs out, or it returns an invalid response, the Worker automatically switches to the project's own **public mirror of [Cloudflare-Scamalytics](https://mehdi-hexing.github.io/mehdi-hexing/topics/Cloudflare-Scamalytics)** (the same `cloudflare-scamalytics.pages.dev` documented elsewhere). Even geolocation/ISP data has the same fallback: first `ip-api.com`, then the same mirror. In other words, **signing up for Scamalytics is optional** — the bot works fine without any Scamalytics account; the risk score is just slightly less precise, since it comes from the public mirror rather than your own dedicated account.
+::: tip `Important Note`
+This bot's Worker first tries to get a risk score from the **official Scamalytics API** (using a real username and key, if configured). If those variables are never set, or the official API errors out, the quota runs out, or it returns an invalid response, the Worker automatically switches to the project's own **public mirror of [Cloudflare-Scamalytics](https://mehdi-hexing.github.io/mehdi-hexing/topics/Cloudflare-Scamalytics)** (the same `cloudflare-scamalytics.pages.dev` documented elsewhere). Even geolocation/ISP data has the same fallback: first `ip-api.com`, then the same mirror. In other words, **signing up for Scamalytics is optional** — the bot works fine without any Scamalytics account; the risk score is just slightly less precise, since it comes from the public mirror rather than your own dedicated account.
+:::
 
 ## Features
 
 - **Multiple test modes:** `/proxyip` (single/multiple IPs), `/iprange`, `/domain`, `/file` (from a file URL)
 - **Free proxies:** `/freeproxyip` with a sorted, three-column country menu (source: a separate public repo)
 
-  ![Country menu for /freeproxyip](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/proxyip-tel-bot/pic3.jpg)
+  <p align="center">
+<img src="/public/proxyip-tel-bot/pic3.jpg" alt="Country menu for /freeproxyip">
+</p><br/>
 - **Interactive live testing:** the result message updates live, with **Pause / Resume / Cancel** buttons
 
-  ![Result of /proxyip for a single IP, with Pause/Cancel buttons](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/proxyip-tel-bot/pic1.jpg)
+  <p align="center">
+<img src="/public/proxyip-tel-bot/pic1.jpg" alt="Result of /proxyip for a single IP, with Pause/Cancel buttons">
+</p><br/>
 - **5 selectable output formats** at the end of each test: Detailed Info, Rich Table (Collapsible), Copyable IPs, Files (TXT/CSV), or All Formats
 
-  ![Output format selection menu](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/proxyip-tel-bot/pic2.jpg)
+  <p align="center">
+<img src="/public/proxyip-tel-bot/pic2.jpg" alt="Output format selection menu">
+</p><br/>
 - **Posting to a channel/group:**
   - `/addchat` — multi-step registration of a destination channel/group
   - `/deletechat` — an interactive menu for removing a registered chat
@@ -46,7 +64,9 @@ Important note: this bot's Worker first tries to get a risk score from the **off
 - **Conversational logic:** in a private chat you can either pass arguments directly (`/proxyip 1.1.1.1`) or go through the conversational flow; in groups only the conversational/reply mode is active (for better stability)
 - **User experience:** emoji numbering for multi-domain tests, automatic cleanup of temporary messages, and error guidance for invalid commands.
 
-![The bot while /post is running — the live progress bar, before the final result gets posted to the channel/group](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/proxyip-tel-bot/pic4.jpg)
+<p align="center">
+<img src="/public/proxyip-tel-bot/pic4.jpg" alt="The bot while /post is running — the live progress bar, before the final result gets posted to the channel/group">
+</p><br/>
 
 ## Bot commands
 
@@ -78,12 +98,12 @@ Important note: this bot's Worker first tries to get a risk score from the **off
 
 Choose **only one** of these options (you can also deploy several and list them all in `apiUrls` so the Worker tries them in parallel — see the "Architecture" section above):
 
-**Option A) Vercel (recommended, simpler):**
+**Option A) Vercel (recommended, simpler):** <Badge type="tip" text="Vercel" />
 1. Go to the [ProxyIP-Checker-Vercel-API](https://github.com/mehdi-hexing/ProxyIP-Checker-Vercel-API) repo
 2. Click the "Deploy" button in that repo's README
 3. Save the resulting URL (e.g. `https://my-proxy-checker.vercel.app`) — you'll need it for Part 3
 
-**Option B) Self-host on your own server:**
+**Option B) Self-host on your own server:** <Badge type="danger" text="VPS" />
 ```bash
 git clone https://github.com/mehdi-hexing/ProxyIP-Checker-API.git
 cd ProxyIP-Checker-API
@@ -95,7 +115,7 @@ python main.py --port 8080
 ```
 Resulting URL: `http://Your_Server_IP:8080` (make sure the port is open in your firewall)
 
-**Option C) Render:**
+**Option C) Render:** <Badge type="info" text="Render" />
 This same repo (`ProxyIP-Checker-API`) can also be deployed on Render — it's exactly the same service documented for the CF-ProxyIPChecker project. The full steps (build/start command, env vars, cold-start note) are written there, so they're not repeated here: [Render deployment guide](https://mehdi-hexing.github.io/mehdi-hexing/topics/CF-ProxyIPChecker)
 
 ### Part 2 — Set up Scamalytics (optional, but recommended)
@@ -158,10 +178,10 @@ python proxy-ip-bot.py
 
 To reattach to the session: `screen -r proxybot` — to stop the bot: reattach and press `Ctrl+C`.
 
-## Important notes
-
+::: danger `Important Notes`
 - The data source for `/freeproxyip` is a **third-party** repo (`NiREvil/vless`) on GitHub, not data generated by this project itself
 - If you don't set up a dedicated Scamalytics account (or it goes down), both the risk score and the geolocation data come from the same public mirror of the Cloudflare-Scamalytics project — meaning this bot effectively also depends on that service's availability
+:::
 
 ## Troubleshooting
 

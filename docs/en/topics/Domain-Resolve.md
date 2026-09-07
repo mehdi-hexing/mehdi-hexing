@@ -1,6 +1,14 @@
 ---
-title: Domain-Resolve — IP Resolver and Grouping Tool for Risk-Checking Subdomains with Huge IP Counts
-description: Documentation for the Domain-Resolve repository — the helper service Cloudflare-Scamalytics uses to work around the Worker SubRequest limit on subdomains with more than 50 IPs
+layout: doc
+outline: deep
+title: "Domain-Resolve — IP Resolver and Grouping Tool for Risk-Checking Subdomains with Huge IP Counts"
+description: "Documentation for the Domain-Resolve repository — the helper service Cloudflare-Scamalytics uses to work around the Worker SubRequest limit on subdomains with more than 50 IPs"
+date: 2026-9-22
+editLink: true
+head:
+  - - meta
+    - name: keywords
+      content: Domain Resolve, DNS, Subrequest, Cloudflare Worker, Scamalytics, IP Grouping
 ---
 
 # Domain-Resolve
@@ -21,7 +29,9 @@ Although structurally it's a completely separate service (its own repo and deplo
 
 <div style="text-align:right">
 
-> One thing I wanted to mention is that, since we're forced to use this method because of the SubRequest limit on Cloudflare's free plan, the number of requests to our Worker goes up.
+::: tip `Note`
+Since we're forced to use this method because of the SubRequest limit on Cloudflare's free plan, the number of requests to our Worker goes up.
+:::
 
 </div>
 
@@ -102,7 +112,7 @@ The service is written in **Node.js + Express** and uses the built-in `dns/promi
 
 Since this service is just a plain Express app, it can run on any Node.js platform. Right now (2026), **Render** is a genuinely free option that doesn't need manual renewal. (For reference: Railway no longer has a permanent free tier, Glitch fully stopped hosting apps as of July 2025, and Vercel is also a bit sensitive and bans accounts.)
 
-### Deploying on Render (free, permanent)
+### Deploying on Render (free, permanent) <Badge type="info" text="Render" />
 
 1. Log into the [Render](https://render.com) dashboard and click **New**,
 then click **Web Service**.
@@ -112,11 +122,15 @@ then click **Web Service**.
 - **Start Command:** `node server.js`
 - **Plan:** Free
 
-![The New Web Service screen on Render with Build/Start Command filled in](https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/domain-resolve/pic.jpg)
+<p align="center">
+<img src="/public/domain-resolve/pic.jpg" alt="The New Web Service screen on Render with Build/Start Command filled in">
+</p><br/>
 
 4. Click **Create Web Service**; once the build finishes, you get a permanent HTTPS address (like `https://domain-resolve.onrender.com`)
 
-> **Free plan note:** after a while of inactivity, the service goes to sleep and the next request has a few seconds of Cold Start. To keep it awake, you can ping the same `/health` endpoint with a periodic Cron/Ping (say, every 10 minutes).
+::: tip `Free Plan Note`
+After a while of inactivity, the service goes to sleep and the next request has a few seconds of Cold Start. To keep it awake, you can ping the same `/health` endpoint with a periodic Cron/Ping (say, every 10 minutes).
+:::
 
 ### Testing after deployment
 
