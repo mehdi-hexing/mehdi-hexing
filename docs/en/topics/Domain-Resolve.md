@@ -15,7 +15,7 @@ head:
 
 ## What problem was this project built for?
 
-Cloudflare Workers have a fixed cap per execution on the number of **Subrequests** (outgoing requests). When the [Cloudflare-Scamalytics](https://mehdi-hexing.github.io/mehdi-hexing/topics/Cloudflare-Scamalytics) project wanted to check the risk score of a domain, if that domain had more than 50 IPs behind it, trying to fetch the risk of each one individually from Scamalytics would fill up the Worker's SubRequest cap and the whole operation would hit the limit.
+Cloudflare Workers have a fixed cap per execution on the number of **Subrequests** (outgoing requests). When the [Cloudflare-Scamalytics][1] project wanted to check the risk score of a domain, if that domain had more than 50 IPs behind it, trying to fetch the risk of each one individually from Scamalytics would fill up the Worker's SubRequest cap and the whole operation would hit the limit.
 
 **Domain-Resolve** was built to solve exactly this problem: instead of having the Worker itself resolve the domain's DNS directly and send all the IPs to Scamalytics at once, this service acts as a middleman that does the following:
 
@@ -27,7 +27,7 @@ The Cloudflare-Scamalytics Worker then calls the endpoint with fetch, reads the 
 
 Although structurally it's a completely separate service (its own repo and deployment), functionally it counts as part of the Cloudflare-Scamalytics infrastructure.
 
-<div style="text-align:right">
+<div style="text-align:left">
 
 ::: tip `Note`
 Since we're forced to use this method because of the SubRequest limit on Cloudflare's free plan, the number of requests to our Worker goes up.
@@ -114,7 +114,7 @@ Since this service is just a plain Express app, it can run on any Node.js platfo
 
 ### Deploying on Render (free, permanent) <Badge type="info" text="Render" />
 
-1. Log into the [Render](https://render.com) dashboard and click **New**,
+1. Log into the [Render][2] dashboard and click **New**,
 then click **Web Service**.
 2. Connect the `domain-resolve` repo from GitHub (or fork it first)
 3. Enter the settings:
@@ -161,3 +161,6 @@ const data = await res.json();
 
 - This service's repo: `https://github.com/mehdi-hexing/Domain-Resolve`
 - The main project that uses this service: `https://github.com/mehdi-hexing/Cloudflare-scamalytics`
+
+[1]: https://mehdi-hexing.github.io/mehdi-hexing/topics/Cloudflare-Scamalytics
+[2]: https://render.com
