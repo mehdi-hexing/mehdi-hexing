@@ -29,7 +29,7 @@ Obfuscating the code before use is **mandatory**; but don't worry, since it's al
 
 📦 **Attached file (zip):**
 
-[Config zip file](/public/hysteria2-setup/KataBumpJSCode[NeedToExtract].zip)
+[Config zip file][1]
 
 Extract the file above; its contents will be used in the file-upload step — you can either upload the files directly, or copy each file's content and paste it into the corresponding location.
 
@@ -142,3 +142,5 @@ Image 3 of 3:
 <p align="center">
 <img src="/public/hysteria2-setup/pic12.jpg" alt="Final step - Image 3">
 </p><br/>
+
+[1]: https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/KataBumpJSCode[NeedToExtract].zip
