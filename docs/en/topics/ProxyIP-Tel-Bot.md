@@ -36,7 +36,7 @@ User → Telegram Bot → Cloudflare Worker → ( Backend API (Render/Server) + 
 ```
 
 ::: tip `Important Note`
-This bot's Worker first tries to get a risk score from the **official Scamalytics API** (using a real username and key, if configured). If those variables are never set, or the official API errors out, the quota runs out, or it returns an invalid response, the Worker automatically switches to the project's own **public mirror of [Cloudflare-Scamalytics](https://mehdi-hexing.github.io/mehdi-hexing/topics/Cloudflare-Scamalytics)** (the same `cloudflare-scamalytics.pages.dev` documented elsewhere). Even geolocation/ISP data has the same fallback: first `ip-api.com`, then the same mirror. In other words, **signing up for Scamalytics is optional** — the bot works fine without any Scamalytics account; the risk score is just slightly less precise, since it comes from the public mirror rather than your own dedicated account.
+This bot's Worker first tries to get a risk score from the **official Scamalytics API** (using a real username and key, if configured). If those variables are never set, or the official API errors out, the quota runs out, or it returns an invalid response, the Worker automatically switches to the project's own **public mirror of [Cloudflare-Scamalytics][1]** (the same `cloudflare-scamalytics.pages.dev` documented elsewhere). Even geolocation/ISP data has the same fallback: first `ip-api.com`, then the same mirror. In other words, **signing up for Scamalytics is optional** — the bot works fine without any Scamalytics account; the risk score is just slightly less precise, since it comes from the public mirror rather than your own dedicated account.
 :::
 
 ## Features
@@ -44,17 +44,17 @@ This bot's Worker first tries to get a risk score from the **official Scamalytic
 - **Multiple test modes:** `/proxyip` (single/multiple IPs), `/iprange`, `/domain`, `/file` (from a file URL)
 - **Free proxies:** `/freeproxyip` with a sorted, three-column country menu (source: a separate public repo)
 
-  <p align="center">
+<p align="center">
 <img src="/public/proxyip-tel-bot/pic3.jpg" alt="Country menu for /freeproxyip">
 </p><br/>
 - **Interactive live testing:** the result message updates live, with **Pause / Resume / Cancel** buttons
 
-  <p align="center">
+<p align="center">
 <img src="/public/proxyip-tel-bot/pic1.jpg" alt="Result of /proxyip for a single IP, with Pause/Cancel buttons">
 </p><br/>
 - **5 selectable output formats** at the end of each test: Detailed Info, Rich Table (Collapsible), Copyable IPs, Files (TXT/CSV), or All Formats
 
-  <p align="center">
+<p align="center">
 <img src="/public/proxyip-tel-bot/pic2.jpg" alt="Output format selection menu">
 </p><br/>
 - **Posting to a channel/group:**
@@ -85,7 +85,7 @@ This bot's Worker first tries to get a risk score from the **official Scamalytic
 
 ## Prerequisites
 
-- A **Telegram bot token** from [@BotFather](https://t.me/BotFather)
+- A **Telegram bot token** from [@BotFather][2]
 - A **Cloudflare** account (free)
 - A server/machine with **Python 3.8+** and the `screen` command installed
 - A **GitHub** account
@@ -99,7 +99,7 @@ This bot's Worker first tries to get a risk score from the **official Scamalytic
 Choose **only one** of these options (you can also deploy several and list them all in `apiUrls` so the Worker tries them in parallel — see the "Architecture" section above):
 
 **Option A) Vercel (recommended, simpler):** <Badge type="tip" text="Vercel" />
-1. Go to the [ProxyIP-Checker-Vercel-API](https://github.com/mehdi-hexing/ProxyIP-Checker-Vercel-API) repo
+1. Go to the [ProxyIP-Checker-Vercel-API][3] repo
 2. Click the "Deploy" button in that repo's README
 3. Save the resulting URL (e.g. `https://my-proxy-checker.vercel.app`) — you'll need it for Part 3
 
@@ -116,13 +116,13 @@ python main.py --port 8080
 Resulting URL: `http://Your_Server_IP:8080` (make sure the port is open in your firewall)
 
 **Option C) Render:** <Badge type="info" text="Render" />
-This same repo (`ProxyIP-Checker-API`) can also be deployed on Render — it's exactly the same service documented for the CF-ProxyIPChecker project. The full steps (build/start command, env vars, cold-start note) are written there, so they're not repeated here: [Render deployment guide](https://mehdi-hexing.github.io/mehdi-hexing/topics/CF-ProxyIPChecker)
+This same repo (`ProxyIP-Checker-API`) can also be deployed on Render — it's exactly the same service documented for the CF-ProxyIPChecker project. The full steps (build/start command, env vars, cold-start note) are written there, so they're not repeated here: [Render deployment guide][4]
 
 ### Part 2 — Set up Scamalytics (optional, but recommended)
 
 You can skip this part entirely — the bot still works without it (it uses the public mirror). But for a more accurate risk score, and to avoid depending on someone else's shared service being available, it's better to set up your own dedicated account:
 
-1. Sign up at [Scamalytics.com](https://scamalytics.com/) with the **free** plan
+1. Sign up at [Scamalytics.com][5] with the **free** plan
 2. Verify your email and wait for manual API access approval (can take up to 24 hours)
 3. Once approved, grab your **Username** and **API Key** from the Scamalytics dashboard
 
@@ -195,3 +195,9 @@ To reattach to the session: `screen -r proxybot` — to stop the bot: reattach a
 - This project's repo: `https://github.com/mehdi-hexing/ProxyIP-Tel-Bot`
 - Backend (Vercel): `https://github.com/mehdi-hexing/ProxyIP-Checker-Vercel-API`
 - Backend (Python — Render): `https://github.com/mehdi-hexing/ProxyIP-Checker-API`
+
+[1]: https://mehdi-hexing.github.io/mehdi-hexing/topics/Cloudflare-Scamalytics
+[2]: https://t.me/BotFather
+[3]: https://github.com/mehdi-hexing/ProxyIP-Checker-Vercel-API
+[4]: https://mehdi-hexing.github.io/mehdi-hexing/topics/CF-ProxyIPChecker
+[5]: https://scamalytics.com
