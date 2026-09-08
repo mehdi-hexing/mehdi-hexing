@@ -67,7 +67,7 @@ cloudflare, google, quad9, nextdns, opendns
 direct (بدون واسط), allorigins, corsproxy
 ```
 
-::: tip `نکته`
+::: tip نکته
 این لیست‌ها سرویس‌های عمومی و رایگان‌اند، بدون تضمین آپ‌تایم؛ در صورت نیاز باید مستقیم در فایل `src/index.js` (ثابت‌های `DEFAULT_RESOLVERS` و `DEFAULT_PROXIES`) ویرایش و دوباره دیپلوی شوند.
 :::
 

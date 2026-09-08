@@ -182,7 +182,7 @@ uvicorn api.index:app --host 0.0.0.0 --port 8000 --workers 2
 
 اگر HTTPS و دامنه‌ی اختصاصی لازم داری، پشت Nginx یا Caddy قرارش بده.
 
-::: tip `A Note`
+::: tip یک نکته
 `country` هیچ‌جا مقدار پیش‌فرض ندارد؛ هر درخواست باید صریحاً یک کد کشور بدهد (یا `all`)
 :::
 

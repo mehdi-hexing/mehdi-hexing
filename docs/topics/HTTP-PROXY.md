@@ -163,7 +163,7 @@ python Scanner.py
 
 ## لینک‌های مرتبط
 
-::: info **Links**  
+::: info لینک ها
 
 - ریپوی این پروژه:  
 https://github.com/mehdi-hexing/HTTP-PROXY
