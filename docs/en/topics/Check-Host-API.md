@@ -180,7 +180,7 @@ uvicorn api.index:app --host 0.0.0.0 --port 8000 --workers 2
 
 If you need HTTPS and a custom domain, put it behind Nginx or Caddy.
 
-::: tip `A Note`
+::: tip A Note
 `country` has no default value anywhere; every request must explicitly provide a country code (or `all`)
 :::
 

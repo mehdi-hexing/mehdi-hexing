@@ -65,7 +65,7 @@ Intermediary proxies:
 direct (no intermediary), allorigins, corsproxy
 ```
 
-::: tip `Note`
+::: tip Note
 These are public, free services with no uptime guarantee; if you need to change them, you have to edit them directly in `src/index.js` (the `DEFAULT_RESOLVERS` and `DEFAULT_PROXIES` constants) and redeploy.
 :::
 

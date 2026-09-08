@@ -101,7 +101,7 @@ Render, like Vercel, is a serverless platform with direct deployment from GitHub
 4. Note that Render passes the port number to the app through the `PORT` environment variable, not a fixed value like 8080; for this reason the start command must use `$PORT`, not a hardcoded number
 5. Click **Create Web Service**; once the build finishes, Render gives you a permanent HTTPS address (like `https://proxy-api.onrender.com`) — use this in Step 3
 
-::: tip `Free Plan Note`
+::: tip Free Plan Note
 On Render's free plan, if the service doesn't receive requests for a while it goes to sleep, and the next request after that has a delay of a few seconds (Cold Start). If you want the service to always stay awake, either use a paid plan or set up a periodic Cron/Ping to keep it awake.
 :::
 

@@ -17,7 +17,7 @@ head:
 
 This method allows you to set up a dedicated <Badge type="danger" text="MTProto" /> proxy for Telegram using <Badge type="danger" text="Katabump" /> (a free Node.js/Python hosting service). This version has a small modification compared to the original project: every time the server starts, a new random secret is generated, and in addition to the link displayed in the Console, a simple web page is also served on the same port, showing the proxy link with a copy button.
 
-::: tip **Important Note**
+::: tip Important Note
 
 Katabump's free plan requires manual renewal (Renew) every 4 days. If you forget the due date, the server and proxy will shut down completely, and you'll need to start it again.
 
@@ -38,7 +38,7 @@ No obfuscation or compilation is needed; the entire project runs with plain Pyth
 
 <br/>
 
-::: info **Note**
+::: info Note
 
 <Badge type="danger" text="Extract" /> the file above; its contents (`mtprotoproxy.py`, `config.py`, and the `pyaes` folder) will be used directly in the file upload step.
 
@@ -113,7 +113,7 @@ Replace the port number you found in the previous step inside the `config.py` fi
 PORT = 25565  # replace with your own public port
 ```
 
-::: danger **Attention**
+::: danger Attention
 
 This is the only value that needs to be set manually; everything else (secret and links) is generated automatically.
 
@@ -232,7 +232,7 @@ A simple page will open displaying the proxy link in a selectable box, along wit
 
 ## Final Notes
 
-::: danger **Don't Forget**   
+::: danger Don't Forget
 You must log in to the Katabump panel and Renew your server every 4 days; otherwise, the server and proxy will stop working.
 
 <br/>
@@ -248,7 +248,7 @@ If you see an error message like "ModuleNotFoundError" or "No such file" in the 
 
 ## Support and Help
 
-::: info **Further Assistance**   
+::: info Further Assistance
 If you encounter any questions or issues during setup or while using this project, you can reach out through the following channels:  
 - Direct contact: [My personal Telegram account][4]
 - General Q&A: [Telegram support group][5]   

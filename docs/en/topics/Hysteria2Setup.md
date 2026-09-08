@@ -33,7 +33,7 @@ Obfuscating the code before use is **mandatory**; but don't worry, since it's al
 
 Extract the file above; its contents will be used in the file-upload step — you can either upload the files directly, or copy each file's content and paste it into the corresponding location.
 
-::: danger `Important Note About Quality and Server Renewal`
+::: danger Important Note About Quality and Server Renewal
 This Hysteria config gives good throughput and a stable connection on Irancell. The important thing to note is that you have to **renew** the server every **4 days**.
 :::
 

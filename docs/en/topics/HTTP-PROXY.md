@@ -133,7 +133,7 @@ python Scanner.py
 
 ## Related Links
 
-::: info **Links**  
+::: info Links
 
 - Project repository:  
   https://github.com/mehdi-hexing/HTTP-PROXY

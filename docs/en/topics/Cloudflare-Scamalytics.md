@@ -135,7 +135,7 @@ IPv4 and IPv6 are supported identically everywhere:
 
 For batch/domain checks, IPs are scored in **batches of 3**: within each batch, requests are spread out with a 250ms gap (so they don't hit scamalytics.com all at once), there's also a 400ms pause between one batch and the next, and one retry is done per IP on error. Because of this, checking domains with a large number of IPs takes longer.
 
-::: danger `Important Notes`
+::: danger Important Notes
 - Since scoring uses scraping of the public scamalytics.com page, it may occasionally get rate-limited or blocked; in that case that specific IP comes back with `"error": true`, not the whole request.
 - If the Check-Host service (on Render) is slow or down, only that country's card shows an error message, the rest of the countries in the same request aren't affected.
 :::

@@ -29,7 +29,7 @@ Although structurally it's a completely separate service (its own repo and deplo
 
 <div style="text-align:left">
 
-::: tip `Note`
+::: tip Note
 Since we're forced to use this method because of the SubRequest limit on Cloudflare's free plan, the number of requests to our Worker goes up.
 :::
 
@@ -128,7 +128,7 @@ then click **Web Service**.
 
 4. Click **Create Web Service**; once the build finishes, you get a permanent HTTPS address (like `https://domain-resolve.onrender.com`)
 
-::: tip `Free Plan Note`
+::: tip Free Plan Note
 After a while of inactivity, the service goes to sleep and the next request has a few seconds of Cold Start. To keep it awake, you can ping the same `/health` endpoint with a periodic Cron/Ping (say, every 10 minutes).
 :::
 
