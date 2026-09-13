@@ -1,9 +1,11 @@
 ---
 layout: doc
 outline: deep
-title: "Setting Up a Server and Hysteria Config with Katabump"
-description: "A step-by-step guide to setting up a server and Hysteria config using Katabump — from registration to uploading files and getting the subscription link"
+title: "Server Setup and Config with Katabump"
+description: "A step-by-step guide to setting up a Hysteria server and config using Katabump — from sign-up to uploading files and getting the subscription link"
 date: 2026-9-13
+category: "Linux"
+icon: "🐧"
 editLink: true
 head:
   - - meta
@@ -11,152 +13,164 @@ head:
       content: Hysteria2, Katabump, VPS, Server Setup, Config, Subscription Link
 ---
 
-# Setting Up a Server and Hysteria Config with Katabump
+# Server Setup and Config with Katabump {#deploy}
 
-## What is this method?
+## What Is This Method? {#whatis}
 
-A new method where you can set up a server and config using **Katabump**.
+This is a new method that lets you set up several types of v2ray configs using a server provided by **Katabump**.
 
-## Prerequisites and required links
+## Prerequisites {#prereq}
 
-For this tutorial, you'll need these links:
+For this tutorial, you will need the following links:
 
-- Katabump panel: `https://dashboard.katabump.com`
-- Code obfuscator (JS Obfuscator): `https://js-obfuscator.github.io/`
-- Config repository: `https://github.com/qlxi/Xray-Sing-node`
+- Katabump website link:  
 
-Obfuscating the code before use is **mandatory**; but don't worry, since it's already obfuscated using the obfuscator mentioned above.
+[katabump.com][1]
 
-📦 **Attached file (zip):**
+- Code Obfuscator tool:  
 
-[Config zip file][1]
+[js-obfuscator.github.io][2]
 
-Extract the file above; its contents will be used in the file-upload step — you can either upload the files directly, or copy each file's content and paste it into the corresponding location.
 
-::: danger Important Note About Quality and Server Renewal
-This Hysteria config gives good throughput and a stable connection on Irancell. The important thing to note is that you have to **renew** the server every **4 days**.
+- Config repository (reference):  
+
+[github.com/qlxi/Xray-Sing-node][3]
+
+Obfuscating the code before you use it is **mandatory**; but don't worry, because the code file below has already been obfuscated with the same obfuscation tool that was mentioned.
+
+📦 **[Click here to download the required zip file][4]**
+
+Extract the file above; its contents are used in the file upload step — either upload the files directly, or copy the contents of each one and paste it in the relevant place.
+
+::: danger Important note about server quality and renewal
+This Hysteria2 config and other protocols have shown good results and stable connections on Irancell and Samantel. The important thing is that every **4 days** you must **renew** the server from the site dashboard so it doesn't get deactivated.
 :::
 
-## Important Technical Notes Before You Start
+## Important Technical Notes Before You Start {#tips}
 
-- **Minimum server resources:** this config downloads and runs several binaries (sing-box, and — if enabled — Xray-core and Cloudflared). The core services (Hysteria2 + VLESS-WS) will come up fine even on very limited plans (a few hundred MB of disk/RAM), but if you keep **Argo (the Cloudflare tunnel)** enabled, you need roughly an extra 200–300MB of free disk space; otherwise you'll see a "not enough disk space" error in the logs and only Argo will stay disabled — every other service keeps working normally.
-- **Configuration is done by editing the file itself:** the Katabump panel (on some plans) doesn't support setting Environment Variables. So if you need to change anything (e.g. the data directory, disabling Argo to save resources, or the SNI), you'll need to edit that setting's default value directly inside the JS file before uploading it.
-- **Data directory:** if your host's temp folder (`/tmp`) is backed by RAM instead of real disk, it's better to point the data directory to a subfolder next to the project itself (e.g. `xray-sing` next to the main file) so disk usage isn't mistaken for RAM usage.
+- **Minimum server requirements:** This config downloads and runs several binaries (sing-box +, if enabled, Xray-core and Cloudflared). The main services (Hysteria2 + VLESS-WS) come up even on very limited plans (a few hundred MB of disk/RAM), but if you also keep **Argo (Cloudflare Tunnel)** enabled, you'll need at least roughly 200–300 MB of extra free disk space; otherwise you may encounter a "not enough space for Argo" error in the log — though this issue has also been resolved and the rest of the services work without any problem.
 
-## Step 1: Registration
+- **Configuring via editing the file itself:** The Katabump panel (on some plans) does not support defining Environment Variables. So if you need to change something (for example, the file storage path, turning off Argo to save resources, or the SNI), you must edit the default value of that setting directly inside the JS file, before uploading.
 
-To get started, you need to create an account on Katabump:
+- **File storage path:** If you're on a server whose temp folder (`/tmp`) uses RAM instead of real disk, it's better to change the storage path to a subfolder next to the project itself (for example, `xray-sing` next to the main file) so that disk usage isn't confused with RAM.
 
-- You can sign up with Gmail
-- In the **First Name** and **Last Name** fields, each must be more than one character (for example, entering something like `Jon K` won't be accepted, since the last name is only one character)
-- For the password, you can either enter one yourself or use the strong password suggested by Chrome
+## Step 1: Sign-Up {#signup}
 
-📷 **Images for this step:**
+To get started, you need to create an account on [Katabump][1]:
 
-Image 1 of 2:
+- You can sign up with Gmail.
+- In the **First Name** and **Last Name** fields, each must be more than one character (for example, entering something like `ali k` in one of these fields is not accepted.)
+- For the password, you can enter your own password or use the strong password suggested by the Chrome browser.
 
-<p align="center">
-<img src="/public/hysteria2-setup/pic.jpg" alt="Registration step - Image 1">
-</p><br/>
+### 📷 Images for This Step {#signup-pics}
 
-Image 2 of 2:
+**Image 1 of 2:**
 
 <p align="center">
-<img src="/public/hysteria2-setup/pic1-en.jpg" alt="Registration step - Image 2">
+<img src="/public/hysteria2-setup/pic.jpg" alt="Sign-up step - Image 1">
 </p><br/>
 
-## Step 2: Creating and logging into the server management panel
+**Image 2 of 2:**
+
+<p align="center">
+<img src="/public/hysteria2-setup/pic1-fa.jpg" alt="Sign-up step - Image 2">
+</p><br/>
+
+## Step 2: Creating and Logging into the Server Management Panel {#panel}
 
 In this step, the server is created and you log into its management panel.
 
-📷 **Images for this step:**
+### 📷 Images for This Step {#panel-pics}
 
-Image 1 of 5:
+**Image 1 of 5:**
 
 <p align="center">
 <img src="/public/hysteria2-setup/pic2.jpg" alt="Server creation and panel login step - Image 1">
 </p><br/>
 
-Image 2 of 5:
+**Image 2 of 5:**
 
 <p align="center">
-<img src="/public/hysteria2-setup/pic3-en.jpg" alt="Server creation and panel login step - Image 2">
+<img src="/public/hysteria2-setup/pic3-fa.jpg" alt="Server creation and panel login step - Image 2">
 </p><br/>
 
-Image 3 of 5:
+**Image 3 of 5:**
 
 <p align="center">
-<img src="/public/hysteria2-setup/pic4-en.jpg" alt="Server creation and panel login step - Image 3">
+<img src="/public/hysteria2-setup/pic4-fa.jpg" alt="Server creation and panel login step - Image 3">
 </p><br/>
 
-Image 4 of 5:
+**Image 4 of 5:**
 
 <p align="center">
 <img src="/public/hysteria2-setup/pic5.jpg" alt="Server creation and panel login step - Image 4">
 </p><br/>
 
-Image 5 of 5:
+**Image 5 of 5:**
 
 <p align="center">
 <img src="/public/hysteria2-setup/pic6.jpg" alt="Server creation and panel login step - Image 5">
 </p><br/>
 
-## Step 3: Uploading files
+## Step 3: Uploading the Files {#upload}
 
-Extract the zip file provided in the Prerequisites section; its contents are used in this step. In the images below, the location and method for uploading the JS and JSON files are marked in green.
+Extract the [zip file][4] mentioned in the Prerequisites section; its contents are now used in this step. In the images below, the location and method of uploading both the `index.js` and `package.json` files are marked in green.
 
-::: tip Before you upload
-If you want to change any default settings (e.g. disabling Argo on low-resource plans, or the data directory), now — before uploading — is the time to do it. As mentioned in "Important Technical Notes Before You Start," these changes must be made directly in the JS file, since there's no way to set Environment Variables through the panel.
+::: tip Before uploading
+If you want to change the default settings (such as turning off Argo on low-resource plans, or the file storage path), now is a good time before uploading. As stated in "Important Technical Notes Before You Start," these changes must be applied directly inside the JS file, because it's not possible to define Environment Variables through the panel.
 :::
 
-📷 **Images for this step:**
+### 📷 Images for This Step {#upload-pics}
 
-Image 1 of 3:
+**Image 1 of 3:**
 
 <p align="center">
 <img src="/public/hysteria2-setup/pic7.jpg" alt="File upload step - Image 1">
 </p><br/>
 
-Image 2 of 3:
+**Image 2 of 3:**
 
 <p align="center">
 <img src="/public/hysteria2-setup/pic8.jpg" alt="File upload step - Image 2">
 </p><br/>
 
-Image 3 of 3:
+**Image 3 of 3:**
 
 <p align="center">
 <img src="/public/hysteria2-setup/pic9.jpg" alt="File upload step - Image 3">
 </p><br/>
 
-## Step 4: Final step — getting the panel address and subscription
+## Step 4: The Final Step — Getting the Panel Address and Subscription {#final}
 
-At this stage, as shown in the images below, the panel address and subscription link are displayed in the logs, and no extra work is needed — you can now access the panel and subscriptions.
+In this step, as seen in the images below, the panel address and subscription link are displayed in the logs, and no extra work is needed — you can access the panel and subscriptions.
 
-📷 **Images for this step:**
+### Images for This Step {#final-pics}
 
-Image 1 of 3:
+**Image 1 of 3:**
 
 <p align="center">
 <img src="/public/hysteria2-setup/pic10.jpg" alt="Final step - Image 1">
 </p><br/>
 
-Image 2 of 3:
+**Image 2 of 3:**
 
 <p align="center">
 <img src="/public/hysteria2-setup/pic11.jpg" alt="Final step - Image 2">
 </p><br/>
 
-Image 3 of 3:
+**Image 3 of 3:**
 
 <p align="center">
 <img src="/public/hysteria2-setup/pic12.jpg" alt="Final step - Image 3">
 </p><br/>
 
-## Common Issues
+## Common Issues {#faq}
 
-**The log says "Argo link not ready" or shows a disk-space error for Argo — what do I do?**
+**The log says "Argo link not ready" or I saw a "not enough space for Argo" error — what should I do?**
 
-This means there wasn't enough free disk space (roughly 60MB or more) to download cloudflared. Every other service (Hysteria2, VLESS-WS, etc.) keeps working fine — only Argo (the Cloudflare tunnel) is unavailable for that run. If you don't actually need Argo, it's best to disable it directly in the JS file as described in "Important Technical Notes Before You Start," which frees up both disk space and RAM for the other services.
+This means there wasn't enough free disk space (about 60 MB or more) to download cloudflared. The rest of the services (Hysteria2, VLESS-WS, etc.) work without any problem, and only this part (Argo/Cloudflare Tunnel) is unavailable in that run. If you really don't need Argo, it's better to turn it off from inside the JS file, as mentioned in "Important Technical Notes Before You Start," so that more space and RAM are freed up for the rest of the services.
 
-[1]: https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/KataBumpJSCode[NeedToExtract].zip
+[1]: https://dashboard.katabump.com
+[2]: https://js-obfuscator.github.io
+[3]: https://github.com/qlxi/Xray-Sing-node
+[4]: https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/hysteria2-setup/KataBumpJSCode[NeedToExtract].zip
