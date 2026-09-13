@@ -118,6 +118,40 @@ Extract the [zip file][4] mentioned in the Prerequisites section; its contents a
 
 ::: tip Before uploading
 If you want to change the default settings (such as turning off Argo on low-resource plans, or the file storage path), now is a good time before uploading. As stated in "Important Technical Notes Before You Start," these changes must be applied directly inside the JS file, because it's not possible to define Environment Variables through the panel.
+
+Once uploaded, the project folder on the server looks roughly like this — `index.js` is the file you're uploading and the one you need to edit:
+
+```
+/home/container/              (project root on Katabump)
+├── index.js                  ← edit this file
+├── package.json
+└── xray-sing/                (created automatically by the app at runtime)
+```
+
+**Example 1 — disabling Argo on low-resource plans:**
+
+In `index.js`, find this line and replace the value assigned to `ENABLE_ARGO` with `false`:
+
+```js
+    CFPORT: parseInt(process.env.CFPORT || "443", 10),
+
+    // Argo enabled by default (set ENABLE_ARGO=0 to disable)
+    ENABLE_ARGO: !(process.env.ENABLE_ARGO === "0" || process.env.ENABLE_ARGO === "false"), // [!code focus]
+    ARGO_DOMAIN: process.env.ARGO_DOMAIN || "",
+```
+
+**Example 2 — changing the data directory:**
+
+If your project path isn't `/home/container`, change this line to your actual path:
+
+```js
+    const candidates = [
+        "/home/container/xray-sing", // [!code focus]
+        path.join(__dirname, "xray-sing"), // next to this script, wherever it runs
+        path.join(process.cwd(), "xray-sing"), // current working directory fallback
+        path.join(os.tmpdir(), "xray-sing"),   // last resort (may be tmpfs/RAM)
+    ];
+```
 :::
 
 ### 📷 Images for This Step {#upload-pics}
@@ -168,7 +202,17 @@ In this step, as seen in the images below, the panel address and subscription li
 
 **The log says "Argo link not ready" or I saw a "not enough space for Argo" error — what should I do?**
 
-This means there wasn't enough free disk space (about 60 MB or more) to download cloudflared. The rest of the services (Hysteria2, VLESS-WS, etc.) work without any problem, and only this part (Argo/Cloudflare Tunnel) is unavailable in that run. If you really don't need Argo, it's better to turn it off from inside the JS file, as mentioned in "Important Technical Notes Before You Start," so that more space and RAM are freed up for the rest of the services.
+This means there wasn't enough free disk space (about 60 MB or more) to download cloudflared. The rest of the services (Hysteria2, VLESS-WS, etc.) work without any problem, and only this part (Argo/Cloudflare Tunnel) is unavailable in that run. If you really don't need Argo, the best fix is the same "Example 1" code block from the "Step 3: Uploading the Files" section — find that `ENABLE_ARGO` line in `index.js` and set its value to `false`:
+
+```js
+    CFPORT: parseInt(process.env.CFPORT || "443", 10),
+
+    // Argo enabled by default (set ENABLE_ARGO=0 to disable)
+    ENABLE_ARGO: !(process.env.ENABLE_ARGO === "0" || process.env.ENABLE_ARGO === "false"), // [!code focus]
+    ARGO_DOMAIN: process.env.ARGO_DOMAIN || "",
+```
+
+This frees up both disk space and RAM for the other services.
 
 [1]: https://dashboard.katabump.com
 [2]: https://js-obfuscator.github.io
