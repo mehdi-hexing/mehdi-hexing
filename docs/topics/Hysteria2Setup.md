@@ -120,6 +120,40 @@ head:
 
 ::: tip قبل از آپلود
 اگر می‌خواهید تنظیمات پیش‌فرض (مثل خاموش‌کردن Argo روی پلن‌های کم منبع، یا مسیر ذخیره‌سازی فایل‌ها) را عوض کنید، الان قبل از آپلود زمان مناسبی است. همانطور که در «نکات فنی مهم قبل از شروع» گفته شد، این تغییرات باید مستقیم داخل فایل JS اعمال شوند، چون امکان تعریف Environment Variable از طریق پنل وجود ندارد.
+
+بعد از آپلود، ساختار پوشه‌ی پروژه روی سرور شبیه این است — همان فایلی که آپلود می‌کنید (`index.js`) جایی است که باید ویرایشش کنید:
+
+```
+/home/container/              (project root on Katabump)
+├── index.js                  ← edit this file
+├── package.json
+└── xray-sing/                (created automatically by the app at runtime)
+```
+
+**نمونه ۱ — خاموش‌کردن Argo روی پلن‌های کم‌منبع:**
+
+داخل `index.js` دنبال این خط بگردید و مقدار جلوی `ENABLE_ARGO` را با `false` جایگزین کنید:
+
+```js
+    CFPORT: parseInt(process.env.CFPORT || "443", 10),
+
+    // Argo enabled by default (set ENABLE_ARGO=0 to disable)
+    ENABLE_ARGO: !(process.env.ENABLE_ARGO === "0" || process.env.ENABLE_ARGO === "false"), // [!code focus]
+    ARGO_DOMAIN: process.env.ARGO_DOMAIN || "",
+```
+
+**نمونه ۲ — تغییر مسیر ذخیره‌سازی فایل‌ها:**
+
+اگر مسیر پروژه‌ی شما با `/home/container` فرق دارد، همین خط را به مسیر درست خودتان تغییر بدهید:
+
+```js
+    const candidates = [
+        "/home/container/xray-sing", // [!code focus]
+        path.join(__dirname, "xray-sing"), // next to this script, wherever it runs
+        path.join(process.cwd(), "xray-sing"), // current working directory fallback
+        path.join(os.tmpdir(), "xray-sing"),   // last resort (may be tmpfs/RAM)
+    ];
+```
 :::
 
 ### 📷 تصاویر این مرحله {#upload-pics}
@@ -170,7 +204,17 @@ head:
 
 **در لاگ نوشته "Argo link not ready" یا خطای کمبود فضا برای Argo دیدم، چیکار کنم؟**
 
-یعنی فضای دیسک آزاد کافی (حدود ۶۰ مگابایت یا بیشتر) برای دانلود cloudflared وجود نداشته. بقیه‌ی سرویس‌ها (Hysteria2، VLESS-WS و...) بدون مشکل کار می‌کنند و فقط همین بخش (Argo/تانل Cloudflare) در آن اجرا در دسترس نیست. اگر واقعاً به Argo نیاز ندارید، بهتر است همان‌طور که در «نکات فنی مهم قبل از شروع» اشاره شد، آن را از داخل فایل JS خاموش کنید تا هم فضا و هم رم بیشتری برای بقیه‌ی سرویس‌ها آزاد بماند.
+یعنی فضای دیسک آزاد کافی (حدود ۶۰ مگابایت یا بیشتر) برای دانلود cloudflared وجود نداشته. بقیه‌ی سرویس‌ها (Hysteria2، VLESS-WS و...) بدون مشکل کار می‌کنند و فقط همین بخش (Argo/تانل Cloudflare) در آن اجرا در دسترس نیست. اگر واقعاً به Argo نیاز ندارید، بهترین راه‌حل همون بلوک کد «نمونه ۱» در بخش «مرحله ۳: آپلود فایل‌ها» است — همون خطِ `ENABLE_ARGO` را داخل `index.js` پیدا کنید و مقدارش را `false` بگذارید:
+
+```js
+    CFPORT: parseInt(process.env.CFPORT || "443", 10),
+
+    // Argo enabled by default (set ENABLE_ARGO=0 to disable)
+    ENABLE_ARGO: !(process.env.ENABLE_ARGO === "0" || process.env.ENABLE_ARGO === "false"), // [!code focus]
+    ARGO_DOMAIN: process.env.ARGO_DOMAIN || "",
+```
+
+این کار هم فضا و هم رم بیشتری برای بقیه‌ی سرویس‌ها آزاد می‌کند.
 
 [1]: https://dashboard.katabump.com
 [2]: https://js-obfuscator.github.io
