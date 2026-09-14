@@ -5,7 +5,7 @@ lang: "fa-IR"
 dir: "rtl"
 title: "آرشیو پروکسی‌های رایگان"
 description: "مستندات ریپوی HTTP-PROXY — یک GitHub Actions که هر ۶ ساعت پروکسی‌های رایگان عمومی رو جمع، تست و بر اساس کشور/ریسک آی‌پی دسته‌بندی می‌کنه، به‌همراه لینک‌های ساب آماده"
-date: 2026-9-27
+date: 2026-9-15
 editLink: true
 head:
   - - meta
@@ -35,9 +35,9 @@ head:
 | :---: | :---: | :---: |
 | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/mahsang_http_qr.png" width="220" alt="QR کد MahsaNG HTTP"/> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/v2rayng_http_qr.png" width="220" alt="QR کد V2rayNG HTTP"/> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_http_qr.png" width="220" alt="QR کد Exclave HTTP"/> |
 
-| **Exclave**<br>HTTPS | **Exclave**<br>SOCKS4 | **V2rayNG**<br>SOCKS5 | **Exclave**<br>SOCKS5 |
+| **Exclave**<br>HTTP_TLS | **Exclave**<br>SOCKS4 | **V2rayNG**<br>SOCKS5 | **Exclave**<br>SOCKS5 |
 | :---: | :---: | :---: | :---: |
-| <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_https_qr.png" width="220" alt="QR کد Exclave HTTPS"/> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks4_qr.png" width="220" alt="QR کد Exclave SOCKS4"/> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/v2rayng_socks5_qr.png" width="220" alt="QR کد V2rayNG SOCKS5"/> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks5_qr.png" width="220" alt="QR کد Exclave SOCKS5"/> |
+| <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_http_tls_qr.png" width="220" alt="QR کد Exclave HTTP_TLS"/> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks4_qr.png" width="220" alt="QR کد Exclave SOCKS4"/> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/v2rayng_socks5_qr.png" width="220" alt="QR کد V2rayNG SOCKS5"/> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks5_qr.png" width="220" alt="QR کد Exclave SOCKS5"/> |
 
 </div>
 
@@ -53,7 +53,7 @@ head:
 1. لیست خام هر پروتکل را از منابع بالا می‌گیرد و با پول محلی قبلی (`Raw_Sources/raw_<protocol>.txt`) ادغام می‌کند (حداکثر ۳۰۰٬۰۰۰ ورودی نگه داشته می‌شود)
 1. هر پروکسی را با حداکثر **۵۰ ترد هم‌زمان** تست می‌کند:
 
-- برای `http`/`https`: یک درخواست به `clients3.google.com/generate_204` و سپس یک **Cross-check** جدا به `api.ipify.org` — اگر Cross-check رد شود، پروکسی به‌عنوان یک relay تک‌مصرفی (احتمال false-positive) کنار گذاشته می‌شود.
+- برای `http`/`http_tls`: یک درخواست به `clients3.google.com/generate_204` و سپس یک **Cross-check** جدا به `api.ipify.org` — اگر Cross-check رد شود، پروکسی به‌عنوان یک relay تک‌مصرفی (احتمال false-positive) کنار گذاشته می‌شود.
 - برای `socks4`/`socks5`: یک درخواست به `gstatic.com/generate_204` (نیازمند کتابخانه‌ی `requests[socks]`/PySocks)
 
 1. پروکسی‌های زنده بر اساس (کشور، فراد-اسکور) مرتب و در قالب‌های زیر ذخیره می‌شوند:
@@ -75,7 +75,7 @@ head:
 | ستون | توضیح |
 | --- | --- |
 | Proxy | آدرس `ip:port` |
-| Protocol | HTTP/HTTPS/SOCKS4/SOCKS5 |
+| Protocol | HTTP/HTTP_TLS/SOCKS4/SOCKS5 |
 | Country / Country Code / Flag | از متادیتای Cloudflare-Scamalytics |
 | Fraud Score / Risk | فراد-اسکور و سطح ریسک |
 | VPN | آیا این IP به‌عنوان VPN شناخته شده |
@@ -103,8 +103,8 @@ head:
 
 
 ```
-proxies/protocol/{http,https,socks4,socks5}/all.txt
-proxies/protocol/{http,https,socks4,socks5}/all.csv
+proxies/protocol/{http,http_tls,socks4,socks5}/all.txt
+proxies/protocol/{http,http_tls,socks4,socks5}/all.csv
 ```  
 
 </Ltr>
@@ -115,8 +115,8 @@ proxies/protocol/{http,https,socks4,socks5}/all.csv
 
 
 ```
-proxies/countries/{http,https,socks4,socks5}/{CC}.txt
-proxies/countries/{http,https,socks4,socks5}/{CC}.csv
+proxies/countries/{http,http_tls,socks4,socks5}/{CC}.txt
+proxies/countries/{http,http_tls,socks4,socks5}/{CC}.csv
 ```  
 
 </Ltr>
@@ -132,7 +132,7 @@ QR کدهای این لینک‌ها بالای همین صفحه هستن؛ ا�
 | **MahsaNG** | HTTP | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/mahsang_http.txt"/> |
 | **V2rayNG** | HTTP | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/v2rayng_http.txt"/> |
 | **Exclave** | HTTP | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_http.txt"/> |
-| **Exclave** | HTTPS | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_https.txt"/> |
+| **Exclave** | HTTP_TLS | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_http_tls.txt"/> |
 | **Exclave** | SOCKS4 | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks4.txt"/> |
 | **V2rayNG** | SOCKS5 | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/v2rayng_socks5.txt"/> |
 | **Exclave** | SOCKS5 | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks5.txt"/> |
