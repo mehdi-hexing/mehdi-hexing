@@ -3,7 +3,7 @@ layout: doc
 outline: deep
 title: "Free Proxy Archive"
 description: "Documentation for the HTTP-PROXY repo — a GitHub Actions workflow that collects, tests, and categorizes free public proxies by country/IP risk every 6 hours, with ready-made subscription links"
-date: 2026-9-27
+date: 2026-9-15
 editLink: true
 head:
   - - meta
@@ -32,9 +32,9 @@ Each of these QR codes is always in sync with the latest scan (every 6 hours) �
 | MahsaNG <br>HTTP | V2rayNG <br>HTTP | Exclave <br>HTTP |
 | ---|---|---|
 | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/mahsang_http_qr.png" width="220" alt="MahsaNG HTTP QR Code"> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/v2rayng_http_qr.png" width="220" alt="V2rayNG HTTP QR Code"> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_http_qr.png" width="220" alt="Exclave HTTP QR Code"> |
-| Exclave <br>HTTPS | Exclave <br>SOCKS4 | V2rayNG <br>SOCKS5 | Exclave <br>SOCKS5 |
+| Exclave <br>HTTP_TLS | Exclave <br>SOCKS4 | V2rayNG <br>SOCKS5 | Exclave <br>SOCKS5 |
 | ---|---|---|---|
-| <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_https_qr.png" width="220" alt="Exclave HTTPS QR Code"> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks4_qr.png" width="220" alt="Exclave SOCKS4 QR Code"> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/v2rayng_socks5_qr.png" width="220" alt="V2rayNG SOCKS5 QR Code"> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks5_qr.png" width="220" alt="Exclave SOCKS5 QR Code"> |
+| <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_http_tls_qr.png" width="220" alt="Exclave HTTP_TLS QR Code"> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks4_qr.png" width="220" alt="Exclave SOCKS4 QR Code"> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/v2rayng_socks5_qr.png" width="220" alt="V2rayNG SOCKS5 QR Code"> | <img src="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks5_qr.png" width="220" alt="Exclave SOCKS5 QR Code"> |
 
 </div>
 
@@ -50,7 +50,7 @@ A GitHub Actions workflow (`Scan_Proxies.yml`) runs automatically on a schedule 
 
 - Fetches the raw list for each protocol from the sources above and merges it with the previous local pool (`Raw_Sources/raw_<protocol>.txt`) (a maximum of 300,000 entries is retained)
 - Tests each proxy with up to 50 concurrent threads:
-  - For `http`/`https`: a request to `clients3.google.com/generate_204` followed by a separate cross-check to `api.ipify.org` — if the cross-check fails, the proxy is set aside as a single-use relay (potential false-positive)
+  - For `http`/`http_tls`: a request to `clients3.google.com/generate_204` followed by a separate cross-check to `api.ipify.org` — if the cross-check fails, the proxy is set aside as a single-use relay (potential false-positive)
   - For `socks4`/`socks5`: a request to `gstatic.com/generate_204` (requires the `requests[socks]`/PySocks library)
 - Live proxies are sorted by (country, fraud score) and saved in the following formats:
   - `proxies/protocol/<protocol>/all.txt` and `all.csv` (global list)
@@ -63,7 +63,7 @@ A GitHub Actions workflow (`Scan_Proxies.yml`) runs automatically on a schedule 
 | Column | Description |
 | ---|---|
 | Proxy | ip:port address |
-| Protocol | HTTP/HTTPS/SOCKS4/SOCKS5 |
+| Protocol | HTTP/HTTP_TLS/SOCKS4/SOCKS5 |
 | Country / Country Code / Flag | From Cloudflare-Scamalytics metadata |
 | Fraud Score / Risk | Fraud score and risk level |
 | VPN | Whether this IP is recognized as a VPN |
@@ -84,15 +84,15 @@ Verified proxies can also be used with Psiphon:
 ### Global List (by protocol)
 
 ```
-proxies/protocol/{http,https,socks4,socks5}/all.txt
-proxies/protocol/{http,https,socks4,socks5}/all.csv
+proxies/protocol/{http,http_tls,socks4,socks5}/all.txt
+proxies/protocol/{http,http_tls,socks4,socks5}/all.csv
 ```
 
 ### By Country
 
 ```
-proxies/countries/{http,https,socks4,socks5}/{CC}.txt
-proxies/countries/{http,https,socks4,socks5}/{CC}.csv
+proxies/countries/{http,http_tls,socks4,socks5}/{CC}.txt
+proxies/countries/{http,http_tls,socks4,socks5}/{CC}.csv
 ```
 
 ## Subscription Links (for direct import into clients)
@@ -104,7 +104,7 @@ The QR codes for these links are at the top of this page; here are just the raw 
 | MahsaNG | HTTP | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/mahsang_http.txt" /> |
 | V2rayNG | HTTP | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/v2rayng_http.txt" /> |
 | Exclave | HTTP | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_http.txt" /> |
-| Exclave | HTTPS | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_https.txt" /> |
+| Exclave | HTTP_TLS | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_http_tls.txt" /> |
 | Exclave | SOCKS4 | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks4.txt" /> |
 | V2rayNG | SOCKS5 | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/v2rayng_socks5.txt" /> |
 | Exclave | SOCKS5 | <CopyLink url="https://raw.githubusercontent.com/mehdi-hexing/HTTP-PROXY/main/proxies/subscriptions/exclave_socks5.txt" /> |
