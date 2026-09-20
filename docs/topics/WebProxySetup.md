@@ -68,17 +68,14 @@ head:
 
 ## معماری کلی
 
-```
-Internet
-   │
-   ▼
-Cloudflare
-   │
-   ▼
-main.py (on your host)
-   ├── decoy site      <- looks like a normal website
-   ├── tproxy-server   <- HTTPS disguise layer
-   └── mtg             <- real Telegram backend
+```mermaid
+flowchart TD
+    A[Internet] --> B[Cloudflare]
+    B --> C[main.py on your host]
+    C --> D[decoy site]
+    C --> E[tproxy-server]
+    E -->|valid Telegram token| F[mtg]
+    E -->|invalid / no token| D
 ```
 
 هر درخواستی که به دامین شما می‌رسد، اول وارد `tproxy-server` می‌شود. اگر همراهش کد معتبر تلگرام نباشد، بدون هیچ نشانه‌ای سایت قلابی نشانش داده می‌شود؛ اگر معتبر باشد، به `mtg` (که ترافیک واقعی تلگرام را می‌فهمد) وصل می‌شود.
