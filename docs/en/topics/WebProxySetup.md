@@ -113,7 +113,7 @@ At the end of the run, the script asks:
 Do you have SFTP/SSH access to Katabump and want to upload now? [y/N]
 ```
 
-If you answer `y`, it asks you to paste the SFTP address exactly as your panel shows it (e.g. `sftp://fr-node-47.katabump.fr:2022`). It parses the host and port from that automatically, and if the address already includes a username (as on Orihost), it won't ask for one separately. The password is your panel password, which the upload command itself will prompt for when it connects.
+If you answer `y`, it asks you to paste the SFTP address exactly as your panel shows it (e.g. `sftp://user.katabump.fr:2022`). It parses the host and port from that automatically, and if the address already includes a username (as on Orihost), it won't ask for one separately. The password is your panel password, which the upload command itself will prompt for when it connects.
 
 **Finding your SFTP details:**
 
