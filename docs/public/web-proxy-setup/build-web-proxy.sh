@@ -432,6 +432,25 @@ info "  it's fetched fresh in the next step from MAIN_PY_URL."
 step "Step 6/8: downloading main.py"
 if curl -fsSL -o "$PROJECT_DIR/main.py" "$MAIN_PY_URL"; then
     ok "downloaded main.py from: $MAIN_PY_URL"
+
+    QT_LINE='QUICK_TUNNEL = os.environ.get("QUICK_TUNNEL", "0") == "1"'
+    if grep -qF "$QT_LINE" "$PROJECT_DIR/main.py"; then
+        if [ "$TUNNEL_MODE" = "quick" ]; then
+            QT_HARDCODED='QUICK_TUNNEL = True  # hardcoded by build script: quick tunnel selected'
+        else
+            QT_HARDCODED='QUICK_TUNNEL = False  # hardcoded by build script: named tunnel selected'
+        fi
+        # Use a temp file instead of sed -i (not portable across Termux/BSD/GNU sed).
+        awk -v old="$QT_LINE" -v new="$QT_HARDCODED" \
+            '{ if ($0 == old) print new; else print }' \
+            "$PROJECT_DIR/main.py" > "$PROJECT_DIR/main.py.tmp" \
+            && mv "$PROJECT_DIR/main.py.tmp" "$PROJECT_DIR/main.py"
+        ok "QUICK_TUNNEL hardcoded to $([ "$TUNNEL_MODE" = "quick" ] && echo True || echo False) in main.py"
+    else
+        warn "could not find the expected QUICK_TUNNEL line in main.py -- it may"
+        warn "have changed upstream. main.py was left as downloaded: you'll need"
+        warn "to set QUICK_TUNNEL=$QUICK_TUNNEL_VALUE as a panel env var / in the start command instead."
+    fi
 else
     err "could not download main.py from $MAIN_PY_URL"
     warn "edit MAIN_PY_URL at the top of this script, or copy main.py into"
@@ -471,16 +490,31 @@ if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
     else
         ask "  Username (e.g. dj7e9f6afve6ac3o5831c8j8): "; read -r KATABUMP_USER
     fi
-    ask "  Remote directory [.]: "
-    read -r KATABUMP_REMOTE_DIR
-    KATABUMP_REMOTE_DIR="${KATABUMP_REMOTE_DIR:-.}"
+
+    ask "  Remote directory [/home/container]: "; read -r KATABUMP_REMOTE_DIR
+    KATABUMP_REMOTE_DIR="${KATABUMP_REMOTE_DIR:-/home/container}"
 
     if [ -z "$KATABUMP_HOST" ] || [ -z "$KATABUMP_USER" ]; then
         warn "host or username left empty, skipping upload."
     else
+        # Modern scp defaults to the SFTP-protocol transfer mode, which tries
+        # to fsetstat() each file's permissions/mtime after upload. Katabump/
+        # Orihost's SFTP daemon doesn't support that call and returns
+        # "Failure" for it -- even though the file itself transferred
+        # completely -- which makes scp exit non-zero and this script wrongly
+        # report the whole upload as failed. -O forces the old SCP wire
+        # protocol, which never makes that call, avoiding the problem.
+        SCP_LEGACY_FLAG="-O"
+        if scp -O 2>&1 | grep -qi "unknown option"; then
+            SCP_LEGACY_FLAG=""
+            warn "this scp build doesn't support -O (legacy protocol) -- if you see"
+            warn "'remote fsetstat: Failure' lines below, the upload likely still"
+            warn "worked; double-check the panel's file manager before re-uploading."
+        fi
+
         info "uploading $PROJECT_DIR to $KATABUMP_USER@$KATABUMP_HOST:$KATABUMP_REMOTE_DIR (port $KATABUMP_PORT) ..."
         info "you'll be asked for your panel password next."
-        if scp -P "$KATABUMP_PORT" -r "$PROJECT_DIR"/* \
+        if scp $SCP_LEGACY_FLAG -P "$KATABUMP_PORT" -r "$PROJECT_DIR"/* \
             "$KATABUMP_USER@$KATABUMP_HOST:$KATABUMP_REMOTE_DIR/"; then
             ok "upload finished."
         else
@@ -516,7 +550,7 @@ SUMMARY_FILE="$PROJECT_DIR/SETTINGS-SUMMARY.txt"
     fi
     printf "%-22s %-38s %s\n" "MTG secret" "$SECRET" "profiles.json"
     printf "%-22s %-38s %s\n" "MTG_PUBLIC_IPV4" "$MTG_IPV4" "panel env var"
-    printf "%-22s %-38s %s\n" "QUICK_TUNNEL" "$QUICK_TUNNEL_VALUE" "panel env var / start command"
+    printf "%-22s %-38s %s\n" "QUICK_TUNNEL" "$QUICK_TUNNEL_VALUE" "hardcoded in main.py"
 } > "$SUMMARY_FILE"
 
 DEST="$HOME/storage/downloads/web-proxy-project"
@@ -533,10 +567,6 @@ step "Double-check these before you upload/run"
 cat "$SUMMARY_FILE"
 info "(also saved as SETTINGS-SUMMARY.txt inside the project folder)"
 echo
-echo "Set these two as environment variables in the Katabump panel, then start with:"
-if [ "$TUNNEL_MODE" = "quick" ]; then
-    printf "  ${C_BOLD}QUICK_TUNNEL=1 python /home/container/main.py${C_RESET}\n"
-else
-    printf "  ${C_BOLD}python /home/container/main.py${C_RESET}\n"
-fi
+echo "Set this as an environment variable in the Katabump panel, then start with:"
+printf "  ${C_BOLD}python /home/container/main.py${C_RESET}\n"
 printf "${C_OK}${C_BOLD}================================================================${C_RESET}\n"
