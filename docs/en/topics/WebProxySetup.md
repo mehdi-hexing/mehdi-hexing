@@ -32,7 +32,7 @@ Link: [control.katabump.com][1]
 A free host that offers a Python/Node.js plan. This is where the project actually runs.
 
 **2. Orihost** *(alternative to Katabump, optional)*
-Link: [orihost.com][8]
+Link: [orihost.com][9]
 A free host similar to Katabump, with the same kind of plan. Use this if Katabump isn't available to you.
 
 **3. Cloudflare**
@@ -44,19 +44,19 @@ Link: [termux.dev][3]
 A terminal app for Android. You'll use it to build the required binaries on your phone.
 
 **5. A domain registrar** *(if you want to buy your own domain)*
-Link: [namecheap.com][9]
+Link: [namecheap.com][10]
 For buying a cheap, unused domain -- see [Filtering notes](#filtering-and-domain-notes) for why this matters.
 
 **6. DigitalPlat FreeDomain** *(a free alternative to buying a domain)*
-Link: [dash.domain.digitalplat.org][7]
+Link: [dash.domain.digitalplat.org][8]
 A free subdomain registration service, for when buying a domain isn't an option yet.
 
 **7. tproxy-server repository**
-Link: [github.com/telegramdesktop/tproxy-server][5]
+Link: [github.com/telegramdesktop/tproxy-server][6]
 Telegram's own official implementation of this proxy type.
 
 **8. mtg repository**
-Link: [github.com/9seconds/mtg][6]
+Link: [github.com/9seconds/mtg][7]
 The software that actually understands and relays real Telegram traffic.
 
 ## Prerequisites
@@ -315,7 +315,7 @@ If buying a domain isn't an option right now, `trycloudflare.com` (Cloudflare's 
 
 ### 3. DigitalPlat FreeDomain
 
-You can register a free subdomain (`.us.kg`, `.qzz.io`, `.qd.je`, `.xx.kg`) at [dash.domain.digitalplat.org][7].
+You can register a free subdomain (`.us.kg`, `.qzz.io`, `.qd.je`, `.xx.kg`) at [dash.domain.digitalplat.org][8].
 
 ::: warning Use caution
 `dpdns.org` -- which got blocked in our tests -- belongs to this same provider. Test it on your actual network before relying on it.
@@ -332,13 +332,26 @@ You can register a free subdomain (`.us.kg`, `.qzz.io`, `.qd.je`, `.xx.kg`) at [
 | `cannot resolve any public address` | Set the `MTG_PUBLIC_IPV4` variable |
 | Client stuck on "Connecting..." | Make sure `public_hostname` exactly matches your real domain |
 
-## Help and support
+## Tips About services
 
-::: info Need more help?
-If you run into any questions or issues, here's where to go:
+::: danger Don't Forget
+<br/>
+For Katabump : You must log in to the Katabump panel and Renew your server every 4 days; otherwise, the server and proxy will stop working.
 
-- **Official project docs:** [tproxy-server on GitHub][5]
-- **The mtg project:** [9seconds/mtg][6]
+<br/>
+For Orihost : You must log in to the Orihost panel and Renew your server every 7 days; otherwise, the server and proxy will stop working.
+
+<br/>
+
+The free plan has limited resources (308 MB RAM, 25% of one CPU core); this is sufficient for personal use or a small group of users.
+:::
+
+## Support and Help
+
+::: info Further Assistance
+If you encounter any questions or issues during setup or while using this project, you can reach out through the following channels:  
+- Direct contact: [My personal Telegram account][4]
+- General Q&A: [Telegram support group][5]   
 :::
 
 ## Additional details (for the curious)
@@ -362,8 +375,10 @@ mtg needs to know its own publicly reachable address to talk to Telegram's own m
 [1]: https://control.katabump.com
 [2]: https://dash.cloudflare.com
 [3]: https://termux.dev
-[5]: https://github.com/telegramdesktop/tproxy-server
-[6]: https://github.com/9seconds/mtg
-[7]: https://dash.domain.digitalplat.org
-[8]: https://orihost.com
-[9]: https://www.namecheap.com
+[4]: https://t.me/mehdiasmart
+[5]: https://t.me/NiREvil_GP
+[6]: https://github.com/telegramdesktop/tproxy-server
+[7]: https://github.com/9seconds/mtg
+[8]: https://dash.domain.digitalplat.org
+[9]: https://orihost.com
+[10]: https://www.namecheap.com
