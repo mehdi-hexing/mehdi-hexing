@@ -335,13 +335,11 @@ You can register a free subdomain (`.us.kg`, `.qzz.io`, `.qd.je`, `.xx.kg`) at [
 ## Tips About services
 
 ::: danger Don't Forget
-<br/>
-For Katabump : You must log in to the Katabump panel and Renew your server every 4 days; otherwise, the server and proxy will stop working.
 
-<br/>
-For Orihost : You must log in to the Orihost panel and Renew your server every 7 days; otherwise, the server and proxy will stop working.
+For Katabump : You must login to the **Katabump** panel and **Renew** your server **every 4 days**; otherwise, the server and proxy will stop working.
 
-<br/>
+For Orihost : You must login to the **Orihost** panel and **Renew** your server **every 7 days**; otherwise, the server and proxy will stop working.
+
 
 The free plan has limited resources (308 MB RAM, 25% of one CPU core); this is sufficient for personal use or a small group of users.
 :::
