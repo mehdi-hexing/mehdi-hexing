@@ -68,17 +68,14 @@ The software that actually understands and relays real Telegram traffic.
 
 ## Overall architecture
 
-```
-Internet
-   │
-   ▼
-Cloudflare
-   │
-   ▼
-main.py (on your host)
-   ├── decoy site      <- looks like a normal website
-   ├── tproxy-server   <- HTTPS disguise layer
-   └── mtg             <- real Telegram backend
+```mermaid
+flowchart TD
+    A[Internet] --> B[Cloudflare]
+    B --> C[main.py on your host]
+    C --> D[decoy site]
+    C --> E[tproxy-server]
+    E -->|valid Telegram token| F[mtg]
+    E -->|invalid / no token| D
 ```
 
 Every request that reaches your domain first hits `tproxy-server`. If it doesn't carry a valid Telegram token, it's silently shown the decoy site. If it does, it's handed off to `mtg`, which understands real Telegram traffic.
