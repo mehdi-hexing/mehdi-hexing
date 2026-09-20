@@ -223,7 +223,7 @@ openssl rand -hex 16
 
 #### cf-config.yml (فقط اگر دامین اختصاصی دارید)
 
-```yaml
+```json
 tunnel: tproxy
 credentials-file: ./YOUR-TUNNEL-UUID.json // [!code focus]
 
@@ -292,7 +292,7 @@ my-site/index.html
 
 برای اجرا با Quick Tunnel باید در کد پایتون، مقدار QUICK_TUNNEL را از 0 به مقدار 1 تغییر دهید:
 
-```python
+```json
 # auto-detects it and rewrites config.json + status.html each time.
 QUICK_TUNNEL = os.environ.get("QUICK_TUNNEL", "0") == "1" // [!code focus]  
 QUICK_TUNNEL_URL_RE = re.compile(r"https://([a-zA-Z0-9.-]+\.trycloudflare\.com)")
