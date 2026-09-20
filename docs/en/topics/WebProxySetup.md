@@ -6,8 +6,8 @@ dir: "ltr"
 title: "Setting Up a Telegram WEB Proxy with tproxy-server, mtg and Katabump"
 description: "A simple, step-by-step guide to setting up Telegram's new WEB Proxy protocol on a free Katabump host"
 date: 2026-09-20
-category: "Tools & Servers"
-icon: "📡"
+category: "Tools & Server"
+icon: "⚙️"
 editLink: true
 head:
   - - meta
