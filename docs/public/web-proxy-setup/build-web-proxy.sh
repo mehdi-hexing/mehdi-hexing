@@ -497,29 +497,44 @@ if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
     if [ -z "$KATABUMP_HOST" ] || [ -z "$KATABUMP_USER" ]; then
         warn "host or username left empty, skipping upload."
     else
-        # Modern scp defaults to the SFTP-protocol transfer mode, which tries
-        # to fsetstat() each file's permissions/mtime after upload. Katabump/
-        # Orihost's SFTP daemon doesn't support that call and returns
-        # "Failure" for it -- even though the file itself transferred
-        # completely -- which makes scp exit non-zero and this script wrongly
-        # report the whole upload as failed. -O forces the old SCP wire
-        # protocol, which never makes that call, avoiding the problem.
-        SCP_LEGACY_FLAG="-O"
-        if scp -O 2>&1 | grep -qi "unknown option"; then
-            SCP_LEGACY_FLAG=""
-            warn "this scp build doesn't support -O (legacy protocol) -- if you see"
-            warn "'remote fsetstat: Failure' lines below, the upload likely still"
-            warn "worked; double-check the panel's file manager before re-uploading."
-        fi
+        # Katabump/Orihost containers are served by Pterodactyl's "Wings"
+        # daemon. Wings' built-in SFTP server only implements the SFTP
+        # subsystem -- it never spawns a shell or lets the client run
+        # arbitrary remote commands. scp (even with the legacy -O flag)
+        # works by opening an "exec" channel to run a remote scp/sftp-server
+        # binary, which Wings refuses outright -- that's exactly the
+        # "exec request failed on channel 0 / lost connection" error.
+        # There's no scp flag that fixes this: scp can never work against
+        # this kind of server. The real SFTP protocol (a "subsystem"
+        # request, not "exec") does work, so we drive it directly with the
+        # sftp client instead of scp.
+        SFTP_BATCH_FILE="$WORKDIR/sftp-batch.txt"
+        {
+            echo "-mkdir $KATABUMP_REMOTE_DIR"
+            echo "cd $KATABUMP_REMOTE_DIR"
+            echo "lcd $PROJECT_DIR"
+            for item in "$PROJECT_DIR"/*; do
+                [ -e "$item" ] || continue
+                name="$(basename "$item")"
+                if [ -d "$item" ]; then
+                    echo "put -r $name"
+                else
+                    echo "put $name"
+                fi
+            done
+        } > "$SFTP_BATCH_FILE"
 
         info "uploading $PROJECT_DIR to $KATABUMP_USER@$KATABUMP_HOST:$KATABUMP_REMOTE_DIR (port $KATABUMP_PORT) ..."
         info "you'll be asked for your panel password next."
-        if scp $SCP_LEGACY_FLAG -P "$KATABUMP_PORT" -r "$PROJECT_DIR"/* \
-            "$KATABUMP_USER@$KATABUMP_HOST:$KATABUMP_REMOTE_DIR/"; then
+        if sftp -P "$KATABUMP_PORT" -b "$SFTP_BATCH_FILE" \
+            "$KATABUMP_USER@$KATABUMP_HOST"; then
             ok "upload finished."
         else
             err "upload failed -- check host/port/username and try again,"
-            warn "or upload the Downloads copy by hand (see below)."
+            warn "(if you see 'put -r' rejected as an unknown/invalid command,"
+            warn "your sftp client is too old for recursive put -- update"
+            warn "openssh via 'pkg upgrade openssh', or upload the Downloads"
+            warn "copy by hand instead, see below)."
         fi
     fi
 else
