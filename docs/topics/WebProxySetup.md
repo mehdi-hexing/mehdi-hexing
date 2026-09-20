@@ -7,7 +7,7 @@ title: "راه‌اندازی پراکسی WEB تلگرام با tproxy-server،
 description: "راهنمای گام‌به‌گام و ساده‌ی راه‌اندازی پروتکل جدید WEB Proxy تلگرام، روی هاست رایگان Katabump"
 date: 2026-09-20
 category: "ابزارها و سرور"
-icon: "📡"
+icon: "⚙️"
 editLink: true
 head:
   - - meta
