@@ -32,7 +32,7 @@ head:
 یک هاست رایگان که پلن Python/Node.js می‌دهد. سروری که پروژه رویش اجرا می‌شود.
 
 **۲. Orihost** *(جایگزین Katabump، اختیاری)*
-لینک: [orihost.com][8]
+لینک: [orihost.com][9]
 یک هاست رایگان مشابه Katabump با همین نوع پلن. اگر Katabump در دسترس نبود، می‌توانید از این استفاده کنید.
 
 **۳. Cloudflare**
@@ -44,19 +44,19 @@ head:
 یک اپلیکیشن ترمینال برای اندروید. باینری‌های لازم را با آن روی گوشی می‌سازیم.
 
 **۵. یک رجیستر دامین** *(اگر می‌خواهید دامین شخصی بخرید)*
-لینک: [namecheap.com][9]
+لینک: [namecheap.com][10]
 برای خرید یک دامین ارزان و بدون سابقه — دلیل اهمیتش در بخش [نکات دامین](#نکات-فیلترینگ-و-انتخاب-دامین) توضیح داده شده.
 
 **۶. DigitalPlat FreeDomain** *(جایگزین رایگان برای دامین شخصی)*
-لینک: [dash.domain.digitalplat.org][7]
+لینک: [dash.domain.digitalplat.org][8]
 یک سرویس رایگان ثبت ساب‌دامین، برای وقتی که خرید دامین فعلاً مقدور نیست.
 
 **۷. مخزن tproxy-server**
-لینک: [github.com/telegramdesktop/tproxy-server][5]
+لینک: [github.com/telegramdesktop/tproxy-server][6]
 پروژه‌ی رسمی تیم تلگرام که این نوع پروکسی را پیاده‌سازی می‌کند.
 
 **۸. مخزن mtg**
-لینک: [github.com/9seconds/mtg][6]
+لینک: [github.com/9seconds/mtg][7]
 نرم‌افزاری که ترافیک واقعی تلگرام را می‌فهمد و رد و بدل می‌کند.
 
 ## پیش‌نیازها
@@ -332,15 +332,29 @@ python /home/container/main.py
 | `cannot resolve any public address` | مقدار `MTG_PUBLIC_IPV4` را تنظیم کنید |
 | کلاینت روی «در حال اتصال» می‌ماند | مطمئن شوید `public_hostname` با دامین واقعی یکی است |
 
+## نکاتی درباره سرویس ها
+
+::: danger فراموش نکنید
+<br/>
+هر **۴ روز یک‌بار** باید وارد پنل **Katabump** شده و سرور را **Renew** کنید، در غیر این صورت سرور و پراکسی از کار می‌افتند.
+
+هر **۷ روز یک‌بار** باید وارد پنل **Orihost** شده و سرور را **Renew** کنید، در غیر این صورت سرور و پراکسی از کار می‌افتند.
+
+<br/>
+- پلن رایگان منابع محدودی دارد (۳۰۸ مگابایت RAM، ۲۵٪ از یک هسته CPU)؛ برای استفاده‌ی شخصی یا چند نفره کافی است.
+
+:::
+
 ## راهنما و پشتیبانی
 
 ::: info راهنمایی بیشتر
-در صورت مواجهه با هرگونه سوال یا مشکل، می‌توانید از راه‌های زیر با ما در ارتباط باشید:
 
-- **مستندات رسمی پروژه:** [tproxy-server در گیت‌هاب][5]
-- **پروژه‌ی mtg:** [9seconds/mtg][6]
+در صورت مواجهه با هرگونه سوال یا مشکل در حین راه‌اندازی یا استفاده از این پروژه، می‌توانید از راه‌های زیر با ما در ارتباط باشید:
+
+- **ارتباط مستقیم:** [اکانت شخصی من در تلگرام][4]
+- **پرسش و پاسخ عمومی:** [گروه پشتیبانی در تلگرام][5]
+ 
 :::
-
 ## توضیحات تکمیلی (برای علاقه‌مندان)
 
 ::: details چرا CGO_ENABLED=0 لازم است؟
@@ -362,8 +376,10 @@ mtg برای صحبت با سرورهای واسط خود تلگرام، بای�
 [1]: https://control.katabump.com
 [2]: https://dash.cloudflare.com
 [3]: https://termux.dev
-[5]: https://github.com/telegramdesktop/tproxy-server
-[6]: https://github.com/9seconds/mtg
-[7]: https://dash.domain.digitalplat.org
-[8]: https://orihost.com
-[9]: https://www.namecheap.com
+[4]: https://t.me/mehdiasmart
+[5]: https://t.me/NiREvil_GP
+[6]: https://github.com/telegramdesktop/tproxy-server
+[7]: https://github.com/9seconds/mtg
+[8]: https://dash.domain.digitalplat.org
+[9]: https://orihost.com
+[10]: https://www.namecheap.com
