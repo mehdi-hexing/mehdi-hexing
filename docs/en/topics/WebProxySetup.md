@@ -223,7 +223,7 @@ Only change the `secret` line to the value you generated in Step 4.
 
 #### cf-config.yml (only if you have your own domain)
 
-```yaml
+```json
 tunnel: tproxy
 credentials-file: ./YOUR-TUNNEL-UUID.json // [!code focus]
 
@@ -292,7 +292,7 @@ In the Katabump panel, go to the **Startup** section, find the **PY FILE** field
 
 To run with Quick Tunnel You Should to Change Python Code **QUICK_TUNNEL** Value From 0 to --> ("QUICK_TUNNEL", "1") :
 
-```python
+```json
 # auto-detects it and rewrites config.json + status.html each time.
 QUICK_TUNNEL = os.environ.get("QUICK_TUNNEL", "0") == "1" // [!code focus]
 QUICK_TUNNEL_URL_RE = re.compile(r"https://([a-zA-Z0-9.-]+\.trycloudflare\.com)")
