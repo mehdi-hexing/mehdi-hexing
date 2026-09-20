@@ -471,8 +471,9 @@ if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
     else
         ask "  Username (e.g. dj7e9f6afve6ac3o5831c8j8): "; read -r KATABUMP_USER
     fi
-    ask "  Remote directory [/home/container]: "; read -r KATABUMP_REMOTE_DIR
-    KATABUMP_REMOTE_DIR="${KATABUMP_REMOTE_DIR:-/home/container}"
+    ask "  Remote directory [.]: "
+    read -r KATABUMP_REMOTE_DIR
+    KATABUMP_REMOTE_DIR="${KATABUMP_REMOTE_DIR:-.}"
 
     if [ -z "$KATABUMP_HOST" ] || [ -z "$KATABUMP_USER" ]; then
         warn "host or username left empty, skipping upload."
@@ -500,12 +501,9 @@ if [ ! -d "$HOME/storage/downloads" ]; then
     exit 0
 fi
 
-DEST="$HOME/storage/downloads/web-proxy-project"
-rm -rf "$DEST"
-cp -r "$PROJECT_DIR" "$DEST"
-
 # Summary table of everything that was collected/generated this run, so
 # it can be double-checked against what actually landed in the files.
+# Built *before* copying to Downloads so the copy actually includes it.
 SUMMARY_FILE="$PROJECT_DIR/SETTINGS-SUMMARY.txt"
 {
     printf "%-22s %-38s %s\n" "SETTING" "VALUE" "WRITTEN TO"
@@ -520,6 +518,10 @@ SUMMARY_FILE="$PROJECT_DIR/SETTINGS-SUMMARY.txt"
     printf "%-22s %-38s %s\n" "MTG_PUBLIC_IPV4" "$MTG_IPV4" "panel env var"
     printf "%-22s %-38s %s\n" "QUICK_TUNNEL" "$QUICK_TUNNEL_VALUE" "panel env var / start command"
 } > "$SUMMARY_FILE"
+
+DEST="$HOME/storage/downloads/web-proxy-project"
+rm -rf "$DEST"
+cp -r "$PROJECT_DIR" "$DEST"
 
 echo
 printf "${C_OK}${C_BOLD}================================================================${C_RESET}\n"
