@@ -529,7 +529,7 @@ info "reminder: main.py must chmod +x the binaries on the server before exec."
 
 step "Step 10/10: upload"
 echo
-ask "Do you have SFTP/SSH access to Katabump and want to upload now? [y/N] "
+ask "Do you have SFTP/SSH access to Katabump and want to upload now? [Y/N] "
 read -r HAS_SFTP
 
 if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
