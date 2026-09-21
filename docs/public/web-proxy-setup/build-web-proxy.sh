@@ -1,23 +1,5 @@
-# build script for the Telegram WEB-proxy setup.
-#
-# - Builds tproxy-server + mtg v1 for linux/amd64
-# - Asks for your domain, secret and tunnel mode, and writes them
-#   straight into config.json, profiles.json and cf-config.yml
-# - Saves the finished project folder into your phone's Downloads
-#   directory, so you can upload it by hand through the panel's File
-#   Manager, or lets you upload it directly over SFTP if you want
-# - Prints a table of everything it collected at the end, so you can
-#   double-check it before uploading
-#
-# Usage:
-#   bash build-web-proxy.sh
-#
-# Re-running is safe: build steps and package installs are skipped if
-# already done; project config files are always rewritten with the
-# latest content and whatever you answer this run.
 set -e
 
-# Colors (auto-disabled if output isn't a terminal, e.g. piped to a file)
 if [ -t 1 ]; then
     C_RESET='\033[0m'
     C_BOLD='\033[1m'
@@ -38,8 +20,6 @@ err()     { printf "${C_ERR}✘ %s${C_RESET}\n" "$1" >&2; }
 info()    { printf "${C_DIM}%s${C_RESET}\n" "$1"; }
 ask()     { printf "${C_ASK}%s${C_RESET}" "$1"; }
 
-# main.py is maintained as its own file (not embedded here) so it can be
-# updated independently -- edit this if you host your own copy elsewhere.
 MAIN_PY_URL="https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/web-proxy-setup/main.py"
 
 WORKDIR="$HOME/web-proxy-build"
@@ -440,7 +420,6 @@ if curl -fsSL -o "$PROJECT_DIR/main.py" "$MAIN_PY_URL"; then
         else
             QT_HARDCODED='QUICK_TUNNEL = False  # hardcoded by build script: named tunnel selected'
         fi
-        # Use a temp file instead of sed -i (not portable across Termux/BSD/GNU sed).
         awk -v old="$QT_LINE" -v new="$QT_HARDCODED" \
             '{ if ($0 == old) print new; else print }' \
             "$PROJECT_DIR/main.py" > "$PROJECT_DIR/main.py.tmp" \
@@ -491,60 +470,27 @@ if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
         ask "  Username (e.g. dj7e9f6afve6ac3o5831c8j8): "; read -r KATABUMP_USER
     fi
 
-    ask "  Remote directory [/home/container]: "; read -r KATABUMP_REMOTE_DIR
-    KATABUMP_REMOTE_DIR="${KATABUMP_REMOTE_DIR:-/home/container}"
+    ask "  Remote directory [/]: "; read -r KATABUMP_REMOTE_DIR
+    KATABUMP_REMOTE_DIR="${KATABUMP_REMOTE_DIR:-/}"
 
     if [ -z "$KATABUMP_HOST" ] || [ -z "$KATABUMP_USER" ]; then
         warn "host or username left empty, skipping upload."
     else
-        # Katabump/Orihost containers are served by Pterodactyl's "Wings"
-        # daemon. Wings' built-in SFTP server only implements the SFTP
-        # subsystem -- it never spawns a shell or lets the client run
-        # arbitrary remote commands. scp (even with the legacy -O flag)
-        # works by opening an "exec" channel to run a remote scp/sftp-server
-        # binary, which Wings refuses outright -- that's exactly the
-        # "exec request failed on channel 0 / lost connection" error.
-        # There's no scp flag that fixes this: scp can never work against
-        # this kind of server. The real SFTP protocol (a "subsystem"
-        # request, not "exec") does work, so we drive it directly with the
-        # sftp client instead of scp.
-        #
-        # IMPORTANT: we deliberately do NOT use sftp's "-b batchfile" flag.
-        # -b puts sftp in batch mode, which silently adds "-oBatchMode=yes"
-        # to the underlying ssh connection -- and BatchMode=yes tells ssh to
-        # NEVER prompt for a password, it just fails auth immediately
-        # ("Permission denied") instead of asking. Since this panel uses
-        # password auth (no key), batch mode can never log in. Piping the
-        # same commands into plain "sftp ... < file" keeps the normal
-        # password prompt working while still running unattended.
-        # We also avoid "put -r" for the same reason: OpenSSH's recursive
-        # put creates the remote directory and then immediately calls
-        # setstat on it to copy over local permissions -- Wings doesn't
-        # support setstat either, so that call fails and OpenSSH aborts the
-        # whole "put -r" right there, before uploading anything inside the
-        # directory (this is exactly what happened to my-site/ above: it
-        # was created empty, its contents never sent). A plain "put file"
-        # never calls setstat, so instead of "put -r" we walk the project
-        # folder ourselves and emit one plain "-mkdir" per subdirectory and
-        # one plain "put" per file.
-        #
-        # We also never "cd" into the remote directory. Outside of batch
-        # mode a failed command (like a bad "cd") doesn't stop the script --
-        # it just prints an error and moves on to the next line, still
-        # sitting wherever it was before. If that happened after a "cd",
-        # every following relative "put"/"mkdir" would silently land in the
-        # wrong place. Giving every "-mkdir"/"put" its own full
-        # "$KATABUMP_REMOTE_DIR/..." path removes that dependency entirely:
-        # each command's destination is correct on its own, regardless of
-        # whether any earlier command succeeded.
+        # Wings' SFTP server only supports the SFTP subsystem, not exec, so scp
+        # can never work here ("exec request failed on channel 0"); we drive
+        # sftp directly instead. No "-b batchfile" (forces BatchMode=yes, which
+        # blocks the password prompt); no "put -r" (its setstat call fails on
+        # Wings and aborts mid-directory); no "cd" (a silent failure would
+        # misdirect every later relative path) -- every path below is absolute.
         SFTP_BATCH_FILE="$WORKDIR/sftp-batch.txt"
+        REMOTE_BASE="${KATABUMP_REMOTE_DIR%/}"
         {
             echo "-mkdir $KATABUMP_REMOTE_DIR"
             echo "lcd $PROJECT_DIR"
             find "$PROJECT_DIR" -mindepth 1 -type d | sed "s#^$PROJECT_DIR/##" | sort \
-                | while IFS= read -r d; do echo "-mkdir $KATABUMP_REMOTE_DIR/$d"; done
+                | while IFS= read -r d; do echo "-mkdir $REMOTE_BASE/$d"; done
             find "$PROJECT_DIR" -mindepth 1 -type f | sed "s#^$PROJECT_DIR/##" | sort \
-                | while IFS= read -r f; do echo "put $f $KATABUMP_REMOTE_DIR/$f"; done
+                | while IFS= read -r f; do echo "put $f $REMOTE_BASE/$f"; done
         } > "$SFTP_BATCH_FILE"
 
         SFTP_LOG="$WORKDIR/sftp-upload.log"
@@ -577,9 +523,6 @@ if [ ! -d "$HOME/storage/downloads" ]; then
     exit 0
 fi
 
-# Summary table of everything that was collected/generated this run, so
-# it can be double-checked against what actually landed in the files.
-# Built *before* copying to Downloads so the copy actually includes it.
 SUMMARY_FILE="$PROJECT_DIR/SETTINGS-SUMMARY.txt"
 {
     printf "%-22s %-38s %s\n" "SETTING" "VALUE" "WRITTEN TO"
