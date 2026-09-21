@@ -517,20 +517,25 @@ if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
         # password auth (no key), batch mode can never log in. Piping the
         # same commands into plain "sftp ... < file" keeps the normal
         # password prompt working while still running unattended.
+        # We also avoid "put -r" for the same reason: OpenSSH's recursive
+        # put creates the remote directory and then immediately calls
+        # setstat on it to copy over local permissions -- Wings doesn't
+        # support setstat either, so that call fails and OpenSSH aborts the
+        # whole "put -r" right there, before uploading anything inside the
+        # directory (this is exactly what happened to my-site/ above: it
+        # was created empty, its contents never sent). A plain "put file"
+        # never calls setstat, so instead of "put -r" we walk the project
+        # folder ourselves and emit one plain "-mkdir" per subdirectory and
+        # one plain "put" per file.
         SFTP_BATCH_FILE="$WORKDIR/sftp-batch.txt"
         {
             echo "-mkdir $KATABUMP_REMOTE_DIR"
             echo "cd $KATABUMP_REMOTE_DIR"
             echo "lcd $PROJECT_DIR"
-            for item in "$PROJECT_DIR"/*; do
-                [ -e "$item" ] || continue
-                name="$(basename "$item")"
-                if [ -d "$item" ]; then
-                    echo "put -r $name"
-                else
-                    echo "put $name"
-                fi
-            done
+            find "$PROJECT_DIR" -mindepth 1 -type d | sed "s#^$PROJECT_DIR/##" | sort \
+                | while IFS= read -r d; do echo "-mkdir $d"; done
+            find "$PROJECT_DIR" -mindepth 1 -type f | sed "s#^$PROJECT_DIR/##" | sort \
+                | while IFS= read -r f; do echo "put $f $f"; done
         } > "$SFTP_BATCH_FILE"
 
         SFTP_LOG="$WORKDIR/sftp-upload.log"
@@ -545,11 +550,9 @@ if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
             "$SFTP_LOG"; then
             ok "upload finished."
         else
-            err "upload failed -- check host/port/username/password and try again,"
-            warn "(if 'put -r' is rejected as an unknown/invalid command, your"
-            warn "sftp client is too old for recursive put -- update openssh via"
-            warn "'pkg upgrade openssh', or upload the Downloads copy by hand,"
-            warn "see below)."
+            err "upload failed -- check host/port/username/password, review the"
+            warn "log above, and try again, or upload the Downloads copy by hand"
+            warn "(see below)."
         fi
     fi
 else
