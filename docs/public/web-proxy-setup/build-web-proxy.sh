@@ -527,15 +527,24 @@ if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
         # never calls setstat, so instead of "put -r" we walk the project
         # folder ourselves and emit one plain "-mkdir" per subdirectory and
         # one plain "put" per file.
+        #
+        # We also never "cd" into the remote directory. Outside of batch
+        # mode a failed command (like a bad "cd") doesn't stop the script --
+        # it just prints an error and moves on to the next line, still
+        # sitting wherever it was before. If that happened after a "cd",
+        # every following relative "put"/"mkdir" would silently land in the
+        # wrong place. Giving every "-mkdir"/"put" its own full
+        # "$KATABUMP_REMOTE_DIR/..." path removes that dependency entirely:
+        # each command's destination is correct on its own, regardless of
+        # whether any earlier command succeeded.
         SFTP_BATCH_FILE="$WORKDIR/sftp-batch.txt"
         {
             echo "-mkdir $KATABUMP_REMOTE_DIR"
-            echo "cd $KATABUMP_REMOTE_DIR"
             echo "lcd $PROJECT_DIR"
             find "$PROJECT_DIR" -mindepth 1 -type d | sed "s#^$PROJECT_DIR/##" | sort \
-                | while IFS= read -r d; do echo "-mkdir $d"; done
+                | while IFS= read -r d; do echo "-mkdir $KATABUMP_REMOTE_DIR/$d"; done
             find "$PROJECT_DIR" -mindepth 1 -type f | sed "s#^$PROJECT_DIR/##" | sort \
-                | while IFS= read -r f; do echo "put $f $f"; done
+                | while IFS= read -r f; do echo "put $f $KATABUMP_REMOTE_DIR/$f"; done
         } > "$SFTP_BATCH_FILE"
 
         SFTP_LOG="$WORKDIR/sftp-upload.log"
