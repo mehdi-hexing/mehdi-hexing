@@ -51,22 +51,48 @@ else
     ok "packages installed"
 fi
 
+CF_BIN=""
 if command -v cloudflared >/dev/null 2>&1; then
-    ok "cloudflared (Termux/aarch64) present: $(cloudflared --version 2>/dev/null | head -1)"
+    CF_BIN="cloudflared"
+elif pkg install -y cloudflared 2>/dev/null && command -v cloudflared >/dev/null 2>&1; then
+    CF_BIN="cloudflared"
+    ok "cloudflared installed from the main Termux repo"
+elif pkg install -y tur-repo 2>/dev/null && pkg install -y cloudflared 2>/dev/null \
+     && command -v cloudflared >/dev/null 2>&1; then
+    CF_BIN="cloudflared"
+    ok "cloudflared installed from tur-repo"
 else
-    info "cloudflared not found on this device -- trying to install it"
-    if pkg install -y cloudflared 2>/dev/null; then
-        ok "cloudflared installed from the main Termux repo"
-    else
-        warn "not in the main repo -- trying tur-repo"
-        if pkg install -y tur-repo 2>/dev/null && pkg install -y cloudflared 2>/dev/null; then
-            ok "cloudflared installed from tur-repo"
+
+    case "$(uname -m)" in
+        aarch64|arm64) CF_DEV_ARCH="arm64" ;;
+        armv7l|armv8l) CF_DEV_ARCH="arm" ;;
+        x86_64)        CF_DEV_ARCH="amd64" ;;
+        *)             CF_DEV_ARCH="" ;;
+    esac
+    if [ -n "$CF_DEV_ARCH" ]; then
+        warn "no packaged cloudflared -- downloading the official linux-$CF_DEV_ARCH build"
+        if [ ! -x "$WORKDIR/cloudflared-device" ]; then
+            curl -fL --retry 3 -o "$WORKDIR/cloudflared-device.tmp" \
+                "https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-$CF_DEV_ARCH" \
+                && chmod +x "$WORKDIR/cloudflared-device.tmp" \
+                && mv "$WORKDIR/cloudflared-device.tmp" "$WORKDIR/cloudflared-device" || true
+        fi
+        
+        if [ -x "$WORKDIR/cloudflared-device" ] && "$WORKDIR/cloudflared-device" --version >/dev/null 2>&1; then
+            CF_BIN="$WORKDIR/cloudflared-device"
+            ok "using downloaded cloudflared for this device"
         else
-            warn "could not install cloudflared on this device."
-            warn "that's fine for Quick Tunnel mode; for Named Tunnel you'll need"
-            warn "it to run 'cloudflared tunnel login' and 'cloudflared tunnel create'."
+            rm -f "$WORKDIR/cloudflared-device"
         fi
     fi
+fi
+
+if [ -n "$CF_BIN" ]; then
+    ok "cloudflared on this device: $("$CF_BIN" --version 2>/dev/null | head -1)"
+else
+    warn "no working cloudflared on this device."
+    warn "Quick Tunnel mode is unaffected; Named Tunnel will fall back to"
+    warn "asking you to paste the tunnel UUID by hand."
 fi
 
 step "Step 2/10: storage permission"
@@ -111,7 +137,6 @@ if [ -f "cloudflared-linux-amd64" ]; then
 else
     info "downloading $CLOUDFLARED_URL"
     if curl -fL --retry 3 --retry-delay 2 -o cloudflared-linux-amd64.tmp "$CLOUDFLARED_URL"; then
-        # sanity check: must be a 64-bit x86 ELF, not an HTML error page.
         MAGIC="$(od -An -tx1 -N5 cloudflared-linux-amd64.tmp | tr -d ' \n')"
         if [ "$MAGIC" = "7f454c4602" ]; then
             chmod +x cloudflared-linux-amd64.tmp
@@ -144,14 +169,86 @@ read -r INPUT_TUNNEL_MODE
 if [ "$INPUT_TUNNEL_MODE" = "2" ]; then
     TUNNEL_MODE="named"
     QUICK_TUNNEL_VALUE="0"
+    TUNNEL_UUID=""
+
     echo
-    ask "  Cloudflare tunnel UUID (from 'cloudflared tunnel create'): "
-    read -r INPUT_TUNNEL_UUID
-    TUNNEL_UUID="${INPUT_TUNNEL_UUID:-YOUR-TUNNEL-UUID}"
+    ask "  Tunnel name [tproxy]: "
+    read -r INPUT_TUNNEL_NAME
+    TUNNEL_NAME="${INPUT_TUNNEL_NAME:-tproxy}"
+
+    if [ -n "$CF_BIN" ]; then
+        if [ -f "$HOME/.cloudflared/cert.pem" ]; then
+            ok "already authorised with Cloudflare (cert.pem found)"
+            info "delete ~/.cloudflared/cert.pem if you want to pick a different domain."
+        else
+            echo
+            info "A Cloudflare login page is about to open."
+            info "Log in, SELECT THE DOMAIN you want to use, and authorise it."
+            info "If no browser opens, copy the URL printed below into one."
+            echo
+            "$CF_BIN" tunnel login || true
+        fi
+
+        if [ ! -f "$HOME/.cloudflared/cert.pem" ]; then
+            warn "authorisation didn't complete -- falling back to manual entry."
+        else
+            TUNNEL_UUID="$("$CF_BIN" tunnel list 2>/dev/null \
+                | awk -v n="$TUNNEL_NAME" '$2 == n { print $1; exit }' || true)"
+
+            if [ -n "$TUNNEL_UUID" ]; then
+                ok "tunnel '$TUNNEL_NAME' already exists -- reusing it"
+            else
+                info "creating tunnel '$TUNNEL_NAME' ..."
+                "$CF_BIN" tunnel create "$TUNNEL_NAME" || true
+                TUNNEL_UUID="$("$CF_BIN" tunnel list 2>/dev/null \
+                    | awk -v n="$TUNNEL_NAME" '$2 == n { print $1; exit }' || true)"
+            fi
+
+            case "$TUNNEL_UUID" in
+                [0-9a-fA-F]*-[0-9a-fA-F]*-[0-9a-fA-F]*-[0-9a-fA-F]*-[0-9a-fA-F]*)
+                    ok "tunnel UUID: $TUNNEL_UUID" ;;
+                *)
+                    warn "couldn't read a valid UUID back from 'cloudflared tunnel list'."
+                    TUNNEL_UUID="" ;;
+            esac
+
+            if [ -n "$TUNNEL_UUID" ] && [ "$DOMAIN" != "your-domain.example.com" ]; then
+                info "routing $DOMAIN -> $TUNNEL_NAME ..."
+                if ROUTE_OUT="$("$CF_BIN" tunnel route dns "$TUNNEL_NAME" "$DOMAIN" 2>&1)"; then
+                    ok "DNS record for $DOMAIN created"
+                else
+                    warn "route dns failed:"
+                    info "$ROUTE_OUT"
+                    ask "  a record for $DOMAIN probably exists already -- overwrite it? [y/N] "
+                    read -r OVERWRITE_DNS
+                    if [[ "$OVERWRITE_DNS" =~ ^[Yy]$ ]] \
+                       && "$CF_BIN" tunnel route dns --overwrite-dns "$TUNNEL_NAME" "$DOMAIN"; then
+                        ok "DNS record overwritten"
+                    else
+                        warn "add the record by hand in the Cloudflare dashboard:"
+                        info "  Type: CNAME"
+                        info "  Name: $DOMAIN"
+                        info "  Target: $TUNNEL_UUID.cfargotunnel.com"
+                        info "  Proxy status: Proxied (orange cloud)"
+                    fi
+                fi
+            elif [ -n "$TUNNEL_UUID" ]; then
+                warn "no real domain entered, so the DNS route was skipped."
+            fi
+        fi
+    fi
+
+    if [ -z "$TUNNEL_UUID" ]; then
+        echo
+        ask "  Cloudflare tunnel UUID (from 'cloudflared tunnel create'): "
+        read -r INPUT_TUNNEL_UUID
+        TUNNEL_UUID="${INPUT_TUNNEL_UUID:-YOUR-TUNNEL-UUID}"
+    fi
 else
     TUNNEL_MODE="quick"
     QUICK_TUNNEL_VALUE="1"
     TUNNEL_UUID=""
+    TUNNEL_NAME=""
 fi
 
 echo
@@ -241,7 +338,9 @@ EOF
 
 if [ "$TUNNEL_MODE" = "named" ]; then
     cat > "$PROJECT_DIR/cf-config.yml" << EOF
-tunnel: tproxy
+# 'tunnel' holds the UUID, not the name: resolving a name would require
+# cert.pem on the server, which we deliberately never upload.
+tunnel: $TUNNEL_UUID
 credentials-file: ./$TUNNEL_UUID.json
 
 ingress:
@@ -253,9 +352,6 @@ ingress:
 EOF
     ok "config.json, profiles.json, cf-config.yml written"
 
-    # cf-config.yml points at ./<UUID>.json -- that file lives in
-    # ~/.cloudflared after 'cloudflared tunnel create' and MUST be uploaded
-    # too, otherwise the named tunnel cannot authenticate.
     CF_CREDS="$HOME/.cloudflared/$TUNNEL_UUID.json"
     if [ -f "$CF_CREDS" ]; then
         cp "$CF_CREDS" "$PROJECT_DIR/$TUNNEL_UUID.json"
@@ -523,13 +619,11 @@ else
     warn "main.py will fail to start the tunnel on the server."
 fi
 
-# SFTP 'put' on Wings does not reliably carry the exec bit, so main.py
-# should chmod 0755 these three at startup.
 info "reminder: main.py must chmod +x the binaries on the server before exec."
 
 step "Step 10/10: upload"
 echo
-ask "Do you have SFTP/SSH access to Katabump and want to upload now? [Y/N] "
+ask "Do you have SFTP/SSH access to Katabump and want to upload now? [y/N] "
 read -r HAS_SFTP
 
 if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
@@ -562,12 +656,7 @@ if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
     if [ -z "$KATABUMP_HOST" ] || [ -z "$KATABUMP_USER" ]; then
         warn "host or username left empty, skipping upload."
     else
-        # Wings' SFTP server only supports the SFTP subsystem, not exec, so scp
-        # can never work here ("exec request failed on channel 0"); we drive
-        # sftp directly instead. No "-b batchfile" (forces BatchMode=yes, which
-        # blocks the password prompt); no "put -r" (its setstat call fails on
-        # Wings and aborts mid-directory); no "cd" (a silent failure would
-        # misdirect every later relative path) -- every path below is absolute.
+
         SFTP_BATCH_FILE="$WORKDIR/sftp-batch.txt"
         REMOTE_BASE="${KATABUMP_REMOTE_DIR%/}"
         {
@@ -577,9 +666,6 @@ if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
                 | while IFS= read -r d; do echo "-mkdir $REMOTE_BASE/$d"; done
             find "$PROJECT_DIR" -mindepth 1 -type f | sed "s#^$PROJECT_DIR/##" | sort \
                 | while IFS= read -r f; do echo "put $f $REMOTE_BASE/$f"; done
-            # Wings' SFTP 'put' does not carry the exec bit, so set it
-            # explicitly afterwards. Prefixed with '-' because setstat is
-            # not supported on every Wings build -- a failure here is not fatal.
             find "$PROJECT_DIR" -mindepth 1 -type f -perm -u+x | sed "s#^$PROJECT_DIR/##" | sort \
                 | while IFS= read -r f; do echo "-chmod 755 $REMOTE_BASE/$f"; done
         } > "$SFTP_BATCH_FILE"
@@ -591,9 +677,6 @@ if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
             < "$SFTP_BATCH_FILE" 2>&1 | tee "$SFTP_LOG"
         SFTP_EXIT="${PIPESTATUS[0]}"
 
-        # '-mkdir' on an existing directory and '-chmod' on a Wings build
-        # without setstat both print "Failure" even though they were
-        # deliberately made non-fatal -- exclude those lines before scanning.
         if [ "$SFTP_EXIT" -eq 0 ] && ! grep -viE "mkdir|chmod|setstat" "$SFTP_LOG" \
             | grep -qiE \
             "permission denied|no such file|not a directory|failure|connection (refused|closed)"; then
@@ -625,6 +708,7 @@ SUMMARY_FILE="$PROJECT_DIR/SETTINGS-SUMMARY.txt"
     printf "%-22s %-38s %s\n" "Domain" "$DOMAIN" "config.json"
     printf "%-22s %-38s %s\n" "Tunnel mode" "$TUNNEL_MODE" "-"
     if [ "$TUNNEL_MODE" = "named" ]; then
+        printf "%-22s %-38s %s\n" "Tunnel name" "$TUNNEL_NAME" "created on Cloudflare"
         printf "%-22s %-38s %s\n" "Tunnel UUID" "$TUNNEL_UUID" "cf-config.yml"
         printf "%-22s %-38s %s\n" "Hostname (tunnel)" "$DOMAIN" "cf-config.yml"
     fi
@@ -642,7 +726,7 @@ if [ "$SAVE_TO_DOWNLOADS" -eq 1 ]; then
     DEST="$HOME/storage/downloads/web-proxy-project"
     rm -rf "$DEST"
     cp -r "$PROJECT_DIR" "$DEST"
-    ok "copied to downloads/web-proxy-project/"
+    ok "copied to Download/web-proxy-project/"
 fi
 
 echo
