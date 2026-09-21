@@ -1,3 +1,4 @@
+# NOTE: bash is required (this script uses [[ ]] and PIPESTATUS).
 set -e
 
 if [ -t 1 ]; then
@@ -21,15 +22,17 @@ info()    { printf "${C_DIM}%s${C_RESET}\n" "$1"; }
 ask()     { printf "${C_ASK}%s${C_RESET}" "$1"; }
 
 MAIN_PY_URL="https://raw.githubusercontent.com/mehdi-hexing/mehdi-hexing/refs/heads/main/docs/public/web-proxy-setup/main.py"
+CLOUDFLARED_URL="https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64"
+CLOUDFLARED_NAME="cloudflared"
 
 WORKDIR="$HOME/web-proxy-build"
 PROJECT_DIR="$WORKDIR/project"
 mkdir -p "$WORKDIR" "$PROJECT_DIR" "$PROJECT_DIR/my-site"
 cd "$WORKDIR"
 
-step "Step 1/8: checking packages"
+step "Step 1/10: checking Termux packages (this device)"
 
-NEEDED_BINS="go:golang git:git openssl:openssl-tool cloudflared:cloudflared ssh:openssh termux-setup-storage:termux-api"
+NEEDED_BINS="go:golang git:git openssl:openssl-tool curl:curl ssh:openssh termux-setup-storage:termux-tools"
 MISSING_PKGS=""
 for pair in $NEEDED_BINS; do
     bin="${pair%%:*}"
@@ -48,7 +51,41 @@ else
     ok "packages installed"
 fi
 
-step "Step 2/8: building tproxy-server"
+if command -v cloudflared >/dev/null 2>&1; then
+    ok "cloudflared (Termux/aarch64) present: $(cloudflared --version 2>/dev/null | head -1)"
+else
+    info "cloudflared not found on this device -- trying to install it"
+    if pkg install -y cloudflared 2>/dev/null; then
+        ok "cloudflared installed from the main Termux repo"
+    else
+        warn "not in the main repo -- trying tur-repo"
+        if pkg install -y tur-repo 2>/dev/null && pkg install -y cloudflared 2>/dev/null; then
+            ok "cloudflared installed from tur-repo"
+        else
+            warn "could not install cloudflared on this device."
+            warn "that's fine for Quick Tunnel mode; for Named Tunnel you'll need"
+            warn "it to run 'cloudflared tunnel login' and 'cloudflared tunnel create'."
+        fi
+    fi
+fi
+
+step "Step 2/10: storage permission"
+if [ -d "$HOME/storage/downloads" ]; then
+    ok "storage access already granted"
+else
+    warn "storage access isn't set up yet -- running termux-setup-storage now."
+    warn "tap Allow on the permission prompt that appears."
+    termux-setup-storage || true
+    sleep 3
+    if [ -d "$HOME/storage/downloads" ]; then
+        ok "storage access granted -- continuing"
+    else
+        warn "still not granted. the build continues, but the final copy to"
+        warn "your Downloads folder will be skipped."
+    fi
+fi
+
+step "Step 3/10: building tproxy-server"
 if [ -f "tproxy-server-linux" ]; then
     ok "already built, skipping (delete tproxy-server-linux to rebuild)"
 else
@@ -58,7 +95,7 @@ else
     ok "tproxy-server built"
 fi
 
-step "Step 3/8: building mtg v1"
+step "Step 4/10: building mtg v1"
 if [ -f "mtg-v1-linux" ]; then
     ok "already built, skipping (delete mtg-v1-linux to rebuild)"
 else
@@ -68,7 +105,31 @@ else
     ok "mtg v1 built"
 fi
 
-step "Step 4/8: project settings"
+step "Step 5/10: fetching cloudflared for the SERVER (linux/amd64)"
+if [ -f "cloudflared-linux-amd64" ]; then
+    ok "already downloaded, skipping (delete cloudflared-linux-amd64 to refetch)"
+else
+    info "downloading $CLOUDFLARED_URL"
+    if curl -fL --retry 3 --retry-delay 2 -o cloudflared-linux-amd64.tmp "$CLOUDFLARED_URL"; then
+        # sanity check: must be a 64-bit x86 ELF, not an HTML error page.
+        MAGIC="$(od -An -tx1 -N5 cloudflared-linux-amd64.tmp | tr -d ' \n')"
+        if [ "$MAGIC" = "7f454c4602" ]; then
+            chmod +x cloudflared-linux-amd64.tmp
+            mv cloudflared-linux-amd64.tmp cloudflared-linux-amd64
+            ok "cloudflared (linux/amd64) downloaded -- $(du -h cloudflared-linux-amd64 | cut -f1)"
+        else
+            rm -f cloudflared-linux-amd64.tmp
+            err "downloaded file is not a 64-bit ELF binary (magic: $MAGIC)"
+            warn "download cloudflared-linux-amd64 by hand and drop it in $WORKDIR"
+        fi
+    else
+        rm -f cloudflared-linux-amd64.tmp
+        err "could not download cloudflared from $CLOUDFLARED_URL"
+        warn "the server will have no cloudflared unless you add it manually."
+    fi
+fi
+
+step "Step 6/10: project settings"
 info "these get written straight into your config files -- leave any"
 info "answer blank to keep a placeholder and fill it in by hand later."
 echo
@@ -115,7 +176,7 @@ MTG_IPV4="$INPUT_MTG_IPV4"
 
 ok "settings collected"
 
-step "Step 5/8: writing project files"
+step "Step 7/10: writing project files"
 
 cat > "$PROJECT_DIR/config.json" << EOF
 {
@@ -191,6 +252,19 @@ ingress:
   - service: http_status:404
 EOF
     ok "config.json, profiles.json, cf-config.yml written"
+
+    # cf-config.yml points at ./<UUID>.json -- that file lives in
+    # ~/.cloudflared after 'cloudflared tunnel create' and MUST be uploaded
+    # too, otherwise the named tunnel cannot authenticate.
+    CF_CREDS="$HOME/.cloudflared/$TUNNEL_UUID.json"
+    if [ -f "$CF_CREDS" ]; then
+        cp "$CF_CREDS" "$PROJECT_DIR/$TUNNEL_UUID.json"
+        ok "tunnel credentials $TUNNEL_UUID.json copied into the project"
+    else
+        warn "credentials file not found at $CF_CREDS"
+        warn "run 'cloudflared tunnel login' then 'cloudflared tunnel create tproxy',"
+        warn "and copy <UUID>.json into $PROJECT_DIR before uploading."
+    fi
 else
     rm -f "$PROJECT_DIR/cf-config.yml"
     ok "config.json, profiles.json written (cf-config.yml skipped, not needed for Quick Tunnel)"
@@ -409,7 +483,7 @@ EOF
 warn "main.py is NOT written by this script (it changes often during troubleshooting)."
 info "  it's fetched fresh in the next step from MAIN_PY_URL."
 
-step "Step 6/8: downloading main.py"
+step "Step 8/10: downloading main.py"
 if curl -fsSL -o "$PROJECT_DIR/main.py" "$MAIN_PY_URL"; then
     ok "downloaded main.py from: $MAIN_PY_URL"
 
@@ -436,12 +510,24 @@ else
     warn "$PROJECT_DIR manually before uploading."
 fi
 
-step "Step 7/8: copying binaries into the project folder"
+step "Step 9/10: copying binaries into the project folder"
 cp tproxy-server-linux "$PROJECT_DIR/"
 cp mtg-v1-linux "$PROJECT_DIR/"
-ok "binaries copied"
 
-step "Step 8/8: upload"
+if [ -f "cloudflared-linux-amd64" ]; then
+    cp cloudflared-linux-amd64 "$PROJECT_DIR/$CLOUDFLARED_NAME"
+    chmod +x "$PROJECT_DIR/$CLOUDFLARED_NAME"
+    ok "binaries copied (tproxy-server-linux, mtg-v1-linux, $CLOUDFLARED_NAME)"
+else
+    warn "cloudflared-linux-amd64 is missing -- uploading WITHOUT it."
+    warn "main.py will fail to start the tunnel on the server."
+fi
+
+# SFTP 'put' on Wings does not reliably carry the exec bit, so main.py
+# should chmod 0755 these three at startup.
+info "reminder: main.py must chmod +x the binaries on the server before exec."
+
+step "Step 10/10: upload"
 echo
 ask "Do you have SFTP/SSH access to Katabump and want to upload now? [y/N] "
 read -r HAS_SFTP
@@ -491,6 +577,11 @@ if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
                 | while IFS= read -r d; do echo "-mkdir $REMOTE_BASE/$d"; done
             find "$PROJECT_DIR" -mindepth 1 -type f | sed "s#^$PROJECT_DIR/##" | sort \
                 | while IFS= read -r f; do echo "put $f $REMOTE_BASE/$f"; done
+            # Wings' SFTP 'put' does not carry the exec bit, so set it
+            # explicitly afterwards. Prefixed with '-' because setstat is
+            # not supported on every Wings build -- a failure here is not fatal.
+            find "$PROJECT_DIR" -mindepth 1 -type f -perm -u+x | sed "s#^$PROJECT_DIR/##" | sort \
+                | while IFS= read -r f; do echo "-chmod 755 $REMOTE_BASE/$f"; done
         } > "$SFTP_BATCH_FILE"
 
         SFTP_LOG="$WORKDIR/sftp-upload.log"
@@ -500,9 +591,12 @@ if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
             < "$SFTP_BATCH_FILE" 2>&1 | tee "$SFTP_LOG"
         SFTP_EXIT="${PIPESTATUS[0]}"
 
-        if [ "$SFTP_EXIT" -eq 0 ] && ! grep -qiE \
-            "permission denied|no such file|not a directory|failure|connection (refused|closed)" \
-            "$SFTP_LOG"; then
+        # '-mkdir' on an existing directory and '-chmod' on a Wings build
+        # without setstat both print "Failure" even though they were
+        # deliberately made non-fatal -- exclude those lines before scanning.
+        if [ "$SFTP_EXIT" -eq 0 ] && ! grep -viE "mkdir|chmod|setstat" "$SFTP_LOG" \
+            | grep -qiE \
+            "permission denied|no such file|not a directory|failure|connection (refused|closed)"; then
             ok "upload finished."
         else
             err "upload failed -- check host/port/username/password, review the"
@@ -516,11 +610,12 @@ fi
 
 step "Saving a copy to your phone's Downloads folder"
 
+SAVE_TO_DOWNLOADS=1
 if [ ! -d "$HOME/storage/downloads" ]; then
-    warn "storage access isn't set up yet. Running termux-setup-storage --"
-    warn "please tap Allow on the permission prompt, then re-run this script."
-    termux-setup-storage
-    exit 0
+    warn "storage access still isn't granted -- skipping the Downloads copy."
+    warn "your project is complete at: $PROJECT_DIR"
+    warn "run 'termux-setup-storage', tap Allow, then re-run to get the copy."
+    SAVE_TO_DOWNLOADS=0
 fi
 
 SUMMARY_FILE="$PROJECT_DIR/SETTINGS-SUMMARY.txt"
@@ -536,17 +631,30 @@ SUMMARY_FILE="$PROJECT_DIR/SETTINGS-SUMMARY.txt"
     printf "%-22s %-38s %s\n" "MTG secret" "$SECRET" "profiles.json"
     printf "%-22s %-38s %s\n" "MTG_PUBLIC_IPV4" "$MTG_IPV4" "panel env var"
     printf "%-22s %-38s %s\n" "QUICK_TUNNEL" "$QUICK_TUNNEL_VALUE" "hardcoded in main.py"
+    if [ -f "$PROJECT_DIR/$CLOUDFLARED_NAME" ]; then
+        printf "%-22s %-38s %s\n" "cloudflared" "linux/amd64, bundled as $CLOUDFLARED_NAME" "project folder"
+    else
+        printf "%-22s %-38s %s\n" "cloudflared" "MISSING -- add it manually" "project folder"
+    fi
 } > "$SUMMARY_FILE"
 
-DEST="$HOME/storage/downloads/web-proxy-project"
-rm -rf "$DEST"
-cp -r "$PROJECT_DIR" "$DEST"
+if [ "$SAVE_TO_DOWNLOADS" -eq 1 ]; then
+    DEST="$HOME/storage/downloads/web-proxy-project"
+    rm -rf "$DEST"
+    cp -r "$PROJECT_DIR" "$DEST"
+    ok "copied to downloads/web-proxy-project/"
+fi
 
 echo
 printf "${C_OK}${C_BOLD}================================================================${C_RESET}\n"
-printf "${C_OK}${C_BOLD}Done.${C_RESET} Your project folder is saved in your phone's Downloads app\n"
-echo "at:"
-printf "  ${C_BOLD}Download/web-proxy-project/${C_RESET}\n"
+if [ "$SAVE_TO_DOWNLOADS" -eq 1 ]; then
+    printf "${C_OK}${C_BOLD}Done.${C_RESET} Your project folder is saved in your phone's Downloads app\n"
+    echo "at:"
+    printf "  ${C_BOLD}Download/web-proxy-project/${C_RESET}\n"
+else
+    printf "${C_OK}${C_BOLD}Done.${C_RESET} Your project folder is at:\n"
+    printf "  ${C_BOLD}%s${C_RESET}\n" "$PROJECT_DIR"
+fi
 echo
 step "Double-check these before you upload/run"
 cat "$SUMMARY_FILE"
