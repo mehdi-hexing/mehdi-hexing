@@ -508,6 +508,15 @@ if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
         # this kind of server. The real SFTP protocol (a "subsystem"
         # request, not "exec") does work, so we drive it directly with the
         # sftp client instead of scp.
+        #
+        # IMPORTANT: we deliberately do NOT use sftp's "-b batchfile" flag.
+        # -b puts sftp in batch mode, which silently adds "-oBatchMode=yes"
+        # to the underlying ssh connection -- and BatchMode=yes tells ssh to
+        # NEVER prompt for a password, it just fails auth immediately
+        # ("Permission denied") instead of asking. Since this panel uses
+        # password auth (no key), batch mode can never log in. Piping the
+        # same commands into plain "sftp ... < file" keeps the normal
+        # password prompt working while still running unattended.
         SFTP_BATCH_FILE="$WORKDIR/sftp-batch.txt"
         {
             echo "-mkdir $KATABUMP_REMOTE_DIR"
@@ -524,17 +533,23 @@ if [[ "$HAS_SFTP" =~ ^[Yy]$ ]]; then
             done
         } > "$SFTP_BATCH_FILE"
 
+        SFTP_LOG="$WORKDIR/sftp-upload.log"
         info "uploading $PROJECT_DIR to $KATABUMP_USER@$KATABUMP_HOST:$KATABUMP_REMOTE_DIR (port $KATABUMP_PORT) ..."
         info "you'll be asked for your panel password next."
-        if sftp -P "$KATABUMP_PORT" -b "$SFTP_BATCH_FILE" \
-            "$KATABUMP_USER@$KATABUMP_HOST"; then
+        sftp -P "$KATABUMP_PORT" "$KATABUMP_USER@$KATABUMP_HOST" \
+            < "$SFTP_BATCH_FILE" 2>&1 | tee "$SFTP_LOG"
+        SFTP_EXIT="${PIPESTATUS[0]}"
+
+        if [ "$SFTP_EXIT" -eq 0 ] && ! grep -qiE \
+            "permission denied|no such file|not a directory|failure|connection (refused|closed)" \
+            "$SFTP_LOG"; then
             ok "upload finished."
         else
-            err "upload failed -- check host/port/username and try again,"
-            warn "(if you see 'put -r' rejected as an unknown/invalid command,"
-            warn "your sftp client is too old for recursive put -- update"
-            warn "openssh via 'pkg upgrade openssh', or upload the Downloads"
-            warn "copy by hand instead, see below)."
+            err "upload failed -- check host/port/username/password and try again,"
+            warn "(if 'put -r' is rejected as an unknown/invalid command, your"
+            warn "sftp client is too old for recursive put -- update openssh via"
+            warn "'pkg upgrade openssh', or upload the Downloads copy by hand,"
+            warn "see below)."
         fi
     fi
 else
