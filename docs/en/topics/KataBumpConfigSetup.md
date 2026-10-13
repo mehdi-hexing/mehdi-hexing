@@ -73,7 +73,7 @@ To get started, you need to create an account on [Katabump][1]:
 **Image 2 of 2:**
 
 <p align="center">
-<img src="/public/katabump-config-setup/pic1-fa.jpg" alt="Sign-up step - Image 2">
+<img src="/public/katabump-config-setup/pic1-en.jpg" alt="Sign-up step - Image 2">
 </p><br/>
 
 ## Step 2: Creating and Logging into the Server Management Panel {#panel}
@@ -91,13 +91,13 @@ In this step, the server is created and you log into its management panel.
 **Image 2 of 5:**
 
 <p align="center">
-<img src="/public/katabump-config-setup/pic3-fa.jpg" alt="Server creation and panel login step - Image 2">
+<img src="/public/katabump-config-setup/pic3-en.jpg" alt="Server creation and panel login step - Image 2">
 </p><br/>
 
 **Image 3 of 5:**
 
 <p align="center">
-<img src="/public/katabump-config-setup/pic4-fa.jpg" alt="Server creation and panel login step - Image 3">
+<img src="/public/katabump-config-setup/pic4-en.jpg" alt="Server creation and panel login step - Image 3">
 </p><br/>
 
 **Image 4 of 5:**
